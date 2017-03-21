@@ -1,0 +1,422 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HuXiuModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityType Name="Activity">
+          <Key>
+            <PropertyRef Name="activity_id" />
+          </Key>
+          <Property Name="activity_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="activity_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="activity_content" Type="varchar(max)" Nullable="false" />
+          <Property Name="activity_start" Type="datetime" Nullable="false" />
+          <Property Name="activity_end" Type="datetime" Nullable="false" />
+          <Property Name="activity_cover" Type="varchar(max)" Nullable="false" />
+          <Property Name="activity_coverlable" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="activity_topicid" Type="int" />
+          <Property Name="activity_hot" Type="int" Nullable="false" />
+          <Property Name="activity_topicname" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pwd" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Column">
+          <Key>
+            <PropertyRef Name="column_id" />
+          </Key>
+          <Property Name="column_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="column_title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="column_content" Type="varchar(max)" Nullable="false" />
+          <Property Name="column_cover" Type="varchar(max)" Nullable="false" />
+          <Property Name="column_hot" Type="int" Nullable="false" />
+          <Property Name="column_like" Type="int" Nullable="false" />
+          <Property Name="column_time" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Interest">
+          <Key>
+            <PropertyRef Name="interest_id" />
+          </Key>
+          <Property Name="interest_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="interest_title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="interest_content" Type="varchar(max)" Nullable="false" />
+          <Property Name="interest_time" Type="datetime" Nullable="false" />
+          <Property Name="interest_like" Type="int" Nullable="false" />
+          <Property Name="interest_url" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="news_id" />
+          </Key>
+          <Property Name="news_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="news_title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="news_content" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="news_time" Type="datetime" Nullable="false" />
+          <Property Name="news_top" Type="int" Nullable="false" />
+          <Property Name="news_cover" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="news_class" Type="int" Nullable="false" />
+          <Property Name="news_like" Type="int" Nullable="false" />
+          <Property Name="news_hot" Type="int" Nullable="false" />
+          <Property Name="new_column" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rumor">
+          <Key>
+            <PropertyRef Name="rumor_id" />
+          </Key>
+          <Property Name="rumor_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rumor_title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="rumor_content" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="rumor_time" Type="datetime" Nullable="false" />
+          <Property Name="rumor_state" Type="int" Nullable="false" />
+          <Property Name="rumor_hot" Type="int" Nullable="false" />
+          <Property Name="rumor_like" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Topic">
+          <Key>
+            <PropertyRef Name="topic_id" />
+          </Key>
+          <Property Name="topic_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="topic_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="topic_content" Type="varchar(max)" Nullable="false" />
+          <Property Name="topic_cover" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Activity_System">
+          <End Role="Topic" Type="Self.Topic" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Activity" Type="Self.Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Topic">
+              <PropertyRef Name="topic_id" />
+            </Principal>
+            <Dependent Role="Activity">
+              <PropertyRef Name="activity_topicid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_News_Column">
+          <End Role="Column" Type="Self.Column" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="News" Type="Self.News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Column">
+              <PropertyRef Name="column_id" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="new_column" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HuXiuModelStoreContainer">
+          <EntitySet Name="Activity" EntityType="Self.Activity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Column" EntityType="Self.Column" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Interest" EntityType="Self.Interest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rumor" EntityType="Self.Rumor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Topic" EntityType="Self.Topic" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Activity_System" Association="Self.FK_Activity_System">
+            <End Role="Topic" EntitySet="Topic" />
+            <End Role="Activity" EntitySet="Activity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_News_Column" Association="Self.FK_News_Column">
+            <End Role="Column" EntitySet="Column" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HuXiuModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityType Name="Activity">
+          <Key>
+            <PropertyRef Name="activity_id" />
+          </Key>
+          <Property Name="activity_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="activity_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="activity_content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="activity_start" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="activity_end" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="activity_cover" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="activity_coverlable" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="activity_topicid" Type="Int32" />
+          <Property Name="activity_hot" Type="Int32" Nullable="false" />
+          <Property Name="activity_topicname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Topic" Relationship="Self.FK_Activity_System" FromRole="Activity" ToRole="Topic" />
+        </EntityType>
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Column">
+          <Key>
+            <PropertyRef Name="column_id" />
+          </Key>
+          <Property Name="column_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="column_title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="column_content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="column_cover" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="column_hot" Type="Int32" Nullable="false" />
+          <Property Name="column_like" Type="Int32" Nullable="false" />
+          <Property Name="column_time" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="News" Relationship="Self.FK_News_Column" FromRole="Column" ToRole="News" />
+        </EntityType>
+        <EntityType Name="Interest">
+          <Key>
+            <PropertyRef Name="interest_id" />
+          </Key>
+          <Property Name="interest_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="interest_title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="interest_content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="interest_time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="interest_like" Type="Int32" Nullable="false" />
+          <Property Name="interest_url" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="news_id" />
+          </Key>
+          <Property Name="news_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="news_title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="news_content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="news_time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="news_top" Type="Int32" Nullable="false" />
+          <Property Name="news_cover" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="news_class" Type="Int32" Nullable="false" />
+          <Property Name="news_like" Type="Int32" Nullable="false" />
+          <Property Name="news_hot" Type="Int32" Nullable="false" />
+          <Property Name="new_column" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Column" Relationship="Self.FK_News_Column" FromRole="News" ToRole="Column" />
+        </EntityType>
+        <EntityType Name="Rumor">
+          <Key>
+            <PropertyRef Name="rumor_id" />
+          </Key>
+          <Property Name="rumor_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rumor_title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rumor_content" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rumor_time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="rumor_state" Type="Int32" Nullable="false" />
+          <Property Name="rumor_hot" Type="Int32" Nullable="false" />
+          <Property Name="rumor_like" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Topic">
+          <Key>
+            <PropertyRef Name="topic_id" />
+          </Key>
+          <Property Name="topic_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="topic_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="topic_content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="topic_cover" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Activity" Relationship="Self.FK_Activity_System" FromRole="Topic" ToRole="Activity" />
+        </EntityType>
+        <Association Name="FK_Activity_System">
+          <End Role="Topic" Type="Self.Topic" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Activity" Type="Self.Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Topic">
+              <PropertyRef Name="topic_id" />
+            </Principal>
+            <Dependent Role="Activity">
+              <PropertyRef Name="activity_topicid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_News_Column">
+          <End Role="Column" Type="Self.Column" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="News" Type="Self.News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Column">
+              <PropertyRef Name="column_id" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="new_column" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HuXiuEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Activity" EntityType="Self.Activity" />
+          <EntitySet Name="Admin" EntityType="Self.Admin" />
+          <EntitySet Name="Column" EntityType="Self.Column" />
+          <EntitySet Name="Interest" EntityType="Self.Interest" />
+          <EntitySet Name="News" EntityType="Self.News" />
+          <EntitySet Name="Rumor" EntityType="Self.Rumor" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Topic" EntityType="Self.Topic" />
+          <AssociationSet Name="FK_Activity_System" Association="Self.FK_Activity_System">
+            <End Role="Topic" EntitySet="Topic" />
+            <End Role="Activity" EntitySet="Activity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_News_Column" Association="Self.FK_News_Column">
+            <End Role="Column" EntitySet="Column" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HuXiuModelStoreContainer" CdmEntityContainer="HuXiuEntities">
+          <EntitySetMapping Name="Activity">
+            <EntityTypeMapping TypeName="HuXiuModel.Activity">
+              <MappingFragment StoreEntitySet="Activity">
+                <ScalarProperty Name="activity_id" ColumnName="activity_id" />
+                <ScalarProperty Name="activity_name" ColumnName="activity_name" />
+                <ScalarProperty Name="activity_content" ColumnName="activity_content" />
+                <ScalarProperty Name="activity_start" ColumnName="activity_start" />
+                <ScalarProperty Name="activity_end" ColumnName="activity_end" />
+                <ScalarProperty Name="activity_cover" ColumnName="activity_cover" />
+                <ScalarProperty Name="activity_coverlable" ColumnName="activity_coverlable" />
+                <ScalarProperty Name="activity_topicid" ColumnName="activity_topicid" />
+                <ScalarProperty Name="activity_hot" ColumnName="activity_hot" />
+                <ScalarProperty Name="activity_topicname" ColumnName="activity_topicname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Admin">
+            <EntityTypeMapping TypeName="HuXiuModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="pwd" ColumnName="pwd" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Column">
+            <EntityTypeMapping TypeName="HuXiuModel.Column">
+              <MappingFragment StoreEntitySet="Column">
+                <ScalarProperty Name="column_id" ColumnName="column_id" />
+                <ScalarProperty Name="column_title" ColumnName="column_title" />
+                <ScalarProperty Name="column_content" ColumnName="column_content" />
+                <ScalarProperty Name="column_cover" ColumnName="column_cover" />
+                <ScalarProperty Name="column_hot" ColumnName="column_hot" />
+                <ScalarProperty Name="column_like" ColumnName="column_like" />
+                <ScalarProperty Name="column_time" ColumnName="column_time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Interest">
+            <EntityTypeMapping TypeName="HuXiuModel.Interest">
+              <MappingFragment StoreEntitySet="Interest">
+                <ScalarProperty Name="interest_id" ColumnName="interest_id" />
+                <ScalarProperty Name="interest_title" ColumnName="interest_title" />
+                <ScalarProperty Name="interest_content" ColumnName="interest_content" />
+                <ScalarProperty Name="interest_time" ColumnName="interest_time" />
+                <ScalarProperty Name="interest_like" ColumnName="interest_like" />
+                <ScalarProperty Name="interest_url" ColumnName="interest_url" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="News">
+            <EntityTypeMapping TypeName="HuXiuModel.News">
+              <MappingFragment StoreEntitySet="News">
+                <ScalarProperty Name="news_id" ColumnName="news_id" />
+                <ScalarProperty Name="news_title" ColumnName="news_title" />
+                <ScalarProperty Name="news_content" ColumnName="news_content" />
+                <ScalarProperty Name="news_time" ColumnName="news_time" />
+                <ScalarProperty Name="news_top" ColumnName="news_top" />
+                <ScalarProperty Name="news_cover" ColumnName="news_cover" />
+                <ScalarProperty Name="news_class" ColumnName="news_class" />
+                <ScalarProperty Name="news_like" ColumnName="news_like" />
+                <ScalarProperty Name="news_hot" ColumnName="news_hot" />
+                <ScalarProperty Name="new_column" ColumnName="new_column" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rumor">
+            <EntityTypeMapping TypeName="HuXiuModel.Rumor">
+              <MappingFragment StoreEntitySet="Rumor">
+                <ScalarProperty Name="rumor_id" ColumnName="rumor_id" />
+                <ScalarProperty Name="rumor_title" ColumnName="rumor_title" />
+                <ScalarProperty Name="rumor_content" ColumnName="rumor_content" />
+                <ScalarProperty Name="rumor_time" ColumnName="rumor_time" />
+                <ScalarProperty Name="rumor_state" ColumnName="rumor_state" />
+                <ScalarProperty Name="rumor_hot" ColumnName="rumor_hot" />
+                <ScalarProperty Name="rumor_like" ColumnName="rumor_like" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="HuXiuModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Topic">
+            <EntityTypeMapping TypeName="HuXiuModel.Topic">
+              <MappingFragment StoreEntitySet="Topic">
+                <ScalarProperty Name="topic_id" ColumnName="topic_id" />
+                <ScalarProperty Name="topic_name" ColumnName="topic_name" />
+                <ScalarProperty Name="topic_content" ColumnName="topic_content" />
+                <ScalarProperty Name="topic_cover" ColumnName="topic_cover" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
