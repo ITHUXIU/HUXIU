@@ -15,6 +15,18 @@
 	<link rel="stylesheet" href="../common/layui/css/layui.css">
 	<link rel="stylesheet" href="../common/css/sccl.css">
     
+    <%--  	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js">
+</script>
+	
+<script>
+$(document).ready(function(){
+  $("#userName").click(function(){
+    $(this).value="";
+  });
+});
+</script>--%>
+
+
   </head>
   
   <body class="login-bg">
@@ -30,14 +42,15 @@
 						<i class="layui-icon"></i>
 					</label>
 					<%--<input type="text" name="userName" lay-verify="userName" autocomplete="off" placeholder="这里输入登录名" class="layui-input">--%>  
-                    <asp:TextBox ID="username" runat="server" CssClass="layui-input" ></asp:TextBox>
+                    <asp:TextBox ID="userName" runat="server" CssClass="layui-input" Text="这里输入登录名" ></asp:TextBox>
+   
 				</div>
 				<div class="layui-form-item">
 					<label class="login-icon">
 						<i class="layui-icon"></i>
 					</label>
 					<%--<input type="password" name="password" lay-verify="password" autocomplete="off" placeholder="这里输入密码" class="layui-input">--%>
-                    <asp:TextBox ID="password" runat="server" CssClass="layui-input" ></asp:TextBox>
+                    <asp:TextBox ID="password" runat="server" CssClass="layui-input" Text="这里输入密码"></asp:TextBox>
 				</div>
 				<div class="layui-form-item">
 					<div class="pull-left login-remember">
@@ -46,9 +59,10 @@
 						<input type="checkbox" name="rememberMe" value="true" lay-skin="switch" title="记住帐号"><div class="layui-unselect layui-form-switch"><i></i></div>
 					</div>
 					<div class="pull-right">
-						<button class="layui-btn layui-btn-primary" lay-submit="" lay-filter="login">
+						<%--<button class="layui-btn layui-btn-primary" lay-submit="" lay-filter="login">
 							<i class="layui-icon"></i> 登录
-						</button>
+						</button>--%>
+                        <asp:Button ID="btnLogin" runat="server" CssClass="layui-btn layui-btn-primary" Text="登录" OnClick="btnLogin_Click"/>
 					</div>
 					<div class="clear"></div>
 				</div>

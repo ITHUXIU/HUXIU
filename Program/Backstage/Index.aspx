@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Index.aspx.cs" Inherits="Backstage_Index" %>
+
+<!DOCTYPE html>
 <html>
   <head>
 	<meta charset="utf-8">
@@ -16,9 +18,10 @@
   </head>
   
   <body>
+      <form id="form1" runat="server" >
 	<div class="layout-admin">
 		<header class="layout-header">
-			<span class="header-logo">系统框架</span> 
+			<span class="header-logo">虎嗅网后台管理</span> 
 			<a class="header-menu-btn" href="javascript:;"><i class="icon-font">&#xe600;</i></a>
 			<ul class="header-bar">
 				<li class="header-bar-role"><a href="javascript:;">超级管理员</a></li>
@@ -60,7 +63,8 @@
                 <button class="tab-btn btn-right"><i class="icon-font">&#xe60f;</i></button>
 			</div>
 			<div class="layout-main-body">
-				<iframe class="body-iframe" name="iframe0" width="100%" height="99%" src="home.html" frameborder="0" data-id="home.html" seamless></iframe>
+				<%--<iframe class="body-iframe" name="iframe0" width="100%" height="99%" src="home.html" frameborder="0" data-id="home.html" seamless></iframe>--%>
+                <iframe class="body-iframe" name="iframe0" width="100%" height="99%" src="Home.aspx" frameborder="0" data-id="Home.aspx" seamless></iframe>
 			</div>
 		</section>
 		<div class="layout-footer">@2016 0.1 www.mycodes.net</div>
@@ -68,5 +72,6 @@
 	<script type="text/javascript" src="../common/lib/jquery-1.9.0.min.js"></script>
 	<script type="text/javascript" src="../common/js/sccl.js"></script>
 	<script type="text/javascript" src="../common/js/sccl-util.js"></script>
+      </form>
   </body>
 </html>
