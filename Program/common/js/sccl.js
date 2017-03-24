@@ -417,10 +417,10 @@ $(function(){
 						{"id":"27","name":"添加专题","parentId":"25","url":"home4.html","icon":"","order":"1","isHeader":"0","childMenus":""},
                         {"id":"28","name":"删除专题","parentId":"25","url":"home3.html","icon":"","order":"1","isHeader":"0","childMenus":""}   
 					]},
-                     {"id":"29","name":"留言管理","parentId":"1","url":"","icon":"&#xe602;","order":"1","isHeader":"0","childMenus":[
-						{"id":"30","name":"编辑留言","parentId":"29","url":"home3.html","icon":"","order":"1","isHeader":"0","childMenus":""},
-						{"id":"31","name":"添加留言","parentId":"29","url":"home4.html","icon":"","order":"1","isHeader":"0","childMenus":""},
-                        {"id":"32","name":"删除留言","parentId":"29","url":"home3.html","icon":"","order":"1","isHeader":"0","childMenus":""}   
+                     {"id":"29","name":"流言管理","parentId":"1","url":"","icon":"&#xe602;","order":"1","isHeader":"0","childMenus":[
+						{"id":"30","name":"编辑流言","parentId":"29","url":"home3.html","icon":"","order":"1","isHeader":"0","childMenus":""},
+						{"id":"31","name":"添加流言","parentId":"29","url":"home4.html","icon":"","order":"1","isHeader":"0","childMenus":""},
+                        {"id":"32","name":"删除流言","parentId":"29","url":"home3.html","icon":"","order":"1","isHeader":"0","childMenus":""}   
 					]},
                      {"id":"33","name":"传言管理","parentId":"1","url":"","icon":"&#xe602;","order":"1","isHeader":"0","childMenus":[
 						{"id":"34","name":"编辑传言","parentId":"33","url":"home3.html","icon":"","order":"1","isHeader":"0","childMenus":""},
