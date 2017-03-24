@@ -395,41 +395,17 @@ $(function(){
 
 	/*菜单json*/
 	var menu = [{"id":"1","name":"主菜单","parentId":"0","url":"","icon":"","order":"1","isHeader":"1","childMenus":[
-					{"id":"3","name":"资讯管理","parentId":"1","url":"","icon":"&#xe604;","order":"1","isHeader":"0","childMenus":[
-						{"id":"4","name":"添加资讯管理","parentId":"3","url":"test1.aspx","icon":"","order":"1","isHeader":"0","childMenus":""},
-						{"id":"5","name":"删除资讯管理","parentId":"3","url":"test2.aspx","icon":"","order":"1","isHeader":"0","childMenus":""},
-                        {"id":"19","name":"更改资讯管理","parentId":"3","url":"test3.aspx","icon":"","order":"1","isHeader":"0","childMenus":""}
+					{"id":"3","name":"商品管理","parentId":"1","url":"","icon":"&#xe604;","order":"1","isHeader":"0","childMenus":[
+						{"id":"4","name":"品牌管理","parentId":"3","url":"test1.html","icon":"","order":"1","isHeader":"0","childMenus":""},
+						{"id":"5","name":"分类管理","parentId":"3","url":"test2.html","icon":"","order":"1","isHeader":"0","childMenus":""}
 					]},
-					{"id":"6","name":"活动管理","parentId":"1","url":"","icon":"&#xe602;","order":"1","isHeader":"0","childMenus":[
-						{"id":"7","name":"已结束","parentId":"6","url":"home3.html","icon":"","order":"1","isHeader":"0","childMenus":""},
-						{"id":"8","name":"未开始","parentId":"6","url":"home4.html","icon":"","order":"1","isHeader":"0","childMenus":""},
-                        {"id":"20","name":"正在进行","parentId":"6","url":"home3.html","icon":"","order":"1","isHeader":"0","childMenus":""},
-                        {"id":"21","name":"添加新活动","parentId":"6","url":"home3.html","icon":"","order":"1","isHeader":"0","childMenus":""},
-                        {"id":"37","name":"活动系列管理","parentId":"6","url":"home3.html","icon":"","order":"1","isHeader":"0","childMenus":""}
-					]},
-                  	{"id":"22","name":"短趣管理","parentId":"1","url":"","icon":"&#xe602;","order":"1","isHeader":"0","childMenus":[
-						{"id":"23","name":"编辑短趣","parentId":"22","url":"home3.html","icon":"","order":"1","isHeader":"0","childMenus":""},
-						{"id":"23","name":"添加短趣","parentId":"22","url":"home4.html","icon":"","order":"1","isHeader":"0","childMenus":""},
-                        {"id":"24","name":"删除短趣","parentId":"22","url":"home3.html","icon":"","order":"1","isHeader":"0","childMenus":""}   
-					]},
-                     {"id":"25","name":"专题管理","parentId":"1","url":"","icon":"&#xe602;","order":"1","isHeader":"0","childMenus":[
-						{"id":"26","name":"编辑专题","parentId":"25","url":"home3.html","icon":"","order":"1","isHeader":"0","childMenus":""},
-						{"id":"27","name":"添加专题","parentId":"25","url":"home4.html","icon":"","order":"1","isHeader":"0","childMenus":""},
-                        {"id":"28","name":"删除专题","parentId":"25","url":"home3.html","icon":"","order":"1","isHeader":"0","childMenus":""}   
-					]},
-                     {"id":"29","name":"留言管理","parentId":"1","url":"","icon":"&#xe602;","order":"1","isHeader":"0","childMenus":[
-						{"id":"30","name":"编辑留言","parentId":"29","url":"home3.html","icon":"","order":"1","isHeader":"0","childMenus":""},
-						{"id":"31","name":"添加留言","parentId":"29","url":"home4.html","icon":"","order":"1","isHeader":"0","childMenus":""},
-                        {"id":"32","name":"删除留言","parentId":"29","url":"home3.html","icon":"","order":"1","isHeader":"0","childMenus":""}   
-					]},
-                     {"id":"33","name":"传言管理","parentId":"1","url":"","icon":"&#xe602;","order":"1","isHeader":"0","childMenus":[
-						{"id":"34","name":"编辑传言","parentId":"33","url":"home3.html","icon":"","order":"1","isHeader":"0","childMenus":""},
-						{"id":"35","name":"添加传言","parentId":"33","url":"home4.html","icon":"","order":"1","isHeader":"0","childMenus":""},
-                        {"id":"36","name":"删除传言","parentId":"33","url":"home3.html","icon":"","order":"1","isHeader":"0","childMenus":""}   
+					{"id":"6","name":"订单管理","parentId":"1","url":"","icon":"&#xe602;","order":"1","isHeader":"0","childMenus":[
+						{"id":"7","name":"已付款","parentId":"6","url":"home3.html","icon":"","order":"1","isHeader":"0","childMenus":""},
+						{"id":"8","name":"未付款","parentId":"6","url":"home4.html","icon":"","order":"1","isHeader":"0","childMenus":""}
 					]}
 				]},
-				{"id":"2","name":"首页面展示管理","parentId":"0","url":"","icon":"","order":"2","isHeader":"1","childMenus":[
-					{"id":"9","name":"资讯活动展示管理","parentId":"2","url":"","icon":"","order":"1","isHeader":"0","childMenus":""},
+				{"id":"2","name":"框架案例","parentId":"0","url":"","icon":"","order":"2","isHeader":"1","childMenus":[
+					{"id":"9","name":"新功能","parentId":"2","url":"","icon":"","order":"1","isHeader":"0","childMenus":""},
 					{"id":"10","name":"多级","parentId":"2","url":"","icon":"","order":"1","isHeader":"0","childMenus":[
 						{"id":"11","name":"一级","parentId":"10","url":"","icon":"","order":"1","isHeader":"0","childMenus":""},
 						{"id":"12","name":"一级","parentId":"10","url":"","icon":"","order":"1","isHeader":"0","childMenus":[

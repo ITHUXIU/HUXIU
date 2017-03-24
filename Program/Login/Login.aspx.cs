@@ -11,9 +11,4 @@ public partial class Login_Login : System.Web.UI.Page
     {
 
     }
-
-    protected void btnLogin_Click(object sender, EventArgs e)
-    {
-
-    }
 }
