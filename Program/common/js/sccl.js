@@ -401,11 +401,11 @@ $(function(){
                         {"id":"19","name":"更改资讯管理","parentId":"3","url":"test3.aspx","icon":"","order":"1","isHeader":"0","childMenus":""}
 					]},
 					{"id":"6","name":"活动管理","parentId":"1","url":"","icon":"&#xe602;","order":"1","isHeader":"0","childMenus":[
-						{"id":"7","name":"已结束","parentId":"6","url":"home3.html","icon":"","order":"1","isHeader":"0","childMenus":""},
-						{"id":"8","name":"未开始","parentId":"6","url":"home4.html","icon":"","order":"1","isHeader":"0","childMenus":""},
-                        {"id":"20","name":"正在进行","parentId":"6","url":"home3.html","icon":"","order":"1","isHeader":"0","childMenus":""},
-                        {"id":"21","name":"添加新活动","parentId":"6","url":"home3.html","icon":"","order":"1","isHeader":"0","childMenus":""},
-                        {"id":"37","name":"活动系列管理","parentId":"6","url":"home3.html","icon":"","order":"1","isHeader":"0","childMenus":""}
+						{"id":"7","name":"已结束","parentId":"6","url":"Activity_end.aspx","icon":"","order":"1","isHeader":"0","childMenus":""},
+						{"id":"8","name":"未开始","parentId":"6","url":"Activity_begin.aspx","icon":"","order":"1","isHeader":"0","childMenus":""},
+                        {"id":"20","name":"正在进行","parentId":"6","url":"Activity_going.aspx","icon":"","order":"1","isHeader":"0","childMenus":""},
+                        {"id":"21","name":"添加新活动","parentId":"6","url":"Activity_new.aspx","icon":"","order":"1","isHeader":"0","childMenus":""},
+                        {"id":"37","name":"活动系列管理","parentId":"6","url":"Activity_system.aspx","icon":"","order":"1","isHeader":"0","childMenus":""}
 					]},
                   	{"id":"22","name":"短趣管理","parentId":"1","url":"","icon":"&#xe602;","order":"1","isHeader":"0","childMenus":[
 						{"id":"23","name":"编辑短趣","parentId":"22","url":"home3.html","icon":"","order":"1","isHeader":"0","childMenus":""},
