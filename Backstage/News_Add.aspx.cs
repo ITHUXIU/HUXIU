@@ -11,9 +11,13 @@ public partial class BackstageHTML_sccl_admin_page_News_Add : System.Web.UI.Page
     {
         using (var db = new HuXiuEntities())
         {
-            var news_class = from it in db.News_class select it;
-            dropClass.DataSource = news_class.ToList();
-            dropClass.DataTextField = "News_classname";
+            /*var news_class = from it in db.News_class select it;
+             dropClass.DataSource = news_class.ToList();
+             dropClass.DataTextField = "news_classname";
+             dropClass.DataBind();*/
+            var newsclass = from it in db.News_class select it;
+            dropClass.DataSource = newsclass.ToList();
+            dropClass.DataTextField = "news_classname";
             dropClass.DataBind();
         }
     }
@@ -77,11 +81,12 @@ public partial class BackstageHTML_sccl_admin_page_News_Add : System.Web.UI.Page
                             using (var db_0 = new HuXiuEntities())
                             {
                                 string dropclass = dropClass.SelectedValue.ToString();
-                                News_class news_class = db_0.News_class.SingleOrDefault(a => a.News_classname == dropclass);
-                                newsclassid = news_class.News_classid;
+                                News_class news_class = db_0.News_class.SingleOrDefault(a => a.news_classname == dropclass);
+                                newsclassid = news_class.news_classid;
                             }
                             news.news_class = newsclassid;
                             news.new_column = 1;
+                            news.new_author = txtAuthor.Text;
                             db.News.Add(news);
                             db.SaveChanges();
                         }

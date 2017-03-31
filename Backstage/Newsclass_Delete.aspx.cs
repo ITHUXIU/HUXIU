@@ -25,7 +25,7 @@ public partial class Backstage_Newsclass_Delete : System.Web.UI.Page
         {
             using (var db = new HuXiuEntities())
             {
-                News_class newsclass = db.News_class.SingleOrDefault(a => a.News_classid == id);
+                News_class newsclass = db.News_class.SingleOrDefault(a => a.news_classid == id);
 
                 db.News_class.Remove(newsclass);
 

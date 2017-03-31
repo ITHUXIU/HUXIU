@@ -71,18 +71,22 @@
     <form id="form1" runat="server">
         <div>
             <asp:Repeater ID="rptNews" runat="server" OnItemCommand="rptNews_ItemCommand">
-                <ItemTemplate>
+               <HeaderTemplate>
                     <table>
+              
                         <tr>
+                            <th>资讯序号</th>
                             <th>资讯标题</th>
                             <th>资讯内容</th>
                             <th>删除资讯</th>
                             <th>修改资讯</th>
-                        </tr>
-
-
+                        </tr> </HeaderTemplate>
+                        <ItemTemplate>
+                            <br />
+                            <%# Eval("News_id") %>
                         <img src='<%# Eval("News_cover") %>' runat="server" width="60" height="60" />
                         <h3><%# Eval("News_title") %></h3>
+                            <%# Eval("News_content") %>
                         <asp:Label ID="lbText" runat="server"></asp:Label>
                         <asp:LinkButton ID="lbt" runat="server" Text="删除" CommandName="Delete" CommandArgument='<%#Eval("News_id") %>'></asp:LinkButton>
                         <asp:LinkButton ID="LinkButton1" runat="server" Text="编辑" CommandName="Editor" PostBackUrl='<%#"News_Editor.aspx?news_id="+Eval("News_id") %>'></asp:LinkButton>

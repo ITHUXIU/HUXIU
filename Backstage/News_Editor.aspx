@@ -81,7 +81,9 @@ form{
                         <asp:Button ID="btnChangeContent" runat="server" OnClick="btnChangeContent_Click" Text="修改" />
                         <br />
                         <br />
-                        当前封面：<asp:Image ID="imgCover" runat="server" />
+                        资讯作者：
+                        <asp:TextBox ID="txtAuthor" runat="server"></asp:TextBox>
+                        <asp:Button ID="btnAuthor" runat="server" OnClick="btnAuthor_Click" />
                         <br />
                         上传资讯封面:
                     <asp:FileUpload ID="fup" runat="server" />

@@ -74,7 +74,10 @@ form{
                     <asp:Label ID="lbContent" runat="server"></asp:Label>
                     <br />
                     <br />
-
+                    作者/编辑:
+                    <asp:TextBox ID="txtAuthor" runat="server"></asp:TextBox>
+                    <br />
+                    <br />
                     上传资讯封面:
                         <asp:FileUpload ID="fup" runat="server" />
                     <br />

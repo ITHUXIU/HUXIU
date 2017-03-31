@@ -17,6 +17,7 @@ public partial class BackstageHTML_sccl_admin_page_News_Editor : System.Web.UI.P
                 News news = db.News.SingleOrDefault(a => a.news_id == newsid);
                 txtTitle.Text = news.news_title;
                 txtContent.Text = news.news_content;
+                txtAuthor.Text = news.new_author;
             }
         }
     }
@@ -98,8 +99,8 @@ public partial class BackstageHTML_sccl_admin_page_News_Editor : System.Web.UI.P
         using (var db = new HuXiuEntities())
         {
             News news = db.News.SingleOrDefault(a => a.news_id == newsid);
-            News_class newsclass = db.News_class.SingleOrDefault(a => a.News_classname == dropClass.SelectedItem.ToString());
-            news.news_id = newsclass.News_classid;
+            News_class newsclass = db.News_class.SingleOrDefault(a => a.news_classname == dropClass.SelectedItem.ToString());
+            news.news_id = newsclass.news_classid;
             db.SaveChanges();
         }
     }
@@ -122,5 +123,16 @@ public partial class BackstageHTML_sccl_admin_page_News_Editor : System.Web.UI.P
             }
         }
         return false;
+    }
+
+    protected void btnAuthor_Click(object sender, EventArgs e)
+    {
+        int newsid = Convert.ToInt32(Request.QueryString["news_id"]);
+        using (var db = new HuXiuEntities())
+        {
+            News news = db.News.SingleOrDefault(a => a.news_id == newsid);
+            news.new_author = txtAuthor.Text;
+            db.SaveChanges();
+        }
     }
 }

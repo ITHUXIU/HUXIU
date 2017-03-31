@@ -5,15 +5,15 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class Backstage_Topic_AddNews : System.Web.UI.Page
+public partial class Backstage_Column_Delete : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
         using (var db = new HuXiuEntities())
         {
-            var news = from it in db.News select it;
-            rptNews.DataSource = news.ToList();
-            rptNews.DataBind();
+            var column = from it in db.Column where it.column_id != 1 select it;
+            rptColumn.DataSource = column.ToList();
+            rptColumn.DataBind();
         }
     }
 
@@ -38,26 +38,24 @@ public partial class Backstage_Topic_AddNews : System.Web.UI.Page
 
             pds.CurrentPageIndex = currentPage - 1;
 
-            rptNews.DataSource = pds;
+            rptColumn.DataSource = pds;
 
-            rptNews.DataBind();
+            rptColumn.DataBind();
         }
 
     }
-    protected void rptNews_ItemCommand(object source, RepeaterCommandEventArgs e)
+    protected void rptColumn_ItemCommand(object source, RepeaterCommandEventArgs e)
     {
-        if (e.CommandName == "Add")
+        if(e.CommandName=="Delete")
         {
-            int newsid = Convert.ToInt32(e.CommandArgument.ToString());
-
+            int id = Convert.ToInt32(e.CommandArgument.ToString());
             using (var db = new HuXiuEntities())
             {
-                News del = db.News.SingleOrDefault(a => a.news_id == newsid);
-                del.news_class = newsid;
+                Column column = db.Column.SingleOrDefault(a => a.column_id == id);
+                db.Column.Remove(column);
                 db.SaveChanges();
             }
         }
-
     }
 
     protected void btnUp_Click(object sender, EventArgs e)

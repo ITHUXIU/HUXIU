@@ -72,8 +72,7 @@ form{
         <ItemTemplate>
            <tr> 
                <td><asp:LinkButton ID="lbactivity_name" runat="server" Text='<%#Eval("News_classname") %>' CommandName="Activity_content" CommandArgument='<%#Eval("News_classid") %>'></asp:LinkButton> </td>
-            <td><%#Eval("activity_start") %></td>
-            <td><%#Eval("activity_end") %></td>
+         
                <td><asp:LinkButton ID="lbmodify_activity" runat="server" Text="修改" PostBackUrl='<%#"Newsclass_Editor.aspx?news_classid="+Eval("News_classid") %>'></asp:LinkButton></td>
                 <td><asp:LinkButton ID="lbdelete_activity" runat="server" Text="删除" CommandName="Delete" CommandArgument='<%#Eval("News_classid") %>'></asp:LinkButton></td>
                </tr>

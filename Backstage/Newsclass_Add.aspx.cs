@@ -17,7 +17,7 @@ public partial class Backstage_Newsclass_Add : System.Web.UI.Page
         using (var db = new HuXiuEntities())
         {
             News_class newsclass = new News_class();
-            newsclass.News_classname = txtClass.Text;
+            newsclass.news_classname = txtClass.Text;
             db.News_class.Add(newsclass);
             db.SaveChanges();
         }
