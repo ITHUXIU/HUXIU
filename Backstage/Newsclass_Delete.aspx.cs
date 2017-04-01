@@ -30,6 +30,8 @@ public partial class Backstage_Newsclass_Delete : System.Web.UI.Page
                 db.News_class.Remove(newsclass);
 
                 db.SaveChanges();
+
+                Response.Write("<script>alert('删除成功！');location='Newsclass_Delete.aspx'</script>");
             }
         }
     }

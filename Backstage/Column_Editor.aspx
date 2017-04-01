@@ -77,7 +77,10 @@
             <br />
             专题内容
         <asp:TextBox ID="txtContent" runat="server"></asp:TextBox>
-            <asp:Button ID="btnContent" runat="server" OnClick="btnContent_Click"  Text="修改"/>
+            <asp:Button ID="btnContent" runat="server" OnClick="btnContent_Click" Text="修改" />
+
+            <br />
+            <br />
 
             上传专题封面
                                 <asp:FileUpload ID="fup" runat="server" />
@@ -86,36 +89,43 @@
             <asp:Label ID="lblInfo" runat="server" ForeColor="Red" Font-Size="13px"></asp:Label>
             <br />
             <br />
-            <asp:Button Text="修改" runat="server" OnClick="Unnamed_Click"  />
+            <asp:Button Text="修改" runat="server" OnClick="Unnamed_Click" />
             <div id="divHave" runat="server" visible="true">
-            <asp:Repeater ID="rptHave" runat="server" OnItemCommand="rptHave_ItemCommand">
-                <ItemTemplate>
-                    <table>
-                        <tr>
-                            <th>资讯序号</th>
-                            <th>资讯标题</th>
-                            <th>资讯内容</th>
-                            <th>从专题中移除</th>
-                        </tr>
-                        <%# Eval("News_id") %>
-                        <h3><%# Eval("News_title") %></h3>
-                        <%# Eval("News_content") %>
-                        <asp:LinkButton ID="lbt" runat="server" Text="删除" CommandName="Delete" CommandArgument='<%#Eval("News_id") %>'></asp:LinkButton>
-                </ItemTemplate>
-            </asp:Repeater>
-            <br />
-            <asp:Button ID="btnUp" runat="server" Text="上一页" OnClick="btnUp_Click" />
-            &nbsp;<asp:Button ID="btnDrow" runat="server" Text="下一页" OnClick="btnDrow_Click" />
-            &nbsp;<asp:Button ID="btnFirst" runat="server" Text="首页" OnClick="btnFirst_Click" />
-            &nbsp;<asp:Button ID="btnLast" runat="server" Text="尾页" OnClick="btnLast_Click" />
-            &nbsp;页次：<asp:Label ID="lbNow" runat="server" Text="1"></asp:Label>
-            /<asp:Label ID="lbTotal" runat="server" Text="1"></asp:Label>
+                <asp:Repeater ID="rptHave" runat="server" OnItemCommand="rptHave_ItemCommand">
+                    <ItemTemplate>
+                        <table>
+                            <tr>
+                                <th>资讯序号</th>
+                                <th>资讯封面</th>
+                                <th>资讯标题</th>
+                                <th>资讯内容</th>
+                                <th>从专题中移除</th>
+                            </tr>
 
-            &nbsp;
+                           <th> <%# Eval("News_id") %></th>
+                               <th>
+                            <img src='<%# Eval("News_cover") %>' runat="server" width="60" height="60" /></th>
+                          <th>  <h3><%# Eval("News_title") %></h3></th>
+                         <th>   <%# Eval("News_content") %></th>
+                          <th>  <asp:LinkButton ID="lbt" runat="server" Text="删除" CommandName="Delete" CommandArgument='<%#Eval("News_id") %>'></asp:LinkButton></th>
+                    </ItemTemplate>
+                    <FooterTemplate>
+                        </table>
+                    </FooterTemplate>
+                </asp:Repeater>
+                <br />
+                <asp:Button ID="btnUp" runat="server" Text="上一页" OnClick="btnUp_Click" />
+                &nbsp;<asp:Button ID="btnDrow" runat="server" Text="下一页" OnClick="btnDrow_Click" />
+                &nbsp;<asp:Button ID="btnFirst" runat="server" Text="首页" OnClick="btnFirst_Click" />
+                &nbsp;<asp:Button ID="btnLast" runat="server" Text="尾页" OnClick="btnLast_Click" />
+                &nbsp;页次：<asp:Label ID="lbNow" runat="server" Text="1"></asp:Label>
+                /<asp:Label ID="lbTotal" runat="server" Text="1"></asp:Label>
+
+                &nbsp;
 
                     转<asp:TextBox ID="txtJump" Text="1" runat="server" Width="23px"></asp:TextBox>
-            &nbsp;<asp:Button ID="btnJump" runat="server" Text="Go" OnClick="btnJump_Click" />
-</div>
+                &nbsp;<asp:Button ID="btnJump" runat="server" Text="Go" OnClick="btnJump_Click" />
+            </div>
             <br />
             添加资讯
         搜索
@@ -130,22 +140,35 @@
                 <asp:Button ID="btnFind" runat="server" OnClick="btnFind_Click" Text="查找" />
             </div>
 
-                <asp:Repeater ID="rptNews" runat="server" Visible="false" OnItemCommand="rptNews_ItemCommand">
-                    <ItemTemplate>
-                        <table>
-                            <tr>
-                                <th>资讯序号</th>
-                                <th>资讯标题</th>
-                                <th>资讯内容</th>
-                                <th>添加到专题</th>
-                            </tr>
-                            <%# Eval("News_id")%>
+            <asp:Repeater ID="rptNews" runat="server" Visible="false" OnItemCommand="rptNews_ItemCommand">
+                <ItemTemplate>
+                    <table>
+                        <tr>
+                            <th>资讯序号</th>
+                            <th>资讯封面</th>
+                            <th>资讯标题</th>
+
+                            <th>资讯内容</th>
+                            <th>添加到专题</th>
+                        </tr>
+                        <tr>
+                        <th><%# Eval("News_id")%></th>
+                        <th>
+                            <img src='<%# Eval("News_cover") %>' runat="server" width="60" height="60" /></th>
+                        <th>
                             <h3><%# Eval("News_title") %></h3>
-                            <%# Eval("News_content") %>
+                        </th>
+                        <th><%# Eval("News_content") %></th>
+                        <th>
                             <asp:LinkButton ID="lbt" runat="server" Text="添加" CommandName="Add" CommandArgument='<%#Eval("News_id") %>'></asp:LinkButton>
-                    </ItemTemplate>
-                </asp:Repeater>
-                <br />
+                        </th>
+                            </tr>
+                </ItemTemplate>
+                <FooterTemplate>
+                    </table>
+                </FooterTemplate>
+            </asp:Repeater>
+            <br />
         </div>
     </form>
 </body>

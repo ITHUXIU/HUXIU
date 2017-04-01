@@ -22,7 +22,7 @@ public partial class BackstageHTML_sccl_admin_page_News_Editor : System.Web.UI.P
         }
     }
 
-
+    //修改资讯名称
     protected void btnChangeTitle_Click(object sender, EventArgs e)
     {
         int newsid = Convert.ToInt32(Request.QueryString["news_id"]);
@@ -31,9 +31,10 @@ public partial class BackstageHTML_sccl_admin_page_News_Editor : System.Web.UI.P
             News news = db.News.SingleOrDefault(a => a.news_id == newsid);
             news.news_title = txtTitle.Text;
             db.SaveChanges();
+            Response.Write("<script>alert('修改成功！');location='News_Delete.aspx'</script>");
         }
     }
-
+    //修改资讯内容
     protected void btnChangeContent_Click(object sender, EventArgs e)
     {
         int newsid = Convert.ToInt32(Request.QueryString["news_id"]);
@@ -42,9 +43,10 @@ public partial class BackstageHTML_sccl_admin_page_News_Editor : System.Web.UI.P
             News news = db.News.SingleOrDefault(a => a.news_id == newsid);
             news.news_content = txtContent.Text;
             db.SaveChanges();
+            Response.Write("<script>alert('修改成功！');location='News_Delete.aspx'</script>");
         }
     }
-
+    //修改资讯封面
     protected void btnChangeCover_Click(object sender, EventArgs e)
     {
         int newsid = Convert.ToInt32(Request.QueryString["news_id"]);
@@ -71,6 +73,7 @@ public partial class BackstageHTML_sccl_admin_page_News_Editor : System.Web.UI.P
                         news.news_cover = serverpath;
                         db.SaveChanges();
                         lblInfo.Text = "上传成功！";
+                        Response.Write("<script>alert('修改成功！');location='News_Delete.aspx'</script>");
                     }
                     else
                         lblInfo.Text = "请上传图片！";
@@ -82,7 +85,7 @@ public partial class BackstageHTML_sccl_admin_page_News_Editor : System.Web.UI.P
             }
         }
     }
-
+    //修改是否为首页
     protected void btnChangeTop_Click(object sender, EventArgs e)
     {
         int newsid = Convert.ToInt32(Request.QueryString["news_id"]);
@@ -91,8 +94,10 @@ public partial class BackstageHTML_sccl_admin_page_News_Editor : System.Web.UI.P
             News news = db.News.SingleOrDefault(a => a.news_id == newsid);
             news.news_top = Convert.ToInt32(radlTop.SelectedValue);
             db.SaveChanges();
+            Response.Write("<script>alert('修改成功！');location='News_Delete.aspx'</script>");
         }
     }
+    //修改分类资讯
     protected void btnChangeClass_Click(object sender, EventArgs e)
     {
         int newsid = Convert.ToInt32(Request.QueryString["news_id"]);
@@ -102,9 +107,11 @@ public partial class BackstageHTML_sccl_admin_page_News_Editor : System.Web.UI.P
             News_class newsclass = db.News_class.SingleOrDefault(a => a.news_classname == dropClass.SelectedItem.ToString());
             news.news_id = newsclass.news_classid;
             db.SaveChanges();
+            Response.Write("<script>alert('修改成功！');location='News_Delete.aspx'</script>");
         }
     }
 
+    
     private static bool IsAllowedExtension(FileUpload upfile)
     {
         string strOldFilePath = "";
@@ -124,7 +131,7 @@ public partial class BackstageHTML_sccl_admin_page_News_Editor : System.Web.UI.P
         }
         return false;
     }
-
+    //修改作者
     protected void btnAuthor_Click(object sender, EventArgs e)
     {
         int newsid = Convert.ToInt32(Request.QueryString["news_id"]);
@@ -133,6 +140,7 @@ public partial class BackstageHTML_sccl_admin_page_News_Editor : System.Web.UI.P
             News news = db.News.SingleOrDefault(a => a.news_id == newsid);
             news.new_author = txtAuthor.Text;
             db.SaveChanges();
+            Response.Write("<script>alert('修改成功！');location='News_Delete.aspx'</script>");
         }
     }
 }
