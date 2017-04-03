@@ -11,10 +11,7 @@ public partial class BackstageHTML_sccl_admin_page_News_Add : System.Web.UI.Page
     {
         using (var db = new HuXiuEntities())
         {
-            /*var news_class = from it in db.News_class select it;
-             dropClass.DataSource = news_class.ToList();
-             dropClass.DataTextField = "news_classname";
-             dropClass.DataBind();*/
+
             var newsclass = from it in db.News_class select it;
             dropClass.DataSource = newsclass.ToList();
             dropClass.DataTextField = "news_classname";
@@ -41,7 +38,7 @@ public partial class BackstageHTML_sccl_admin_page_News_Add : System.Web.UI.Page
         }
         return false;
     }
-
+    //添加资讯
     protected void btnSub_Click(object sender, EventArgs e)
     {
         int newsclassid;
@@ -73,11 +70,10 @@ public partial class BackstageHTML_sccl_admin_page_News_Add : System.Web.UI.Page
                         else
                         {
                             news.news_title = txtTitle.Text;
-                            news.news_content = txtContent.Text;
+                            news.news_content = Server.HtmlDecode(myEditor.InnerHtml);
                             news.news_time = DateTime.Now;
                             news.news_top = Convert.ToInt16(radlTop.SelectedValue);
                             news.news_cover = serverpath;
-                            //news.news_class = Convert.ToInt16(dropClass.SelectedValue);
                             using (var db_0 = new HuXiuEntities())
                             {
                                 string dropclass = dropClass.SelectedValue.ToString();
@@ -93,6 +89,7 @@ public partial class BackstageHTML_sccl_admin_page_News_Add : System.Web.UI.Page
                     }
 
                     lblInfo.Text = "上传成功！";
+                    Response.Write("<script>alert('添加成功！');location='News_Add.aspx'</script>");
                 }
                 else
                     lblInfo.Text = "请上传图片！";

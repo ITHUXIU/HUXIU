@@ -16,6 +16,9 @@
          <h2 style="align-content:center  ">标题</h2>
         <asp:TextBox ID="txtTitle" runat="server" MaxLength="50"></asp:TextBox><br />
         封面小图标：<br /><asp:TextBox ID="txtCoverLabel" runat="server" ></asp:TextBox><br />
+           
+        系列活动名称：
+        <asp:TextBox ID="txtTopicName" runat="server" ></asp:TextBox><br />
         封面照片：<br /><asp:ImageButton ID="ibtnChangeiamge" runat="server" ToolTip="更换头像" OnClick="ibtnChangeiamge_Click" />
         <asp:Panel ID="panel" runat="server" Visible="true"  >
               <asp:FileUpload ID="FileUpload1" runat="server" />

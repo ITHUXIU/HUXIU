@@ -52,6 +52,7 @@ public partial class Backstage_Activity_begin : System.Web.UI.Page
 
                 db.SaveChanges();
             }
+            Response.Write("<script>alert('删除成功！');location='Activity_begin.aspx'</script>");
         }
     }
     protected void btnDown_Click(object sender, EventArgs e)

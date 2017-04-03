@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Topic_activity.aspx.cs" Inherits="Backstage_picture_Topic_activity" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Rumor.aspx.cs" Inherits="Backstage_Rumor" %>
 
 <!DOCTYPE html>
 
@@ -6,7 +6,7 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
-      <script type="text/javascript" src="../common/js/tablecloth.js"></script>
+     <script type="text/javascript" src="../common/js/tablecloth.js"></script>
     <link href="../common/css/tablecloth.css" rel="stylesheet" type="text/css" media="screen" />
     <style>
 
@@ -62,21 +62,27 @@ form{
     <div>
     <table>
 			<tr>
-				<th>活动名称</th>
-				<th>活动开始时间</th>
-				<th>活动结束时间</th>
-				
-				<th>修改活动</th>
-				<th>删除系列活动中该活动</th>
+				<th>传言标题</th>
+                <th>传言内容</th>
+				<th>传言时间</th>
+				<th>传言点赞数</th>
+                <th>传言状态</th>
+				<th>传言热度</th>
+                <th>修改传言</th>
+				<th>删除传言</th>
 			</tr>
-    <asp:Repeater ID="rptActivity" runat="server" OnItemCommand="rptActivity_ItemCommand" >
+    <asp:Repeater ID="rptRumor" runat="server" OnItemCommand="rptRumor_ItemCommand" >
         <ItemTemplate>
            <tr> 
-               <td><asp:LinkButton ID="lbactivity_name" runat="server" Text='<%#Eval("activity_name") %>' PostBackUrl='<%#"Modify_activity.aspx?id="+Eval("activity_id") %>'></asp:LinkButton> </td>
-            <td><%#Eval("activity_start") %></td>
-            <td><%#Eval("activity_end") %></td>                                            
-               <td><asp:LinkButton ID="lbmodify_activity" runat="server" Text="修改" PostBackUrl='<%#"Modify_activity.aspx?id="+Eval("activity_id") %>'></asp:LinkButton></td>
-            <td><asp:LinkButton ID="lbdelete_activity" runat="server" Text="删除" CommandName="Delete" CommandArgument='<%#Eval("activity_id") %>'></asp:LinkButton></td>
+               <td><asp:LinkButton ID="lbrumor_name" runat="server" Text='<%#Eval("rumor_title") %>' PostBackUrl='<%#"Modify_rumor.aspx?id="+Eval("rumor_id") %>'></asp:LinkButton> </td>
+
+            <td><%#Eval("rumor_content") %></td>
+               <td><%#Eval("rumor_time") %></td>
+               <td><%#Eval("rumor_like") %></td> 
+               <td><%#Eval("rumor_state") %></td>
+               <td><%#Eval("rumor_hot") %></td>                            
+               <td><asp:LinkButton ID="lbmodify_rumor" runat="server" Text="修改" PostBackUrl='<%#"Modify_rumor.aspx?id="+Eval("rumor_id") %>'></asp:LinkButton></td>
+            <td><asp:LinkButton ID="lbdelete_rumor" runat="server" Text="删除" CommandName="Delete" CommandArgument='<%#Eval("rumor_id") %>'></asp:LinkButton></td>
                </tr>
            
         </ItemTemplate>

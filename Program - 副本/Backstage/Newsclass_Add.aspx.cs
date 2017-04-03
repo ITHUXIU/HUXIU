@@ -19,6 +19,7 @@ public partial class Backstage_Newsclass_Add : System.Web.UI.Page
             News_class newsclass = new News_class();
             newsclass.news_classname = txtClass.Text;
             db.News_class.Add(newsclass);
+            Response.Write("<script>alert('添加成功！');location='Newsclass_Add.aspx'</script>");
             db.SaveChanges();
         }
     }

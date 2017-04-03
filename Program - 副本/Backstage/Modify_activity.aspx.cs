@@ -22,7 +22,7 @@ public partial class Backstage_Modify_activity : System.Web.UI.Page
                 myEditor.InnerHtml = activity.activity_content;
 
                 ibtnChangeiamge.ImageUrl = activity.activity_cover;
-
+              
                 txtTopicName.Text = activity.activity_topicname;
 
                 txtActivityBeginTime.Text = activity.activity_start.ToString();
@@ -37,29 +37,51 @@ public partial class Backstage_Modify_activity : System.Web.UI.Page
 
     protected void btnActivity_Click(object sender, EventArgs e)
     {
+        string topic_id = null;
+
         int id = Convert.ToInt32(Request.QueryString["id"].ToString());
 
-        string activity_content = Server.HtmlDecode(myEditor.InnerHtml);
-
-        using (var db = new HuXiuEntities())
+        using (var db1 = new HuXiuEntities())
         {
-            Activity new_activity = db.Activity.SingleOrDefault(a => a.activity_id == id);
+            if (txtTopicName.Text != null)
+            {
+                Topic topicname = db1.Topic.SingleOrDefault(a => a.topic_name == txtTopicName.Text);
 
-            new_activity.activity_name = txtTitle.Text;
+                if (topicname == null)
+                {
+                    Response.Write("<script>alert('该系列不存在，请确认无误再填写');location='Modify_activity.aspx'</script>");
+                }
+                else
+                {
+                    topic_id = topicname.topic_id.ToString(); 
 
-            new_activity.activity_content = myEditor.InnerHtml;
+                }
+            }
+            if (txtTitle != null && myEditor.InnerHtml != null && txtTopicName != null && txtCoverLabel != null && txtActivityBeginTime != null && txtActivityEndTime != null)
+            {
+                using (var db = new HuXiuEntities())
+                {
+                    Activity new_activity = db.Activity.SingleOrDefault(a => a.activity_id == id);
 
-            new_activity.activity_topicname = txtTopicName.Text;
+                    new_activity.activity_name = txtTitle.Text;
 
-            new_activity.activity_start = Convert.ToDateTime(txtActivityBeginTime.Text);
+                    new_activity.activity_content = Server.HtmlDecode(myEditor.InnerHtml);
 
-            new_activity.activity_end = Convert.ToDateTime(txtActivityEndTime.Text);
+                    new_activity.activity_topicid = Convert.ToInt32(topic_id);
 
-            new_activity.activity_coverlable = txtCoverLabel.Text;
+                    new_activity.activity_topicname = txtTopicName.Text;
 
-            db.SaveChanges();
+                    new_activity.activity_start = Convert.ToDateTime(txtActivityBeginTime.Text);
 
-            Response.Write("<script>alert('修改成功！')</script>");
+                    new_activity.activity_end = Convert.ToDateTime(txtActivityEndTime.Text);
+
+                    new_activity.activity_coverlable = txtCoverLabel.Text;
+
+                    db.SaveChanges();
+
+                    Response.Write("<script>alert('修改成功！')</script>");
+                }
+            }
         }
 
     }

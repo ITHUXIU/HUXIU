@@ -28,6 +28,7 @@ public partial class Backstage_Newsclass_Editor : System.Web.UI.Page
             News_class newsclass = db.News_class.SingleOrDefault(a => a.news_classid == id);
             newsclass.news_classname = txtName.Text;
             db.SaveChanges();
+            Response.Write("<script>alert('修改成功！');location='Newsclass_Delete.aspx'</script>");
         }
     }
 }

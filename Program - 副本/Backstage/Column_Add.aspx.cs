@@ -13,7 +13,7 @@ public partial class Backstage_Column_Add : System.Web.UI.Page
     }
 
 
-
+    //添加新专题
     protected void Unnamed_Click(object sender, EventArgs e)
     {
         try
@@ -38,7 +38,7 @@ public partial class Backstage_Column_Add : System.Web.UI.Page
                     {
                         var column = new Column();
                         column.column_title = txtName.Text;
-                        column.column_content = txtContent.Text;
+                        column.column_content = Server.HtmlDecode(myEditor.InnerHtml);
                         column.column_cover = serverpath;
                         column.column_time = DateTime.Now;
                         db.Column.Add(column);
@@ -47,6 +47,7 @@ public partial class Backstage_Column_Add : System.Web.UI.Page
                     }
 
                     lblInfo.Text = "上传成功！";
+                    Response.Write("<script>alert('添加成功！');location='Column_Add.aspx'</script>");
                 }
                 else
                     lblInfo.Text = "请上传图片！";

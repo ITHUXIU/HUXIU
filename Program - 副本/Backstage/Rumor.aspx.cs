@@ -5,18 +5,36 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class Backstage_Activity_going : System.Web.UI.Page
+public partial class Backstage_Rumor : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
         RptDataBind(1);
+    }
+
+    protected void rptRumor_ItemCommand(object source, RepeaterCommandEventArgs e)
+    {
+        int id = Convert.ToInt32(e.CommandArgument.ToString());
+        if(e.CommandName=="Delete")
+        {
+            using (var db = new HuXiuEntities())
+            {
+                Rumor rumor = db.Rumor.SingleOrDefault(a => a.rumor_id == id);
+
+                db.Rumor.Remove(rumor);
+
+                db.SaveChanges();
+            }
+            Response.Write("<script>alert('删除成功！');location='Rumor.aspx'</script>");
+
+        }
     }
     protected void RptDataBind(int currentPage)
     {
 
         using (var db = new HuXiuEntities())
         {
-            var datascore = from it in db.Activity where it.activity_start < DateTime.Now && it.activity_end > DateTime.Now select it;
+            var datascore = from it in db.Rumor select it;
 
             PagedDataSource pds = new PagedDataSource();
 
@@ -30,29 +48,12 @@ public partial class Backstage_Activity_going : System.Web.UI.Page
 
             pds.CurrentPageIndex = currentPage - 1;//当前页数从零开始，故把接受的数减一
 
-            rptActivity_going.DataSource = pds;
+            rptRumor.DataSource = pds;
 
-            rptActivity_going.DataBind();
+            rptRumor.DataBind();
 
         }
 
-    }
-    protected void rptActivity_going_ItemCommand(object source, RepeaterCommandEventArgs e)
-    {
-        int id = Convert.ToInt32(e.CommandArgument.ToString());
-
-        if (e.CommandName == "Delete")
-        {
-            using (var db = new HuXiuEntities())
-            {
-                Activity activity = db.Activity.SingleOrDefault(a => a.activity_id == id);
-
-                db.Activity.Remove(activity);
-
-                db.SaveChanges();
-            }
-            Response.Write("<script>alert('删除成功！');location='Activity_going.aspx'</script>");
-        }
     }
     protected void btnDown_Click(object sender, EventArgs e)
     {
@@ -95,4 +96,5 @@ public partial class Backstage_Activity_going : System.Web.UI.Page
             RptDataBind(Convert.ToInt32(lbNow.Text));
         }
     }
+
 }

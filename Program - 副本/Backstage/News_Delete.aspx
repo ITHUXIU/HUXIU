@@ -70,33 +70,42 @@
 <body>
     <form id="form1" runat="server">
         <div>
-              <table>
-              
-                   <tr>
-                       <th>资讯序号</th>
-                       <th>资讯图标</th>
-                       <th>资讯标题</th>
-                       <th>资讯内容</th>
-                       <th>删除资讯</th>
-                       <th>修改资讯</th>
+            <asp:Repeater ID="rptNews" runat="server" OnItemCommand="rptNews_ItemCommand" OnItemDataBound="rptNews_ItemDataBound">
+                <HeaderTemplate>
+                    <table>
+
+                        <tr>
+                            <th>资讯序号</th>
+                            <th>资讯封面</th>
+                            <th>资讯标题</th>
+                            <th>资讯内容</th>
+                            <th>删除资讯</th>
+                            <th>修改资讯</th>
                         </tr>
-            <asp:Repeater ID="rptNews" runat="server" OnItemCommand="rptNews_ItemCommand">
-               <HeaderTemplate>
-                    
-                   </HeaderTemplate>
-                        <ItemTemplate>                
-                          <tr>
-                             <td> <%# Eval("News_id") %></td>
-                        <td><img src='<%# Eval("News_cover") %>' runat="server" width="25" height="15" /></td>
-                        <td><%# Eval("News_title") %></td>
-                           <td> <%# Eval("News_content") %></td>
-                    
-                        <td><asp:LinkButton ID="lbt" runat="server" Text="删除" CommandName="Delete" CommandArgument='<%#Eval("News_id") %>'></asp:LinkButton></td>
-                        <td><asp:LinkButton ID="LinkButton1" runat="server" Text="编辑" CommandName="Editor" PostBackUrl='<%#"News_Editor.aspx?news_id="+Eval("News_id") %>'></asp:LinkButton></td>                     
-               </tr>
-                               </ItemTemplate>
+                </HeaderTemplate>
+                <ItemTemplate>
+                    <br />
+                    <tr>
+                    <th><%# Eval("News_id") %></th>
+                    <th><img src='<%# Eval("News_cover") %>' runat="server" width="60" height="60" /></th>
+                    <th><h3><%# Eval("News_title") %></h3></th>
+                    <%--<asp:Label ID="lb" runat="server" Text='<%# Eval("News_content")' %>></asp:Label>--%>
+                        <%--<th><%# Eval("News_content") %></th>--%>
+                    <th><asp:Label ID="lbText" runat="server" ></asp:Label></th>
+                    <th><asp:LinkButton ID="lbt" runat="server" Text="删除" CommandName="Delete" CommandArgument='<%#Eval("News_id") %>'></asp:LinkButton></th>
+                 <th>
+                      <asp:LinkButton ID="LinkButton1" runat="server" Text="编辑" CommandName="Editor" PostBackUrl='<%#"News_Editor.aspx?news_id="+Eval("News_id") %>'></asp:LinkButton>
+               </th>
+
+                    </tr>  
+
+                </ItemTemplate>
+                <FooterTemplate>
+                    </table>
+                </FooterTemplate>
+
             </asp:Repeater>
-        </table>
+            <br />
             <asp:Button ID="btnUp" runat="server" Text="上一页" OnClick="btnUp_Click" />
             &nbsp;<asp:Button ID="btnDrow" runat="server" Text="下一页" OnClick="btnDrow_Click" />
             &nbsp;<asp:Button ID="btnFirst" runat="server" Text="首页" OnClick="btnFirst_Click" />
@@ -108,9 +117,9 @@
 
                     转<asp:TextBox ID="txtJump" Text="1" runat="server" Width="23px"></asp:TextBox>
             &nbsp;<asp:Button ID="btnJump" runat="server" Text="Go" OnClick="btnJump_Click" />
-                
-            </div>
-        
+
+        </div>
+
     </form>
 </body>
 </html>

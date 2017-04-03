@@ -6,6 +6,9 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
+     <script  src="../ueditor/ueditor.config.js" type="text/javascript"></script>
+     <script  src="../ueditor/ueditor.all.min.js" type="text/javascript"></script>
+    <script type="text/javascript" charset="utf-8" src="../ueditor/lang/zh-cn/zh-cn.js"></script>
   <script type="text/javascript" src="../common/js/tablecloth.js"></script>
     <link href="../common/css/tablecloth.css" rel="stylesheet" type="text/css" media="screen" />
     <style>
@@ -69,11 +72,11 @@ form{
 				<th>修改该系列活动</th>
 				<th>删除该系列活动</th>
 			</tr>
-    <asp:Repeater ID="rptActivity_topic" runat="server" OnItemCommand="rptActivity_topic_ItemCommand" >
+    <asp:Repeater ID="rptActivity_topic" runat="server" OnItemCommand="rptActivity_topic_ItemCommand" OnItemDataBound="rptActivity_topic_ItemDataBound">
         <ItemTemplate>
            <tr> 
-               <td><asp:LinkButton ID="lbactivity_name" runat="server" Text='<%#Eval("topic_name") %>' CommandName="Activity_content" CommandArgument='<%#Eval("topic_id") %>'></asp:LinkButton> </td>
-            <td><asp:Label ID="lbTopicActicity" runat="server" Text='<%#Eval("topic_content") %>.Substring(0,30)'></asp:Label></td>
+               <td><asp:LinkButton ID="lbactivity_name" runat="server" Text='<%#Eval("topic_name") %>' PostBackUrl='<%#"Topic_activity.aspx?id="+Eval("topic_id") %>'></asp:LinkButton> </td>
+            <td><asp:Label ID="lbTopicActicity" runat="server" Text='<%#Eval("topic_content") %>'></asp:Label></td>
                <td><asp:LinkButton ID="lbmodify_activity" runat="server" Text="修改" PostBackUrl='<%#"Modify_topic.aspx?id="+Eval("topic_id") %>'></asp:LinkButton></td>
             <td><asp:LinkButton ID="lbdelete_activity" runat="server" Text="删除" CommandName="Delete" CommandArgument='<%#Eval("topic_id") %>'></asp:LinkButton></td>
                </tr>
@@ -91,6 +94,7 @@ form{
         转<asp:TextBox ID="txtJump2" Text="1" runat="server" Width="16px" onkeyup="this.value=this.value.replace(/\D/g,'')"></asp:TextBox>
          <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat ="server" ControlToValidate ="txtJump" ></asp:RequiredFieldValidator> 
         <asp:Button ID="btnJump2" runat="server" Text="Go"  OnClick="btnJump2_Click"/>
+           <asp:Button ID="btnNewTopic" runat="server" Text="新建系列" OnClick="btnNewTopic_Click" />
          <asp:Button ID="btnback2" runat="server" Text="未编入系列活动管理" OnClick="btnback2_Click" />
            </asp:panel> 
         <asp:Panel ID="panelTopicActivityAdd" runat="server" Visible="false">
@@ -127,6 +131,36 @@ form{
         <asp:Button ID="btnJump" runat="server" Text="Go"  OnClick="btnJump_Click"/>
          <asp:Button ID="btnback" runat="server" Text="系列管理" OnClick="btnback_Click" />
         </asp:Panel>
+        <asp:Panel ID="pnNewTopic" runat="server" Visible="false">
+            系列名称<br />
+            <asp:TextBox ID="txtNewTopicName" runat="server" ></asp:TextBox><br />
+            系列图标<br />
+           <asp:ImageButton ID="imgbtnTopic" runat="server" ToolTip="点击更换" OnClick="imgbtnTopic_Click" />
+              <asp:Panel ID="panel" runat="server" Visible="true"  >
+              <asp:FileUpload ID="FileUpload1" runat="server" />
+        <asp:Button ID="Button1" runat="server" Text="上传" OnClick="btnupload_Click" /><br />
+        </asp:Panel>
+            系列简介<br />
+                   <textarea id="myEditor" name="myEditor" runat="server" onblur="setUeditor()" style="width: 1030px; height: 250px;"></textarea>
+            <%-- 上面这个style这里是实例化的时候给实例化的这个容器设置宽和高，不设置的话，或默认为auto可能会造成部分显示的情况--%>
+            
+            <script type="text/javascript">
+                var editor = new baidu.editor.ui.Editor();
+                
+                editor.render("<%=myEditor.ClientID%>");
+            </script>
+      
+<script type="text/javascript">
+        function setUeditor() {
+            var myEditor = document.getElementById("myEditor");
+            myEditor.value = editor.getContent();//把得到的值给textarea
+        }
+    </script>
+            <br />
+            <asp:Button ID="btnNewTopicSet" runat="server" Text="确定" OnClick="btnNewTopicSet_Click" />
+            &nbsp;&nbsp;&nbsp;
+            <asp:Button ID="btnBack1" runat="server" Text="返回" OnClick="btnBack_Click" />
+            </asp:Panel>
     </div>
     </form>
 </body>

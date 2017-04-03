@@ -28,12 +28,13 @@ public partial class Backstage_Interesting : System.Web.UI.Page
          
                 db.SaveChanges();
             }
+            Response.Write("<script>alert('删除成功！');location='Interesting.aspx'</script>");
         }
         if(e.CommandName=="URL")
         {
             string url = e.CommandArgument.ToString();
             //有待改正
-            Response.Write("<script>window.location='http://www.baidu.com'</script>");
+            Response.Write("<script>window.location=url</script>");
         }
     }
     protected void RptDataBind(int currentPage)

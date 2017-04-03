@@ -14,25 +14,58 @@ public partial class Backstage_Activity_new : System.Web.UI.Page
 
     protected void btnNewActivity_Click(object sender, EventArgs e)
     {
-        using (var db = new HuXiuEntities())
+        string topic_id = null;
+
+        using (var db1 = new HuXiuEntities())
         {
-            Activity newActivity = new Activity();
+            if (txtTopicName.Text != null)
+            {
+                Topic topicname = db1.Topic.SingleOrDefault(a => a.topic_name == txtTopicName.Text);
 
-            newActivity.activity_name = txtTitle.Text;
+                if (topicname == null)
+                {
+                    Response.Write("<script>alert('该系列不存在，请确认无误再填写');location='Modify_activity.aspx'</script>");
+                }
+                else
+                {
+                    topic_id = topicname.topic_id.ToString();
 
-            newActivity.activity_coverlable = txtCoverLabel.Text;
+                }
+            }
+        }
+        if (txtTitle != null && txtCoverLabel.Text != null && myEditor.InnerHtml != null && ibtnChangeiamge.ImageUrl != null && txtActivityBeginTime.Text != null && txtActivityEndTime.Text != null)
 
-            newActivity.activity_content = myEditor.InnerHtml;
+        {
+            using (var db = new HuXiuEntities())
+            {
+                Activity newActivity = new Activity();
 
-            newActivity.activity_cover = ibtnChangeiamge.ImageUrl;
+                newActivity.activity_name = txtTitle.Text;
 
-            newActivity.activity_start = Convert.ToDateTime(txtActivityBeginTime.Text);
+                newActivity.activity_topicid = Convert.ToInt32(topic_id);
 
-            newActivity.activity_end = Convert.ToDateTime(txtActivityEndTime.Text);
+                newActivity.activity_topicname = txtTopicName.Text;
 
-            db.Activity.Add(newActivity);
+                newActivity.activity_coverlable = txtCoverLabel.Text;
 
-            db.SaveChanges();
+                newActivity.activity_content = Server.HtmlDecode(myEditor.InnerHtml);
+
+                newActivity.activity_cover = ibtnChangeiamge.ImageUrl;
+
+                newActivity.activity_start = Convert.ToDateTime(txtActivityBeginTime.Text);
+
+                newActivity.activity_end = Convert.ToDateTime(txtActivityEndTime.Text);
+
+                db.Activity.Add(newActivity);
+
+                db.SaveChanges();
+
+                Response.Write("<script>alert('添加成功！');location='Activity_new.aspx'</script>");
+            }
+        }
+        else
+        {
+            Response.Write("<script>alert('请填写完全！')</script>");
         }
     }
     protected void btnupload_Click(object sender, EventArgs e)

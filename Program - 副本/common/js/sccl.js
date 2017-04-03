@@ -397,8 +397,7 @@ $(function(){
 	var menu = [{"id":"1","name":"主菜单","parentId":"0","url":"","icon":"","order":"1","isHeader":"1","childMenus":[
 					{"id":"3","name":"资讯管理","parentId":"1","url":"","icon":"&#xe604;","order":"1","isHeader":"0","childMenus":[
 						{"id":"4","name":"添加资讯管理","parentId":"3","url":"News_Add.aspx","icon":"","order":"1","isHeader":"0","childMenus":""},
-						{"id":"5","name":"编辑资讯管理","parentId":"3","url":"News_Delete.aspx","icon":"","order":"1","isHeader":"0","childMenus":""}
-                        
+                        {"id":"5","name":"编辑资讯管理","parentId":"3","url":"News_Delete.aspx","icon":"","order":"1","isHeader":"0","childMenus":""}
 					]},
 					{"id":"6","name":"活动管理","parentId":"1","url":"","icon":"&#xe602;","order":"1","isHeader":"0","childMenus":[
 						{"id":"7","name":"已结束","parentId":"6","url":"Activity_end.aspx","icon":"","order":"1","isHeader":"0","childMenus":""},
@@ -408,8 +407,8 @@ $(function(){
                         {"id":"37","name":"活动系列管理","parentId":"6","url":"Activity_system.aspx","icon":"","order":"1","isHeader":"0","childMenus":""}
 					]},
                   	{"id":"22","name":"短趣管理","parentId":"1","url":"","icon":"&#xe602;","order":"1","isHeader":"0","childMenus":[
-						{"id":"23","name":"编辑短趣","parentId":"22","url":"Interesting.aspx","icon":"","order":"1","isHeader":"0","childMenus":""}
-						 
+						{"id":"23","name":"编辑短趣","parentId":"22","url":"Interesting.aspx","icon":"","order":"1","isHeader":"0","childMenus":""},
+                  	{"id":"23","name":"新建短趣","parentId":"22","url":"Interest_new.aspx","icon":"","order":"1","isHeader":"0","childMenus":""}
 					]},
                     {"id":"25","name":"专题管理","parentId":"1","url":"","icon":"&#xe602;","order":"1","isHeader":"0","childMenus":[
 						{ "id": "26", "name": "添加专题", "parentId": "25", "url": "Column_Add.aspx", "icon": "", "order": "1", "isHeader": "0", "childMenus": "" },
@@ -422,9 +421,9 @@ $(function(){
                        
 					]},
                      {"id":"33","name":"传言管理","parentId":"1","url":"","icon":"&#xe602;","order":"1","isHeader":"0","childMenus":[
-						{"id":"34","name":"编辑传言","parentId":"33","url":"home3.html","icon":"","order":"1","isHeader":"0","childMenus":""},
-						{"id":"35","name":"添加传言","parentId":"33","url":"home4.html","icon":"","order":"1","isHeader":"0","childMenus":""},
-                        {"id":"36","name":"删除传言","parentId":"33","url":"home3.html","icon":"","order":"1","isHeader":"0","childMenus":""}   
+						{"id":"34","name":"编辑传言","parentId":"33","url":"Rumor.aspx","icon":"","order":"1","isHeader":"0","childMenus":""},
+						{"id":"35","name":"添加传言","parentId":"33","url":"Rumor_new.aspx","icon":"","order":"1","isHeader":"0","childMenus":""}
+                      
 					]}
 				]},
 				{"id":"2","name":"首页面展示管理","parentId":"0","url":"","icon":"","order":"2","isHeader":"1","childMenus":[

@@ -35,19 +35,28 @@ public partial class Backstage_Modify_interest : System.Web.UI.Page
     {
         int id = Convert.ToInt32(Request.QueryString["id"].ToString());
 
-        using (var db = new HuXiuEntities())
+        if (txtInterestTitle != null && txtLike != null && txtTime != null && txtUrl != null && myEditor.InnerHtml != null)
         {
-            Interest interest = db.Interest.SingleOrDefault(a => a.interest_id == id);
+            using (var db = new HuXiuEntities())
+            {
+                Interest interest = db.Interest.SingleOrDefault(a => a.interest_id == id);
 
-            interest.interest_title = txtInterestTitle.Text;
+                interest.interest_title = txtInterestTitle.Text;
 
-            interest.interest_like = Convert.ToInt32(txtLike.Text);
+                interest.interest_like = Convert.ToInt32(txtLike.Text);
 
-            interest.interest_time = Convert.ToDateTime(txtTime.Text);
+                interest.interest_time = Convert.ToDateTime(txtTime.Text);
 
-            interest.interest_url = txtUrl.Text;
+                interest.interest_url = txtUrl.Text;
 
-            interest.interest_content = myEditor.InnerHtml;
+                interest.interest_content = Server.HtmlDecode(myEditor.InnerHtml);
+
+                db.SaveChanges();
+            }
+        }
+        else
+        {
+            Response.Write("<script>alert('请填写完全！')</script>");
         }
     }
 

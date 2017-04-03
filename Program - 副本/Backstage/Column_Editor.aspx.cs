@@ -16,8 +16,8 @@ public partial class Backstage_Column_Editor : System.Web.UI.Page
                 int id = Convert.ToInt32(Request.QueryString["column_id"].ToString());
                 Column column = db.Column.SingleOrDefault(a => a.column_id == id);
                 txtName.Text = column.column_title;
-                txtContent.Text = column.column_content;
-                var news = from it in db.News where it.news_class == id select it;
+                myEditor .InnerHtml = column.column_content;
+                var news = from it in db.News where it.new_column == id select it;
                 rptHave.DataSource = news.ToList();
                 rptHave.DataBind(); 
                 if (news.ToList().Count == 0)
@@ -60,7 +60,7 @@ public partial class Backstage_Column_Editor : System.Web.UI.Page
     }
 
 
-
+    //修改封面
     protected void Unnamed_Click(object sender, EventArgs e)
     {
         try
@@ -91,6 +91,7 @@ public partial class Backstage_Column_Editor : System.Web.UI.Page
                     }
 
                     lblInfo.Text = "上传成功！";
+                    Response.Write("<script>alert('修改成功！');location='Column_Delete.aspx'</script>");
                 }
                 else
                     lblInfo.Text = "请上传图片！";
@@ -101,7 +102,7 @@ public partial class Backstage_Column_Editor : System.Web.UI.Page
             lblInfo.Text = DateTime.Now.ToString() + "上传发生错误！原因是：" + ex.ToString();
         }
     }
-
+    //修改名字
     protected void btnName_Click(object sender, EventArgs e)
     {
         using (var db = new HuXiuEntities())
@@ -110,23 +111,23 @@ public partial class Backstage_Column_Editor : System.Web.UI.Page
             Column column = db.Column.SingleOrDefault(a => a.column_id == id);
             column.column_title = txtName.Text;
             db.SaveChanges();
-
+            Response.Write("<script>alert('修改成功！');location='Column_Delete.aspx'</script>");
         }
       
     }
-
+    //修改内容
     protected void btnContent_Click(object sender, EventArgs e)
     {
         using (var db = new HuXiuEntities())
         {
             int id = Convert.ToInt32(Request.QueryString["column_id"].ToString());
             Column column = db.Column.SingleOrDefault(a => a.column_id == id);
-            column.column_content = txtContent.Text;
+            column.column_content = Server.HtmlDecode(myEditor.InnerHtml);
             db.SaveChanges();
-
+            Response.Write("<script>alert('修改成功！');location='Column_Delete.aspx'</script>");
         }
     }
-
+    //判断上传格式
     private static bool IsAllowedExtension(FileUpload upfile)
     {
         string strOldFilePath = "";
@@ -146,28 +147,30 @@ public partial class Backstage_Column_Editor : System.Web.UI.Page
         }
         return false;
     }
-
+    
     protected void rptHave_ItemCommand(object source, RepeaterCommandEventArgs e)
-    {
+    {   
+        //将已有资讯从专题中移出
         if(e.CommandName=="Delete")
         {
             int id = Convert.ToInt32(e.CommandArgument.ToString());
             using (var db = new HuXiuEntities())
             {
-                News news = db.News.SingleOrDefault(a => a.new_column == id);
+                News news = db.News.SingleOrDefault(a => a.news_id == id);
                 news.new_column = 1;
                 db.SaveChanges();
+                Response.Write("<script>alert('修改成功！');location='Column_Delete.aspx'</script>");
                 rptHave.DataBind();
             }
             
         }
     }
-
+    //按ID查找资讯
     protected void lbtID_Click(object sender, EventArgs e)
     {
         divID.Visible = true;
     }
-
+    //按ID查找结果绑定
     protected void Unnamed_Click1(object sender, EventArgs e)
     {
         int  id =Convert.ToInt32( txtID.Text);
@@ -179,12 +182,12 @@ public partial class Backstage_Column_Editor : System.Web.UI.Page
             rptNews.Visible = true;
         }
     }
-
+    //按名称查找资讯
     protected void lbtNames_Click(object sender, EventArgs e)
     {
         divNames.Visible = true;
     }
-
+    //按名称查找结果绑定
     protected void btnFind_Click(object sender, EventArgs e)
     {
         string name = txtNames.Text;
@@ -200,7 +203,8 @@ public partial class Backstage_Column_Editor : System.Web.UI.Page
     }
 
     protected void rptNews_ItemCommand(object source, RepeaterCommandEventArgs e)
-    {
+    {   
+        //将资讯添加到专题
         if(e.CommandName=="Add")
         {
             int id = Convert.ToInt32(e.CommandArgument.ToString());
@@ -209,22 +213,23 @@ public partial class Backstage_Column_Editor : System.Web.UI.Page
                 var news = db.News.SingleOrDefault(a => a.news_id == id);
                 news.new_column = Convert.ToInt32(Request.QueryString["column_id"].ToString());
                 db.SaveChanges();
+                Response.Write("<script>alert('添加成功！');location='Column_Delete.aspx'</script>");
             }
         }
     }
-
+    //跳至首页
     protected void btnFirst_Click(object sender, EventArgs e)
     {
         DataBindToRepeater(1);
         lbNow.Text = "1";
     }
-
+    //跳至尾页
     protected void btnLast_Click(object sender, EventArgs e)
     {
         DataBindToRepeater(Convert.ToInt32(lbTotal.Text));
         lbNow.Text = lbTotal.Text;
     }
-
+    //任意跳页
     protected void btnJump_Click(object sender, EventArgs e)
     {
         string number = txtJump.Text;
@@ -251,7 +256,7 @@ public partial class Backstage_Column_Editor : System.Web.UI.Page
         }
     }
 
-
+    //上一页
     protected void btnUp_Click(object sender, EventArgs e)
     {
         if (Convert.ToInt16(lbNow.Text) == 1)
@@ -262,7 +267,7 @@ public partial class Backstage_Column_Editor : System.Web.UI.Page
             DataBindToRepeater(Convert.ToInt32(lbNow.Text));
         }
     }
-
+    //下一页
     protected void btnDrow_Click(object sender, EventArgs e)
     {
 

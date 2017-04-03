@@ -45,6 +45,8 @@ public partial class BackstageHTML_sccl_admin_page_News_Delete : System.Web.UI.P
         }
 
     }
+
+    //删除资讯
     protected void rptNews_ItemCommand(object source, RepeaterCommandEventArgs e)
     {
         if (e.CommandName == "Delete")
@@ -57,11 +59,12 @@ public partial class BackstageHTML_sccl_admin_page_News_Delete : System.Web.UI.P
                 db.News.Remove(del);
                 db.SaveChanges();
                 rptNews.DataBind();
+                Response.Write("<script>alert('删除成功！');location='News_Delete.aspx'</script>");
             }
         }
 
     }
-
+    //上一页
     protected void btnUp_Click(object sender, EventArgs e)
     {
         if (Convert.ToInt16(lbNow.Text) == 1)
@@ -72,7 +75,7 @@ public partial class BackstageHTML_sccl_admin_page_News_Delete : System.Web.UI.P
             DataBindToRepeater(Convert.ToInt32(lbNow.Text));
         }
     }
-
+    //下一页
     protected void btnDrow_Click(object sender, EventArgs e)
     {
 
@@ -84,19 +87,19 @@ public partial class BackstageHTML_sccl_admin_page_News_Delete : System.Web.UI.P
         else
             Response.Write("<script>alert('已在尾页！')</script>");
     }
-
+    //首页
     protected void btnFirst_Click(object sender, EventArgs e)
     {
         DataBindToRepeater(1);
         lbNow.Text = "1";
     }
-
+    //尾页
     protected void btnLast_Click(object sender, EventArgs e)
     {
         DataBindToRepeater(Convert.ToInt32(lbTotal.Text));
         lbNow.Text = lbTotal.Text;
     }
-
+    //任意页
     protected void btnJump_Click(object sender, EventArgs e)
     {
         string number = txtJump.Text;
@@ -121,5 +124,16 @@ public partial class BackstageHTML_sccl_admin_page_News_Delete : System.Web.UI.P
                 lbNow.Text = number;
             }
         }
+    }
+
+
+    protected void rptNews_ItemDataBound(object sender, RepeaterItemEventArgs e)
+    {
+        //if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+        //{
+        //    Label lbText = (Label)e.Item.FindControl("lbText");          //寻找label控件
+
+        //    lbText.Text = (1 + e.Item.ItemIndex).ToString();
+        //}
     }
 }
