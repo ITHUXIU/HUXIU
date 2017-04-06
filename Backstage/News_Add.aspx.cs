@@ -64,32 +64,48 @@ public partial class BackstageHTML_sccl_admin_page_News_Add : System.Web.UI.Page
                     {
                         var news = new News();
                         if (txtTitle.Text == "")
-                            lbTitle.Text = "输入不能为空";
-                        else if (Request.Form["content1"] == "")
-                            lbContent.Text = "输入不能为空";
+                            Response.Write("<script>alert('输入不能为空！')</script>");
+                        else if (Server.HtmlDecode(myEditor.InnerHtml) == "")
+                            Response.Write("<script>alert('输入不能为空！')</script>");
+                        else if (txtAuthor.Text=="")
+                            Response.Write("<script>alert('输入不能为空！')</script>");
                         else
                         {
                             news.news_title = txtTitle.Text;
-                            news.news_content = txtContent.Text;
+                            news.news_content = Server.HtmlDecode(myEditor.InnerHtml);
                             news.news_time = DateTime.Now;
-                            news.news_top = Convert.ToInt16(radlTop.SelectedValue);
-                            news.news_cover = serverpath;
-                            using (var db_0 = new HuXiuEntities())
+                            int cout;
+                            using (var dd = new HuXiuEntities())
                             {
-                                string dropclass = dropClass.SelectedValue.ToString();
-                                News_class news_class = db_0.News_class.SingleOrDefault(a => a.news_classname == dropclass);
-                                newsclassid = news_class.news_classid;
+                                var topcount = from it in db.News where it.news_top==1 select it;
+                                cout = topcount.ToList().Count;
                             }
-                            news.news_class = newsclassid;
-                            news.new_column = 1;
-                            news.new_author = txtAuthor.Text;
-                            db.News.Add(news);
-                            db.SaveChanges();
-                        }
-                    }
+                            if (Convert.ToInt16(radlTop.SelectedValue) == 1 && cout > 2)
+                                Response.Write("<script>alert('已有三条头条，不能再设置头条了！');location='News_Add.aspx'</script>");
 
-                    lblInfo.Text = "上传成功！";
-                    Response.Write("<script>alert('添加成功！');location='News_Add.aspx'</script>");
+                            else
+                            {
+                                news.news_top = Convert.ToInt16(radlTop.SelectedValue);
+
+                                news.news_cover = serverpath;
+                                using (var db_0 = new HuXiuEntities())
+                                {
+                                    string dropclass = dropClass.SelectedValue.ToString();
+                                    News_class news_class = db_0.News_class.SingleOrDefault(a => a.news_classname == dropclass);
+                                    newsclassid = news_class.news_classid;
+                                }
+                                news.news_class = newsclassid;
+                                news.new_column = 1;
+                                news.new_author = txtAuthor.Text;
+                                db.News.Add(news);
+                                db.SaveChanges();
+                            }
+                            lblInfo.Text = "上传成功！";
+                            Response.Write("<script>alert('添加成功！');location='News_Add.aspx'</script>");
+                        }
+
+                        
+                    }
                 }
                 else
                     lblInfo.Text = "请上传图片！";

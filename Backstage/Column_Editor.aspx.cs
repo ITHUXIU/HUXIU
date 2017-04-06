@@ -16,10 +16,10 @@ public partial class Backstage_Column_Editor : System.Web.UI.Page
                 int id = Convert.ToInt32(Request.QueryString["column_id"].ToString());
                 Column column = db.Column.SingleOrDefault(a => a.column_id == id);
                 txtName.Text = column.column_title;
-                txtContent.Text = column.column_content;
+                myEditor.InnerHtml = column.column_content;
                 var news = from it in db.News where it.new_column == id select it;
                 rptHave.DataSource = news.ToList();
-                rptHave.DataBind(); 
+                rptHave.DataBind();
                 if (news.ToList().Count == 0)
                     divHave.Visible = false;
                 rptNews.DataSource = news.ToList();
@@ -107,25 +107,34 @@ public partial class Backstage_Column_Editor : System.Web.UI.Page
     {
         using (var db = new HuXiuEntities())
         {
-            int id = Convert.ToInt32(Request.QueryString["column_id"].ToString());
-            Column column = db.Column.SingleOrDefault(a => a.column_id == id);
-            column.column_title = txtName.Text;
-            db.SaveChanges();
-            Response.Write("<script>alert('修改成功！');location='Column_Delete.aspx'</script>");
+            if (txtName.Text == "")
+                Response.Write("<script>alert('输入不能为空！')</script>");
+            else
+            {
+                int id = Convert.ToInt32(Request.QueryString["column_id"].ToString());
+                Column column = db.Column.SingleOrDefault(a => a.column_id == id);
+                column.column_title = txtName.Text;
+                db.SaveChanges();
+                Response.Write("<script>alert('修改成功！');location='Column_Delete.aspx'</script>");
+            }
+
         }
-      
+
     }
     //修改内容
     protected void btnContent_Click(object sender, EventArgs e)
     {
-        using (var db = new HuXiuEntities())
-        {
-            int id = Convert.ToInt32(Request.QueryString["column_id"].ToString());
-            Column column = db.Column.SingleOrDefault(a => a.column_id == id);
-            column.column_content = txtContent.Text;
-            db.SaveChanges();
-            Response.Write("<script>alert('修改成功！');location='Column_Delete.aspx'</script>");
-        }
+        if (myEditor.InnerText == "")
+            Response.Write("<script>alert('输入不能为空！')</script>");
+        else
+            using (var db = new HuXiuEntities())
+            {
+                int id = Convert.ToInt32(Request.QueryString["column_id"].ToString());
+                Column column = db.Column.SingleOrDefault(a => a.column_id == id);
+                column.column_content = Server.HtmlDecode(myEditor.InnerHtml);
+                db.SaveChanges();
+                Response.Write("<script>alert('修改成功！');location='Column_Delete.aspx'</script>");
+            }
     }
     //判断上传格式
     private static bool IsAllowedExtension(FileUpload upfile)
@@ -147,11 +156,11 @@ public partial class Backstage_Column_Editor : System.Web.UI.Page
         }
         return false;
     }
-    
+
     protected void rptHave_ItemCommand(object source, RepeaterCommandEventArgs e)
-    {   
+    {
         //将已有资讯从专题中移出
-        if(e.CommandName=="Delete")
+        if (e.CommandName == "Delete")
         {
             int id = Convert.ToInt32(e.CommandArgument.ToString());
             using (var db = new HuXiuEntities())
@@ -162,21 +171,26 @@ public partial class Backstage_Column_Editor : System.Web.UI.Page
                 Response.Write("<script>alert('修改成功！');location='Column_Delete.aspx'</script>");
                 rptHave.DataBind();
             }
-            
+
         }
     }
     //按ID查找资讯
     protected void lbtID_Click(object sender, EventArgs e)
     {
         divID.Visible = true;
+        divNames.Visible = false;
+
     }
     //按ID查找结果绑定
     protected void Unnamed_Click1(object sender, EventArgs e)
     {
-        int  id =Convert.ToInt32( txtID.Text);
+        if(txtID.Text=="")
+            Response.Write("<script>alert('输入不能为空！')</script>");
+        else
         using (var db = new HuXiuEntities())
         {
-            var news = from it in db.News where it.news_id==id select it;
+            int id = Convert.ToInt32(txtID.Text);
+            var news = from it in db.News where it.news_id == id select it;
             rptNews.DataSource = news.ToList();
             rptNews.DataBind();
             rptNews.Visible = true;
@@ -186,26 +200,32 @@ public partial class Backstage_Column_Editor : System.Web.UI.Page
     protected void lbtNames_Click(object sender, EventArgs e)
     {
         divNames.Visible = true;
+        divID.Visible = false;
     }
     //按名称查找结果绑定
     protected void btnFind_Click(object sender, EventArgs e)
     {
+
         string name = txtNames.Text;
-        using (var db = new HuXiuEntities())
-        {
-            var news = from it in db.News where (it.news_title.Contains(name)) select it;
-            rptNews.DataSource = news.ToList();
-            rptNews.DataBind();
-            rptNews.Visible = true;
-        }
+        if (name == "")
+            Response.Write("<script>alert('输入不能为空！')</script>");
+        else
+
+            using (var db = new HuXiuEntities())
+            {
+                var news = from it in db.News where (it.news_title.Contains(name)) select it;
+                rptNews.DataSource = news.ToList();
+                rptNews.DataBind();
+                rptNews.Visible = true;
+            }
 
 
     }
 
     protected void rptNews_ItemCommand(object source, RepeaterCommandEventArgs e)
-    {   
+    {
         //将资讯添加到专题
-        if(e.CommandName=="Add")
+        if (e.CommandName == "Add")
         {
             int id = Convert.ToInt32(e.CommandArgument.ToString());
             using (var db = new HuXiuEntities())
@@ -233,15 +253,9 @@ public partial class Backstage_Column_Editor : System.Web.UI.Page
     protected void btnJump_Click(object sender, EventArgs e)
     {
         string number = txtJump.Text;
-        int i, flag = 1;
-        for (i = 0; i < number.Length; i++)
-        {
-            byte asc = Convert.ToByte(number[i]);
-            if (asc < 48 || asc > 57) flag = 0;
-        }
 
-        if (flag == 0)
-            Response.Write("<script>alert('请正确输入数字！')</script>");
+        if (number=="")
+            Response.Write("<script>alert('输入不能为空！')</script>");
         else
         {
             int num = Convert.ToInt32(number);
@@ -279,5 +293,7 @@ public partial class Backstage_Column_Editor : System.Web.UI.Page
         else
             Response.Write("<script>alert('已在尾页！')</script>");
     }
+
+
 
 }

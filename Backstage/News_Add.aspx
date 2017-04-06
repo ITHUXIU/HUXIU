@@ -7,56 +7,9 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
-  <script type="text/javascript" src="../common/js/tablecloth.js"></script>
-    <link href="../common/css/tablecloth.css" rel="stylesheet" type="text/css" media="screen" />
-    <style>
-
-body{
-	margin:0;
-	padding:0;
-	background:#f1f1f1;
-	font:70% Arial, Helvetica, sans-serif; 
-	color:#555;
-	line-height:150%;
-	text-align:left;
-}
-a{
-	text-decoration:none;
-	color:#057fac;
-}
-a:hover{
-	text-decoration:none;
-	color:#999;
-}
-h1{
-	font-size:140%;
-	margin:0 20px;
-	line-height:80px;	
-}
-h2{
-	font-size:120%;
-}
-#container{
-	margin:0 auto;
-	width:680px;
-	background:#fff;
-	padding-bottom:20px;
-}
-#content{margin:0 20px;}
-p.sig{	
-	margin:0 auto;
-	width:680px;
-	padding:1em 0;
-}
-form{
-	margin:1em 0;
-	padding:.2em 20px;
-	background:#eee;
-}
-    .auto-style1 {
-        height: 27px;
-    }
-</style>
+  <script  src="../ueditor/ueditor.config.js" type="text/javascript"></script>
+     <script  src="../ueditor/ueditor.all.min.js" type="text/javascript"></script>
+    <script type="text/javascript" charset="utf-8" src="../ueditor/lang/zh-cn/zh-cn.js"></script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -65,11 +18,26 @@ form{
                     添加资讯
                 <br />
                     <br />
-                    资讯标题:<asp:TextBox ID="txtTitle" runat="server"></asp:TextBox>
+                    资讯标题:<asp:TextBox ID="txtTitle" runat="server" Width="593px"></asp:TextBox>
                     <asp:Label ID="lbTitle" runat="server"></asp:Label>
                     <br />
                     <br />
-                    资讯内容:<asp:TextBox runat="server" ID="txtContent" TextMode="MultiLine"></asp:TextBox>
+                    资讯内容: <br /><textarea id="myEditor" name="myEditor" runat="server" onblur="setUeditor()" style="width: 1030px; height: 250px;"></textarea>
+            <%-- 上面这个style这里是实例化的时候给实例化的这个容器设置宽和高，不设置的话，或默认为auto可能会造成部分显示的情况--%>
+            
+            <script type="text/javascript">
+                var editor = new baidu.editor.ui.Editor();
+                
+                editor.render("<%=myEditor.ClientID%>");
+            </script>
+        </div>
+<script type="text/javascript">
+        function setUeditor() {
+            var myEditor = document.getElementById("myEditor");
+            myEditor.value = editor.getContent();//把得到的值给textarea
+        }
+    </script>
+        <div>
                     <br />
                     <asp:Label ID="lbContent" runat="server"></asp:Label>
                     <br />

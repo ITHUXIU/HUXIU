@@ -79,6 +79,7 @@
                             <th>资讯封面</th>
                             <th>资讯标题</th>
                             <th>资讯内容</th>
+                            <th>是否头条</th>
                             <th>删除资讯</th>
                             <th>修改资讯</th>
                         </tr>
@@ -89,14 +90,9 @@
                     <th><%# Eval("News_id") %></th>
                     <th><img src='<%# Eval("News_cover") %>' runat="server" width="60" height="60" /></th>
                     <th><h3><%# Eval("News_title") %></h3></th>
-                    <%--<asp:Label ID="lb" runat="server" Text='<%# Eval("News_content")' %>></asp:Label>--%>
-                        <%--<th><%# Eval("News_content") %></th>--%>
-                    <th><asp:Label ID="lbText" runat="server" ></asp:Label></th>
-                    <th><asp:LinkButton ID="lbt" runat="server" Text="删除" CommandName="Delete" CommandArgument='<%#Eval("News_id") %>'></asp:LinkButton></th>
-                 <th>
-                      <asp:LinkButton ID="LinkButton1" runat="server" Text="编辑" CommandName="Editor" PostBackUrl='<%#"News_Editor.aspx?news_id="+Eval("News_id") %>'></asp:LinkButton>
-               </th>
-
+                    <th><asp:Label ID="lb" runat="server" Text='<%# Eval("News_content") %>' Width="60%" ></asp:Label></th>
+                    <th><%# Eval("news_top") %></th>
+                    <th><asp:LinkButton ID="lbt" runat="server" Text="设置" CommandName="Set" CommandArgument='<%#Eval("News_id") %>'></asp:LinkButton></th>
                     </tr>  
 
                 </ItemTemplate>
@@ -115,7 +111,7 @@
 
             &nbsp;
 
-                    转<asp:TextBox ID="txtJump" Text="1" runat="server" Width="23px"></asp:TextBox>
+                    转<asp:TextBox ID="txtJump" Text="1" runat="server" Width="23px" onkeyup="this.value=this.value.replace(/\D/g,'')"></asp:TextBox>
             &nbsp;<asp:Button ID="btnJump" runat="server" Text="Go" OnClick="btnJump_Click" />
 
         </div>

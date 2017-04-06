@@ -90,7 +90,7 @@ form{
 
             &nbsp;
 
-                    转<asp:TextBox ID="txtJump" Text="1" runat="server" Width="23px"></asp:TextBox>
+                    转<asp:TextBox ID="txtJump" Text="1" runat="server" Width="23px" onkeyup="this.value=this.value.replace(/\D/g,'')"></asp:TextBox>
             &nbsp;<asp:Button ID="btnJump" runat="server" Text="Go" OnClick="btnJump_Click" />
     </div>
     </form>

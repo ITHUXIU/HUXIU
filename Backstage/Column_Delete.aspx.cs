@@ -14,6 +14,9 @@ public partial class Backstage_Column_Delete : System.Web.UI.Page
             var column = from it in db.Column where it.column_id != 1 select it;
             rptColumn.DataSource = column.ToList();
             rptColumn.DataBind();
+            DataBindToRepeater(1);
+
+
         }
     }
 
@@ -21,10 +24,10 @@ public partial class Backstage_Column_Delete : System.Web.UI.Page
     {
         using (var db = new HuXiuEntities())
         {
-            var news = from it in db.News select it;
+            var column = from it in db.Column select it;
             //news.ToList();
 
-            news.ToList();
+            column.ToList();
 
             PagedDataSource pds = new PagedDataSource();
 
@@ -32,7 +35,7 @@ public partial class Backstage_Column_Delete : System.Web.UI.Page
 
             pds.PageSize = 10;
 
-            pds.DataSource = news.ToList();
+            pds.DataSource = column.ToList();
 
             lbTotal.Text = pds.PageCount.ToString();
 
@@ -102,15 +105,15 @@ public partial class Backstage_Column_Delete : System.Web.UI.Page
     protected void btnJump_Click(object sender, EventArgs e)
     {
         string number = txtJump.Text;
-        int i, flag = 1;
+        int i;
         for (i = 0; i < number.Length; i++)
         {
             byte asc = Convert.ToByte(number[i]);
-            if (asc < 48 || asc > 57) flag = 0;
+            if (asc < 48 || asc > 57);
         }
 
-        if (flag == 0)
-            Response.Write("<script>alert('请正确输入数字！')</script>");
+        if (number == "")
+            Response.Write("<script>alert('输入不能为空！')</script>");
         else
         {
             int num = Convert.ToInt32(number);

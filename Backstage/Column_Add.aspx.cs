@@ -34,20 +34,26 @@ public partial class Backstage_Column_Add : System.Web.UI.Page
                     fup.PostedFile.SaveAs(serverpath);
                     serverpath = "picture/" + filename;
 
-                    using (var db = new HuXiuEntities())
-                    {
-                        var column = new Column();
-                        column.column_title = txtName.Text;
-                        column.column_content = txtContent.Text;
-                        column.column_cover = serverpath;
-                        column.column_time = DateTime.Now;
-                        db.Column.Add(column);
-                        db.SaveChanges();
-                        
-                    }
+                    if(txtName.Text==""|| Server.HtmlDecode(myEditor.InnerHtml)=="")
+                        Response.Write("<script>alert('输入不能为空！')</script>");
+                    else
+                        {
+                            using (var db = new HuXiuEntities())
+                            {
+                                var column = new Column();
+                                column.column_title = txtName.Text;
+                                column.column_content = Server.HtmlDecode(myEditor.InnerHtml);
+                                column.column_cover = serverpath;
+                                column.column_time = DateTime.Now;
+                                db.Column.Add(column);
+                                db.SaveChanges();
 
-                    lblInfo.Text = "上传成功！";
-                    Response.Write("<script>alert('添加成功！');location='Column_Add.aspx'</script>");
+                            }
+
+                            lblInfo.Text = "上传成功！";
+                            Response.Write("<script>alert('添加成功！');location='Column_Add.aspx'</script>");
+                        }
+                   
                 }
                 else
                     lblInfo.Text = "请上传图片！";

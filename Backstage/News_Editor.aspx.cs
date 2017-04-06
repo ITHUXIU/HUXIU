@@ -16,8 +16,15 @@ public partial class BackstageHTML_sccl_admin_page_News_Editor : System.Web.UI.P
             {
                 News news = db.News.SingleOrDefault(a => a.news_id == newsid);
                 txtTitle.Text = news.news_title;
-                txtContent.Text = news.news_content;
+                myEditor.InnerHtml = news.news_content;
                 txtAuthor.Text = news.new_author;
+
+                var newsclass = from it in db.News_class select it;
+                dropClass.DataSource = newsclass.ToList();
+                dropClass.DataTextField = "news_classname";
+                dropClass.DataBind();
+
+
             }
         }
     }
@@ -26,25 +33,31 @@ public partial class BackstageHTML_sccl_admin_page_News_Editor : System.Web.UI.P
     protected void btnChangeTitle_Click(object sender, EventArgs e)
     {
         int newsid = Convert.ToInt32(Request.QueryString["news_id"]);
-        using (var db = new HuXiuEntities())
-        {
-            News news = db.News.SingleOrDefault(a => a.news_id == newsid);
-            news.news_title = txtTitle.Text;
-            db.SaveChanges();
-            Response.Write("<script>alert('修改成功！');location='News_Delete.aspx'</script>");
-        }
+        if (txtTitle.Text == null)
+            Response.Write("<script>alert('输入不能为空！')</script>");
+        else
+            using (var db = new HuXiuEntities())
+            {
+                News news = db.News.SingleOrDefault(a => a.news_id == newsid);
+                news.news_title = txtTitle.Text;
+                db.SaveChanges();
+                Response.Write("<script>alert('修改成功！');location='News_Delete.aspx'</script>");
+            }
     }
     //修改资讯内容
     protected void btnChangeContent_Click(object sender, EventArgs e)
     {
         int newsid = Convert.ToInt32(Request.QueryString["news_id"]);
-        using (var db = new HuXiuEntities())
-        {
-            News news = db.News.SingleOrDefault(a => a.news_id == newsid);
-            news.news_content = txtContent.Text;
-            db.SaveChanges();
-            Response.Write("<script>alert('修改成功！');location='News_Delete.aspx'</script>");
-        }
+        if (Server.HtmlDecode(myEditor.InnerHtml) == "")
+            Response.Write("<script>alert('输入不能为空！')</script>");
+        else
+            using (var db = new HuXiuEntities())
+            {
+                News news = db.News.SingleOrDefault(a => a.news_id == newsid);
+                news.news_content = Server.HtmlDecode(myEditor.InnerHtml);
+                db.SaveChanges();
+                Response.Write("<script>alert('修改成功！');location='News_Delete.aspx'</script>");
+            }
     }
     //修改资讯封面
     protected void btnChangeCover_Click(object sender, EventArgs e)
@@ -111,7 +124,7 @@ public partial class BackstageHTML_sccl_admin_page_News_Editor : System.Web.UI.P
         }
     }
 
-    
+
     private static bool IsAllowedExtension(FileUpload upfile)
     {
         string strOldFilePath = "";
@@ -135,12 +148,15 @@ public partial class BackstageHTML_sccl_admin_page_News_Editor : System.Web.UI.P
     protected void btnAuthor_Click(object sender, EventArgs e)
     {
         int newsid = Convert.ToInt32(Request.QueryString["news_id"]);
-        using (var db = new HuXiuEntities())
-        {
-            News news = db.News.SingleOrDefault(a => a.news_id == newsid);
-            news.new_author = txtAuthor.Text;
-            db.SaveChanges();
-            Response.Write("<script>alert('修改成功！');location='News_Delete.aspx'</script>");
-        }
+        if (txtAuthor.Text == "")
+            Response.Write("<script>alert('输入不能为空！')</script>");
+        else
+            using (var db = new HuXiuEntities())
+            {
+                News news = db.News.SingleOrDefault(a => a.news_id == newsid);
+                news.new_author = txtAuthor.Text;
+                db.SaveChanges();
+                Response.Write("<script>alert('修改成功！');location='News_Delete.aspx'</script>");
+            }
     }
 }
