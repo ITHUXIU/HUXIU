@@ -61,8 +61,10 @@ form{
         <div id="divEditor" runat="server">
             <h1>头条封面</h1>
             <br />
-            <asp:Image ID="imgTop" runat="server" Height="100" Width="100" />
+            <asp:Image ID="imgTop" runat="server" Height="150" Width="250" />
             <br />
+            <h1>头条新闻缩略图</h1>
+            <asp:Image ID="imgCover" runat="server" Height="100" Width="100" />
             <h1>头条新闻</h1>
             <br />
             <h2><asp:Label ID="lbTitle" runat="server"></asp:Label></h2>
@@ -79,6 +81,15 @@ form{
             <asp:Label ID="lblInfo" runat="server" ForeColor="Red" Font-Size="13px"></asp:Label>
             <br />
             <asp:Button ID="btnSub" runat="server" OnClick="btnSub_Click" Text="上传" />
+            <br />
+            <h1>更换资讯缩略图</h1>
+            上传资讯缩略图:
+            <asp:FileUpload ID="FileUpload1" runat="server" />
+            <br />
+            <br />
+            <asp:Label ID="Label1" runat="server" ForeColor="Red" Font-Size="13px"></asp:Label>
+            <br />
+            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="上传" />
             <br />
             <h1>更换新闻</h1>
             <br />

@@ -19,6 +19,8 @@ public partial class Backstage_Top_Editor : System.Web.UI.Page
 
                 imgTop.ImageUrl = top.top_path;
 
+                imgCover.ImageUrl = top.top_cover;
+
                 News topnews = db.News.SingleOrDefault(a => a.news_id == top.top_news);
 
                 lbTitle.Text = topnews.news_title;
@@ -281,6 +283,43 @@ public partial class Backstage_Top_Editor : System.Web.UI.Page
         catch (Exception ex)
         {
             lblInfo.Text = DateTime.Now.ToString() + "上传发生错误！原因是：" + ex.ToString();
+        }
+    }
+
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            if (FileUpload1.PostedFile.FileName == "")
+            {
+                Label1.Text = "请选择文件！";
+            }
+            else
+            {
+                if (IsAllowedExtension(FileUpload1) == true)
+                {
+                    string filepath = FileUpload1.PostedFile.FileName;
+                    string filename = filepath.Substring(filepath.LastIndexOf("\\") + 1);
+                    string serverpath = Server.MapPath("picture/") + filename;
+                    FileUpload1.PostedFile.SaveAs(serverpath);
+                    serverpath = "picture/" + filename;
+
+                    using (var db = new HuXiuEntities())
+                    {
+                        int topid = Convert.ToInt32(Request.QueryString["top_id"]);
+                        Top top = db.Top.SingleOrDefault(a => a.top_id == topid);
+                        top.top_cover = serverpath;
+                        db.SaveChanges();
+                    }
+                    Response.Write("<script>alert('上传成功！');location='Top.aspx'</script>");
+                }
+                else
+                    Label1.Text = "请上传图片！";
+            }
+        }
+        catch (Exception ex)
+        {
+            Label1.Text = DateTime.Now.ToString() + "上传发生错误！原因是：" + ex.ToString();
         }
     }
 }

@@ -63,14 +63,14 @@ form{
 		<table>
 			<tr>
 				<th>头条图片</th>
+                <th>缩略图</th>
                 <th>编辑</th>
-     
 			</tr>
     <asp:Repeater ID="rptTop" runat="server">
         <ItemTemplate>
            <tr> 
-               <td><img src='<%# Eval("top_path") %>' runat="server" width="60" height="60" /></td>
-         
+               <td><img src='<%# Eval("top_path") %>' runat="server" width="100" height="60" /></td>
+                <td><img src='<%# Eval("top_cover") %>' runat="server" width="60" height="60" /></td>
                <td><asp:LinkButton runat="server" Text="编辑" PostBackUrl='<%#"Top_Editor.aspx?top_id="+Eval("top_id") %>'></asp:LinkButton></td>
                </tr>
            
