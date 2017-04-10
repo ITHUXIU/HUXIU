@@ -40,7 +40,6 @@ public partial class Admin
     public string password { get; set; }
     public string email { get; set; }
     public string photo { get; set; }
-    public string pwd { get; set; }
 
     public virtual ICollection<Question> Question { get; set; }
 }

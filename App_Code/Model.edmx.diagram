@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5a2ff9352d30445f80b7c6ac5f3091a7" Name="Diagram1">
+      <Diagram DiagramId="1aa69754fe174d808d0fd020c99eac42" Name="Diagram1">
         <EntityTypeShape EntityType="HuXiuModel.Activity" Width="1.5" PointX="5" PointY="6" IsExpanded="true" />
         <EntityTypeShape EntityType="HuXiuModel.Admin" Width="1.5" PointX="7.75" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="HuXiuModel.Column" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
