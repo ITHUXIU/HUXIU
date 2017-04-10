@@ -3,17 +3,17 @@ li{list-style:none;}
 a{text-decoration: none;color: #000000;}
 img,button{border: 0;}{float: left;}
 .content{width: 100%;}
-	::-webkit-scrollbar {width: 4px;}/* 滚动槽 */
+	/*::-webkit-scrollbar {width: 4px;}滚动槽 
 	::-webkit-scrollbar-track {
 		-webkit-box-shadow: inset 0 0 6px #7f7f7f;border-radius: 10px;
-	}/* 滚动条滑块 */
-	::-webkit-scrollbar-thumb {
+	} 滚动条滑块 */
+	/*::-webkit-scrollbar-thumb {
 			border-radius: 10px;    
 			background: rgba(0,0,0,0.1);    
 			-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
-	}/*滚动条里面可以拖动的那部分*/
+	}滚动条里面可以拖动的那部分
 	::-webkit-scrollbar-thumb:window-inactive {background: rgba(255,0,0,0.4);
-	}
+	}*/
 	/*head*/
 .centera{
     width:60%;
@@ -41,19 +41,22 @@ img,button{border: 0;}{float: left;}
     width: 60px;
     height: 50px;
 }
+.clear{
+    clear:both;
+}
 .unfold {
     display: none;
     position: relative;
     float: left;
     top:0;
     width: 220px;
-    height: 100px;
     z-index: 20;
 }
 .unfold div{
     margin-top: 5%;
     width: 100%;
     height: 95%;
+    overflow:auto;
     background-color:rgb(51,51,51) ;
 }
 .unfold a{
@@ -147,7 +150,7 @@ img,button{border: 0;}{float: left;}
 
 
 .main{
-	height: 4192px;
+	height: 4411px;
 	width: 100%;
 	background: #fff;
 }
@@ -155,33 +158,42 @@ img,button{border: 0;}{float: left;}
 /*shortNews*/
 #story {
   	width:98%;
-	height: 319px;
-	overflow: scroll;
+	height: 335px;
+	overflow: hidden;
 	padding: 0 0 0 2%;
-	overflow-x : hidden; 
+	/*overflow-x : hidden; */
   }
   #story ul {
    height: 355px;
-   width: 32%;
-   margin-left: 1%;
+   width: 43%;
+   margin-left: 7%;
    float:left;
   }
   #story ul li {
    height: 115px;
-   width: 265px;
+
    margin-right: 20px;
    list-style: none;
    float: left;
    box-sizing: border-box;
   }
+.storyContTitle{
+	height: 100px;
+}
+.storyContent{
+	float: left;
+	width: 33%;
+	margin-right: 5px;
+}
+.storyContentTit{
+	float: left;
+	width: 66%;
+}
+.storyContentText p{
+	font-size: 16px;
+}
 
 
-   #story ul li div{display: none;padding-top: 30px;}
-	#story ul li div p{
-		color: #777;
-		line-height: 24px;
-		font-size: 14px;
-	}
 	#story ul li h1:hover{
 		color: #ef2322;
 		cursor: pointer;
@@ -259,7 +271,7 @@ img,button{border: 0;}{float: left;}
 .messageCont{
 	width: 100%;
 	background: #f0f0f0;
-	height: 1127px;
+	height: 1407px;
 	padding-top: 20px;
 	margin-bottom: 10px;
 
@@ -275,7 +287,7 @@ img,button{border: 0;}{float: left;}
 }
 .messageLife{
 	background: #ffffff;
-	height: 514px;
+	height: 640px;
 	width: 100%;
 	margin-bottom: 10px;
 }
@@ -284,7 +296,7 @@ img,button{border: 0;}{float: left;}
 }
 .message{
 	width: 66%;
-	height: 1054px;
+	height: 1314px;
 	margin: 0 auto;
 }
 .messageLifeImg {
@@ -297,38 +309,51 @@ img,button{border: 0;}{float: left;}
 	auto;margin-left:0px;
     margin-top:0px;
 }
-.messageLifeImg img,.messageRightImg img,.gloLeftContImg img,#articleImg img,
+.messageLifeImg img,.messageRightImg img,.gloLeftContImg img,#articleImg2 img,#articleImg1 img,#articleImg3 img,
 .exampleImg img,.pictures li img{
 	 -webkit-transition: all ease .3s;
     transition: all ease .3s;
 }
-    .messageLifeImg img:hover,.messageRightImg img:hover,.gloLeftContImg img:hover,
-    #articleImg img:hover,.exampleImg img:hover,.pictures li img:hover{
+    .messageLifeImg img:hover,.messageRightImg img:hover,.gloLeftContImg img:hover,#articleImg1 img:hover,#articleImg3 img:hover,
+    #articleImg2 img:hover,.exampleImg img:hover,.pictures li img:hover{
    	-webkit-transform: scale(1.05);
     transform: scale(1.05);
     }
 .messageLiftText h2,.messageRightText h2{font-size: 18px;}
+.messH{
+    height:50px;
+}
 .messageLiftText{padding: 0 3px;	margin-top: 30px;}
 .messageNote img,.messageRightNote img{
 	float: left;
 	vertical-align: middle;
 	margin-right: 3px;
 }
+.messageLiftText h2:hover{
+	color: #ef2322;
+}
 #star{
 	margin-top: 13px;
 	float: right;
 	width: 17px;
 	height: 16px;
-	margin-right: 10px;
+	margin-right: 6px;
 	background: url(../images/whiteStar.png) no-repeat;
 }
+#star:hover{
+	background: url("../images/redStar.png") no-repeat;
+}
+
 #email{
 	float: right;
 	width: 17px;
 	height: 16px;
 	background: url(../images/whiteEmail.png) no-repeat;
 	margin-right: 0 !important;
-	padding-top: 4px;
+	margin-top: 13px;
+}
+#email:hover{
+	background: url("../images/redEmail.png") no-repeat;
 }
 .messageNote p,.messageRightNote p{
 	float: left;
@@ -338,8 +363,8 @@ img,button{border: 0;}{float: left;}
 }
 .messageNote,.messageRightNote{
 	width: 100%;
-	height: 60px;
-	margin: 10px 0 0 0;  
+	height: 51px;
+	margin: 5px 0 0 0;  
 }
 .messageRightText{
 	float: left;
@@ -356,7 +381,7 @@ img,button{border: 0;}{float: left;}
 .messageRight ul li{
 	width: 97%;
 	padding-left: 3%;
-	height: 200px;
+	height: 250px;
 	background: #ffffff;
 	margin-bottom: 10px;
 }
@@ -426,13 +451,16 @@ img,button{border: 0;}{float: left;}
 	margin-left: 2%;
 }
 .gloLeftContMes ul li a:hover{color: #ef2322;}
-.gloLeftContMes button{
+#pi{
 	background: #ef2322;
 	color: #ffffff;
 	width: 100%;
 	height: 50px;
 	font-size: 16px;
 	cursor: pointer;
+    display:block;
+    line-height:50px;
+    text-align:center;
 }
 .gloLeftContMes p{
 	margin-bottom: 5px; font-size: 16px;line-height: 20px;}
@@ -478,12 +506,13 @@ img,button{border: 0;}{float: left;}
 	color: #b5b5b5;
 	font-size: 16px;
 }
-.gloRightName ul{padding-left: 5px;}
+.gloRightName ul{padding-left: 5px;height:130px;}
 .gloRightName ul li p{
 	color: #333333;
 	font-size: 14px;
 	text-align: center;
 }
+.gloRightName ul li a:hover p{color: #ef2322;}
 .hotNewsTitle a{
 	display: block;
 	margin-right: 5px;
@@ -499,7 +528,7 @@ img,button{border: 0;}{float: left;}
 	margin-right: 1%;
 	margin-bottom: 74px;
 }
-.gloRightName button{
+#join{
 	background: #ef2322;
 	color: #ffffff;
 	width: 98%;
@@ -507,7 +536,9 @@ img,button{border: 0;}{float: left;}
 	font-size: 18px;
 	display: block;
 	height: 40px;
+    text-align:center;
 	margin-bottom: 30px;
+	cursor: pointer;
 }
 .gloRightName p{
 	color: #b5b5b5;
@@ -531,10 +562,16 @@ img,button{border: 0;}{float: left;}
 	float: left;
 	width: 33.3%;
 }
-#articleImg {
+#articleImg,#articleImg2,#articleImg1 {
 	width: 100%;
 	overflow: hidden;
+	height: 264px;
+    margin-top:49px;
 }
+#articleImg3{
+    overflow:hidden;
+}
+
 
 #articleImg img{
 	width: 100%;
@@ -542,8 +579,11 @@ img,button{border: 0;}{float: left;}
 }
 #articleCont{
 	height: 244px;
-	padding: 20px 0 0 15px;
+	padding: 20px 0 0 0;
 
+}
+.contTitle,.articleNotes,.contDetail{
+    padding-left:15px;
 }
 .contTitle a{
 	display: block;
@@ -551,7 +591,10 @@ img,button{border: 0;}{float: left;}
 	font-size: 18px;
 	color: #333333;
 }
-.articleNotes{margin: 10px 0 20px 0;height: 16px;}
+.contTitle:hover a {color: #ef2322;}
+.articleNotes{
+	margin: 10px 0 20px 0;
+	height: 23px;}
 .articleNotes span{
 	float: left;
 	font-size: 16px;
@@ -560,12 +603,15 @@ img,button{border: 0;}{float: left;}
 	float: left;
 
 }
-
 .contDetail a{
 	font-size: 16px;
 	display: block;
 	margin-bottom: 4px;
 	line-height: 18px;
+}
+.contDetail{
+	height: 80px;
+	margin-top: 17px;
 }
 .contDetail a:hover{color: #ef2322;}
 
@@ -672,15 +718,23 @@ img,button{border: 0;}{float: left;}
 	text-align: center;
 	float: left;
 }
-.exampleAdd button{
+.exampleAdd a{
 	background-color: #ef2322;
 	color: #ffffff;
 	width: 87%;
 	margin: 0 auto;
 	height: 53px;
+    line-height:53px;
+    text-align:center;
 	font-size: 22px;
 	display: block;
 	margin-bottom: 23px;
+}
+.exampleAdd a:hover{
+    color:#fff;
+}
+.exampleAdd div{
+    height:126px;
 }
 .exampleAdd span{
 	color: #b5b5b5;
@@ -733,15 +787,50 @@ img,button{border: 0;}{float: left;}
 	display: block;
 	float: left;
 }
-
+.note p{
+    text-align:center;
+    width:100%;
+    color:#fff;
+}
 .note{
-	width: 825px;
 	height: 20px;
-	margin: 0 auto;
 }
 .note img{
 	height: 25px;
 	width: auto;
 	display: inline-block;
 	vertical-align: middle;
+}
+.note a{
+	width: 100%;
+	text-align: center;
+	color: #fff;
+}
+#emailA{
+	float: left;
+	margin-right: 0px !important;
+	padding-top: 3px;
+}
+@media (max-width : 980px){
+	.example, .help,.hotNews,.glossip,.shortNews,.message,.change
+	{
+		width: 96%;
+	}
+	.pictures{
+		width: 90%;
+		padding: 0;
+		margin: 0 auto;
+	}
+	.pictureNews{background: #333;}
+
+	.centera{
+		width: 90%;
+		text-align: center;
+	}
+
+}
+@media (max-width : 767px){
+	.clearfixHideI{
+		display: none;
+	}
 }

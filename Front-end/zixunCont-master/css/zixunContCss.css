@@ -134,10 +134,10 @@ ul li{
 /*MAIN*/
 .content{width: 100%;}
 .main{
-	width: 66%;
+	width: 60%;
 	height:2372px;
 	margin: 0 auto;
-	padding-top: 20px;
+	padding-top: 50px;
 	 position: relative;
    background: #fff;
 }
@@ -145,11 +145,14 @@ ul li{
 	font-size: 22px;
 	font-weight: normal;
 	color: #ef2322;
+	width: 100%;
+	display: block;
 }
 .name{
 	height: 30px;
 	margin: 30px 0 25px 0;
 }
+
 #touxiang{
 	background: url(../images/tou.png) no-repeat;
 	height: 30px;
@@ -171,12 +174,33 @@ ul li{
 	color: #b5b5b5;
 }
 #exllect{
-	background: url(../images/exlle.png) no-repeat;
-	background-position: 0 -52px;
+	background: url(../images/icon.png) no-repeat;
+	background-position: -14px -673px;
 	height: 20px;
 	width: 20px;
-	background-size: 72px auto;
 	display: inline-block;
+}
+.infor a:hover #exllect{
+	background: url(../images/icon.png) no-repeat;
+	background-position: -116px -673px;
+}
+#whiteEmail{
+	background: url("../images/whiteEmail.png") no-repeat;
+	display: inline-block;
+	height: 14px;
+	width: 20px;
+}
+.infor a:hover #whiteEmail{
+	background: url("../images/redEmail.png") no-repeat;
+}
+#star{
+	background: url("../images/whiteStar.png") no-repeat;
+	display: inline-block;
+	height: 14px;
+	width: 20px;
+}
+.infor a:hover #star{
+	background: url("../images/redStar.png") no-repeat;
 }
 .infor img{
 	margin:0 5px 0 20px;
@@ -195,6 +219,9 @@ ul li{
 .mainText p{
 	font-size: 16px;
 	line-height: 25px;
+	height: 598px;
+	width: 100%;
+	overflow: hidden;
 }
 .mainText h3{
 	font-size: 16px;
@@ -224,7 +251,6 @@ ul li{
 .hotLogoTitle,.hotActTitle{
 	height: 26px;
 	width: 100%;
-	margin-bottom: 45px;
 }
 .hotLogoTitle img,.hotActTitle img{
 	float: left;
@@ -247,6 +273,7 @@ ul li{
 	height: 50px;
 	float: left;
 }
+.hotLogoCont,.hotActCont{margin-top: 20px;}
 .hotLogoCont ul li a{
 	color: #fff;
 	line-height: 50px;
@@ -258,11 +285,18 @@ ul li{
 .hotActCont ul li{
 	float: left;
 	width: 30%;
-	margin-right: 5%;
+	margin-right: 3%;
+	overflow: hidden;
 }
 .hotActCont ul li a img{
 	width: 100%;
 	height: auto;
+	 -webkit-transition: all ease .3s;
+    transition: all ease .3s;
+}
+.hotActCont ul li a img:hover{
+	-webkit-transform: scale(1.05);
+    transform: scale(1.05);
 }
 #no{
 	margin-right: 0px !important;
@@ -283,6 +317,7 @@ ul li{
 	width: 685px;
 	padding: 35px 0 50px 0;
 }
+
 .others ul li{
 	float: left;
 	width: 170px;
@@ -309,11 +344,20 @@ ul li{
 	display: block;
 	float: left;
 }
-.footNote p{color: #fff;}
+.footNote a{
+	color: #fff;
+	width: 100%;
+	margin: 0 auto;
+	text-align: center;
+}
 .footNote{
-	width: 825px;
+	width: 100%;
 	height: 20px;
 	margin: 0 auto;
+}
+.footNote p{
+    color:#fff;
+    text-align:center;
 }
 .footNote img{
 	height: 25px;
@@ -322,3 +366,40 @@ ul li{
 	vertical-align: middle;
 }
 #email img{margin-top: 5px;}
+@media (max-width : 1280px){
+.from img{
+		height: 567px;
+	}
+	.from{
+		height: 646px;
+	}
+	.main{
+		height: 2172px;
+	}
+}
+@media (max-width : 1070px){
+	.mainText{
+		height: 699px;
+	}
+}
+@media (max-width : 801px){
+	.header-left-float {
+		display: none;
+	}
+	.left-div{
+		display: none;
+	}
+	.main{
+		width: 100%;
+	}
+}
+
+
+/*@media (max-width: 1264px)and(min-width:980px ) {
+	.from img{
+		height: 567px;
+	}
+	.from{
+		height: 646px;
+	}
+}*/

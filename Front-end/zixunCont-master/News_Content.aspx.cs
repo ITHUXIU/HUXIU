@@ -18,13 +18,25 @@ public partial class Front_end_zixunCont_master_News_Content : System.Web.UI.Pag
             rptClass.DataSource = newclass.ToList();
             rptClass.DataBind();
 
+            //绑定界面内容
             News news = db.News.SingleOrDefault(a => a.news_id == newsid);
             lbTitle.Text = news.news_title;
+            string aa = news.news_content;
             lbTime.Text = news.news_time.ToString();
             lbContent.Text = news.news_content;
 
-            News_class newsclass = db.News_class.SingleOrDefault(a => a.news_classid == Convert.ToInt32(news.news_class));
+            News_class newsclass = db.News_class.SingleOrDefault(a => a.news_classid == news.news_class);
             lbNewsClass.Text = newsclass.news_classname;
+
+            //热文绑定
+            var HotNews = from it in db.News orderby it.news_hot descending select it;
+            PagedDataSource pds = new PagedDataSource();
+            pds.AllowPaging = true;
+            pds.PageSize = 3;
+            pds.DataSource = HotNews.ToList();
+            pds.CurrentPageIndex = 0;
+            rptHotNews.DataSource = pds;
+            rptHotNews.DataBind();
         }
     }
 }

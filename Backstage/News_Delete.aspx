@@ -92,7 +92,8 @@
                     <th><h3><%# Eval("News_title") %></h3></th>
                     <th><asp:Label ID="lb" runat="server" Text='<%# Eval("News_content") %>' Width="60%" ></asp:Label></th>
                     <th><%# Eval("news_top") %></th>
-                    <th><asp:LinkButton ID="lbt" runat="server" Text="设置" CommandName="Set" CommandArgument='<%#Eval("News_id") %>'></asp:LinkButton></th>
+                    <th><asp:LinkButton ID="lbt" runat="server" Text="删除" CommandName="Delete" CommandArgument='<%#Eval("News_id") %>'></asp:LinkButton></th>
+                    <th><asp:LinkButton runat="server" Text="编辑" CommandName="Delete" PostBackUrl='<%#"~/Backstage/News_Editor.aspx?news_id="+ Eval("news_id") %>'></asp:LinkButton></th>
                     </tr>  
 
                 </ItemTemplate>

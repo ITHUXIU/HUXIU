@@ -194,18 +194,14 @@
 				</div>
 				<div class="hotActCont">
 					<ul>
-						<li><a href="#">
-							<img src="images/claw.jpg">
-							<p>如果一座城市连理想都够不上，还谈什么中心？</p>
-						</a></li>
-						<li><a href="#">
-							<img src="images/claw.jpg">
-							<p>如果一座城市连理想都够不上，还谈什么中心？</p>
-						</a></li>
-						<li id="no"><a href="#">
-							<img src="images/claw.jpg">
-							<p>如果一座城市连理想都够不上，还谈什么中心？</p>
-						</a></li>
+                        <asp:Repeater ID="rptHotNews" runat="server">
+                            <ItemTemplate>
+                                <li><a href="#">
+                                    <asp:Image ImageUrl='<%#"../../Backstage/" + Eval("news_cover") %>' runat="server" />
+                                    <p><%# Eval("news_title") %></p>
+                                </a></li>
+                            </ItemTemplate>
+                        </asp:Repeater>
 					</ul>
 				</div>
 			</div>

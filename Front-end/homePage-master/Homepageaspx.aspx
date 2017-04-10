@@ -41,7 +41,9 @@
                                 <asp:LinkButton ID="lbtClass" runat="server" Text='<%# Eval("news_classname") %>'  PostBackUrl='<%#"~/Front-end/Period-huxiu/News_List.aspx?news_classid="+ Eval("news_classid")%>'></asp:LinkButton>
                             </ItemTemplate>
                         </asp:Repeater>
+                        <a class="clear"></a>
                     </div>
+                    
                 </ul>
 				</li>
 
@@ -54,17 +56,16 @@
        
     		<div class="mainLeft">
       			<form id="loginform" name="loginform" method="post" action="index.html">
-       				<%--<input type="text" name="username" id="username" class="txtfield" tabindex="1" value="手机号/邮箱/虎嗅账号" onfocus="if(this.value=='手机号/邮箱/虎嗅账号'){this.value='';}">
-     	 			<input type="password" name="password" id="password" class="txtfield" tabindex="2"  >--%>
-                      <asp:TextBox ID="txtusername" runat="server" CssClass="txtfield" TabIndex="1" Text="邮箱/虎嗅账号" onfocus="if(this.value=='邮箱/虎嗅账号'){this.value='';}"></asp:TextBox>
-                      <asp:TextBox ID="txtpassword" runat="server" CssClass="txtfield" TabIndex="2" Text="密码" onfocus="if(this.value=='密码'){this.value='';}"></asp:TextBox>
+       				<input type="text" name="username" id="username" class="txtfield" tabindex="1" value="手机号/邮箱/虎嗅账号" onfocus="if(this.value=='手机号/邮箱/虎嗅账号'){this.value='';}">
+     	 			<input type="password" name="password" id="password" class="txtfield" tabindex="2"  >
       				<div id="Lo">
-        		
-                          <asp:LinkButton ID="lkbtnForget" runat="server" Text="忘记密码？" PostBackUrl="~/Backstage/Find_password.aspx"></asp:LinkButton>
+        				<span></span>
+        				<p id="remember">记住密码</p>
+        				<p id="forget">忘记密码?</p>
       				</div>
       				<div class="center">
-          				<%--<input type="submit" name="loginbtn" id="loginbtn" class="flatbtn-blu hidemodal" value="Log In" tabindex="3">--%>
-                          <asp:Button ID="btnLogin" runat="server" CssClass="flatbtn-blu hidemodal" Text="Login" TabIndex="3" OnClick="btnLogin_Click" />
+          				<input type="submit" name="loginbtn" id="loginbtn" class="flatbtn-blu hidemodal" value="Log In" tabindex="3">
+          				<input type="submit" name="zhubtn" id="zhubtn" class="flatbtn-blu hidemodal" value="注册" tabindex="3">
 
       				</div>
 
@@ -176,7 +177,7 @@
                        <li><%--  <asp:ImageButton ImageUrl='<%#"../../Backstage/"+ Eval("top_path") %>' runat="server" PostBackUrl='<%#"~/Front-end/zixunCont-master/News_Content.aspx?news_id="+ Eval("top_news")%>' />
                         --%>
                            <asp:Image  ImageUrl='<%#"../../Backstage/" + Eval("top_cover") %>' runat="server" />
-                           <asp:Image class="aaaaa" ImageUrl='<%#"../../Backstage/"+ Eval("top_path") %>' runat="server" />
+                           <asp:Image class="headBacImg" ImageUrl='<%#"../../Backstage/"+ Eval("top_path") %>' runat="server" />
                         </li>
                     </ItemTemplate>
                 </asp:Repeater>
@@ -207,11 +208,13 @@
                         <div class="messageLife">
 
                             <div class="messageLifeImg" id="showing">
-                                <%--<a href="#"><img id="imgg" src="images/appland.png"></a>--%>
-                                <asp:ImageButton ImageUrl=<%#"../../Backstage/" + Eval("news_cover") %> runat="server" />
+                                <a href="#"><img id="imgg" src="<%#"../../Backstage/" + Eval("news_cover") %>"></a>
+                               <%-- <asp:ImageButton ImageUrl=<%#"../../Backstage/" + Eval("news_cover") %> runat="server" />--%>
                             </div>
                             <div class="messageLiftText">
+                                <div class="messH">
                                 <h2><asp:LinkButton runat="server" Text=<%# Eval("news_title") %> PostBackUrl='<%#"~/Front-end/zixunCont-master/News_Content.aspx?news_id="+ Eval("news_id")%>'></asp:LinkButton></h2>
+                                </div>
                                 <div class="messageNote">
                                     <img src="images/tou.png">
                                     <p><%# Eval("new_author") %></p>
@@ -237,8 +240,10 @@
                                         <img src="images/lab.png">
                                         <p><asp:Label ID="lbNewsclass" Text=<%# Eval("news_class") %> runat="server"></asp:Label></p>
                                     </div>
+                                    <div class ="messH">
                                 <h2><asp:LinkButton runat="server" Text=<%# Eval("news_title") %> PostBackUrl='<%#"~/Front-end/zixunCont-master/News_Content.aspx?news_id="+ Eval("news_id")%>'></asp:LinkButton></h2>
-                                    <div class="messageRightNote">
+                                    </div>
+                                        <div class="messageRightNote">
                                         <img src="images/tou.png">
                                         <p><%# Eval("new_author") %></p>
                                         <p><%# Eval("news_time") %></p>
@@ -259,7 +264,7 @@
 			</div>
 		</div>
 		<div class="change">
-            <asp:Label ID="lbNow" runat="server" Text="1" Visible="false"></asp:Label>
+            <asp:Label ID="lbNow" runat="server" Text="1" Visible="false" ></asp:Label>
             <asp:Label ID="lbTotal" runat="server" Text="1" Visible="false"></asp:Label>
 			<asp:LinkButton ID="lbtChange" runat="server" OnClick="lbtChange_Click" Text="换一换"></asp:LinkButton>
 		</div>
@@ -399,7 +404,7 @@
 								<span class = "alread">已辟谣</span>
 							</a></li>
 						</ul>
-						<button>我要爆料/我要辟谣</button>
+						<a id="pi" href="#bookmark">我要爆料/我要辟谣</a>
 					</div>
 				</div>
 
@@ -429,7 +434,7 @@
 							<p>犀牛电竞</p>
 						</a></li>
 					</ul>
-					<button>我要报名</button>
+					<a id="join" href="#bookmark">我要报名</a>
 					<p>创业公司立即报名提交信息的好处</p>
 					<p>1.优质的展示和访谈机会</p>
 					<p>2.获得投资人的关注</p>
@@ -448,7 +453,7 @@
             <asp:Repeater ID="rptHotNews" runat="server" OnItemDataBound="rptHotNews_ItemDataBound">
                 <ItemTemplate>
                     <div id="article">
-                        <div id="articleImg1">
+                       <div id="articleImg3">
                              <asp:Image ImageUrl=<%#"../../Backstage/" + Eval("news_cover") %> runat="server" ID="imgUp" />
                         </div>
                         <div id="articleCont">
@@ -527,9 +532,11 @@
 					<img src="images/tou.png"><p class="sec">虎嗅会员小秘书</p><p>微信号：huxiu</p>
 				</div>
 				<div class="exampleAdd">
+                    <div>
 					<img src="images/vip.png">
 					<p>早知道一点，多知道一点</p>
-					<button>加入虎嗅会员</button>
+                    </div>
+					<a href="#bookmark">加入虎嗅会员</a>
 					<span>全年300+篇案例分析，盘点有代表性的创新公司，还有商业成功背后的魔鬼细节</span>
 				</div>
 		</div>
@@ -545,29 +552,29 @@
 	<div class="foot">
 			<div class="others">
 				<ul>
-					<li><a href="#">关于我们</a></li>
-					<li><a href="#">合作伙伴</a></li>
-					<li><a href="#">常见问题解答</a></li>
-					<li><a href="#">联系我们</a></li>
-					<li><a href="#">加入我们</a></li>
-					<li><a href="#">广告及服务</a></li>
-					<li><a href="#">防网络诈骗问题</a></li>
+					<li><a href="#bookmark ">关于我们</a></li>
+					<li><a href="#bookmark">合作伙伴</a></li>
+					<li><a href="#bookmark">常见问题解答</a></li>
+					<li><a href="#bookmark">联系我们</a></li>
+					<li><a href="#bookmark">加入我们</a></li>
+					<li><a href="#bookmark">广告及服务</a></li>
+					<li><a href="#bookmark">防网络诈骗问题</a></li>
 					<li class="Link">	
-						<a href="#"><img src="images/wechart.png"></a>
-						<a href="#"><img src="images/qq.png"></a>
-						<a  id = "email" href="#"><img src="images/email.png"></a>
+						<a href="#bookmark"><img src="images/wechart.png"></a>
+						<a href="#bookmark"><img src="images/qq.png"></a>
+						<a  id = "emailA" href="#"><img src="images/email.png"></a>
 					</li>
 				</ul>
 			</div>
 			<div class="note">
-				<p>Copyright © 虎嗅网 京IPC备12013432号-1<img src="images/police.png">京公网安备11010102001402 本站由<a href="#"><img src="images/ali.png"></a>提供计算与安全服务</p>
+				<p>Copyright © 虎嗅网 京IPC备12013432号-1<img src="images/police.png">京公网安备11010102001402 本站由<a href="#bookmark"><img src="images/ali.png"></a>提供计算与安全服务</p>
 			</div>
 	</div>	
 </div>
 <script type="text/javascript">
 	 $(".pictures ul li").click(function(){
 	     //var simg=$(this).find("img").attr("src");
-	     var simg = $(this).find(".aaaaa").attr("src");
+	     var simg = $(this).find(".headBacImg").attr("src");
             var bimg=simg.replace(/-\d*/,'');  //根据小图找到大图的名称
 
             $(".pict").css("background","url("+bimg+")");//url("+bimg+"),添加 变量的方法

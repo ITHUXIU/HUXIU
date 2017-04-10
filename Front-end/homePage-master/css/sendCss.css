@@ -173,7 +173,16 @@ p,li{cursor: pointer;}
   font-size: 18px;
   border-width: 0;
 }
-#sentAct:hover,#save:hover{
+#save{
+   color: #ef2322;
+   background-color: #fff;
+}
+#sentAct{
+  background: #ef2322;
+  color: #fff;
+  margin-bottom: 5px;
+}
+#save:hover{
   color: #fff;
   background-color: #ef2322;
 }
