@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="HuXiuModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="HuXiuModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Activity">
           <Key>
             <PropertyRef Name="activity_id" />
@@ -19,18 +19,14 @@
           <Property Name="activity_topicid" Type="int" />
           <Property Name="activity_hot" Type="int" />
           <Property Name="activity_topicname" Type="varchar" MaxLength="50" />
-          <Property Name="activity_class" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Admin">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="nickname" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="email" Type="nvarchar" MaxLength="50" />
-          <Property Name="photo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="pwd" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Column">
           <Key>
@@ -78,16 +74,6 @@
           <Property Name="news_classid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="news_classname" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="Question">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="user_id" Type="int" Nullable="false" />
-          <Property Name="question" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="answer" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="question_id" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="Rumor">
           <Key>
             <PropertyRef Name="rumor_id" />
@@ -117,7 +103,6 @@
           <Property Name="top_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="top_path" Type="nvarchar(max)" Nullable="false" />
           <Property Name="top_news" Type="int" Nullable="false" />
-          <Property Name="top_cover" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Topic">
           <Key>
@@ -170,20 +155,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Question_Admin">
-          <End Role="Admin" Type="Self.Admin" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Question" Type="Self.Question" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Admin">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Question">
-              <PropertyRef Name="user_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Top_News">
           <End Role="News" Type="Self.News" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -205,7 +176,6 @@
           <EntitySet Name="Interest" EntityType="Self.Interest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="News_class" EntityType="Self.News_class" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Question" EntityType="Self.Question" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rumor" EntityType="Self.Rumor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Top" EntityType="Self.Top" Schema="dbo" store:Type="Tables" />
@@ -222,17 +192,12 @@
             <End Role="News_class" EntitySet="News_class" />
             <End Role="News" EntitySet="News" />
           </AssociationSet>
-          <AssociationSet Name="FK_Question_Admin" Association="Self.FK_Question_Admin">
-            <End Role="Admin" EntitySet="Admin" />
-            <End Role="Question" EntitySet="Question" />
-          </AssociationSet>
           <AssociationSet Name="FK_Top_News" Association="Self.FK_Top_News">
             <End Role="News" EntitySet="News" />
             <End Role="Top" EntitySet="Top" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HuXiuModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -261,9 +226,10 @@
           <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="nickname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="photo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Question" Relationship="Self.FK_Question_Admin" FromRole="Admin" ToRole="Question" />
+          <Property Name="pwd" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Column">
           <Key>
@@ -491,19 +457,15 @@
                 <ScalarProperty Name="activity_topicid" ColumnName="activity_topicid" />
                 <ScalarProperty Name="activity_hot" ColumnName="activity_hot" />
                 <ScalarProperty Name="activity_topicname" ColumnName="activity_topicname" />
-                <ScalarProperty Name="activity_class" ColumnName="activity_class" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Admin">
             <EntityTypeMapping TypeName="HuXiuModel.Admin">
               <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="pwd" ColumnName="pwd" />
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="nickname" ColumnName="nickname" />
-                <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="photo" ColumnName="photo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -557,17 +519,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Question">
-            <EntityTypeMapping TypeName="HuXiuModel.Question">
-              <MappingFragment StoreEntitySet="Question">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="user_id" ColumnName="user_id" />
-                <ScalarProperty Name="question1" ColumnName="question" />
-                <ScalarProperty Name="answer" ColumnName="answer" />
-                <ScalarProperty Name="question_id" ColumnName="question_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Rumor">
             <EntityTypeMapping TypeName="HuXiuModel.Rumor">
               <MappingFragment StoreEntitySet="Rumor">
@@ -598,7 +549,6 @@
                 <ScalarProperty Name="top_id" ColumnName="top_id" />
                 <ScalarProperty Name="top_path" ColumnName="top_path" />
                 <ScalarProperty Name="top_news" ColumnName="top_news" />
-                <ScalarProperty Name="top_cover" ColumnName="top_cover" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
