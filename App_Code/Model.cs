@@ -20,17 +20,28 @@ public partial class Activity
     public string activity_cover { get; set; }
     public string activity_coverlable { get; set; }
     public Nullable<int> activity_topicid { get; set; }
-    public int activity_hot { get; set; }
+    public Nullable<int> activity_hot { get; set; }
     public string activity_topicname { get; set; }
+    public int activity_class { get; set; }
 
     public virtual Topic Topic { get; set; }
 }
 
 public partial class Admin
 {
+    public Admin()
+    {
+        this.Question = new HashSet<Question>();
+    }
+
     public int id { get; set; }
-    public string pwd { get; set; }
+    public string username { get; set; }
+    public string nickname { get; set; }
+    public string password { get; set; }
     public string email { get; set; }
+    public string photo { get; set; }
+
+    public virtual ICollection<Question> Question { get; set; }
 }
 
 public partial class Column
@@ -63,6 +74,11 @@ public partial class Interest
 
 public partial class News
 {
+    public News()
+    {
+        this.Top = new HashSet<Top>();
+    }
+
     public int news_id { get; set; }
     public string news_title { get; set; }
     public string news_content { get; set; }
@@ -73,8 +89,35 @@ public partial class News
     public int news_like { get; set; }
     public int news_hot { get; set; }
     public int new_column { get; set; }
+    public string new_author { get; set; }
 
     public virtual Column Column { get; set; }
+    public virtual News_class News_class1 { get; set; }
+    public virtual ICollection<Top> Top { get; set; }
+}
+
+public partial class News_class
+{
+    public News_class()
+    {
+        this.News = new HashSet<News>();
+    }
+
+    public int news_classid { get; set; }
+    public string news_classname { get; set; }
+
+    public virtual ICollection<News> News { get; set; }
+}
+
+public partial class Question
+{
+    public int id { get; set; }
+    public int user_id { get; set; }
+    public string question1 { get; set; }
+    public string answer { get; set; }
+    public int question_id { get; set; }
+
+    public virtual Admin Admin { get; set; }
 }
 
 public partial class Rumor
@@ -95,6 +138,16 @@ public partial class sysdiagrams
     public int diagram_id { get; set; }
     public Nullable<int> version { get; set; }
     public byte[] definition { get; set; }
+}
+
+public partial class Top
+{
+    public int top_id { get; set; }
+    public string top_path { get; set; }
+    public int top_news { get; set; }
+    public string top_cover { get; set; }
+
+    public virtual News News { get; set; }
 }
 
 public partial class Topic

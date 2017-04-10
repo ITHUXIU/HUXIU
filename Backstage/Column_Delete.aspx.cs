@@ -9,6 +9,10 @@ public partial class Backstage_Column_Delete : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["username"] == null)
+        {
+            Response.Write("<script>alert('尚未登录!');location='../Login/Login.aspx'</script>");
+        }
         using (var db = new HuXiuEntities())
         {
             var column = from it in db.Column where it.column_id != 1 select it;

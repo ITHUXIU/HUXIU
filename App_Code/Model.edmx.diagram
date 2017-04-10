@@ -4,17 +4,23 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2cf8b1362fcf4c40a4e8cb67b31a3b73" Name="Diagram1">
-        <EntityTypeShape EntityType="HuXiuModel.Activity" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="HuXiuModel.Admin" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HuXiuModel.Column" Width="1.5" PointX="5.75" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="HuXiuModel.Interest" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HuXiuModel.News" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="HuXiuModel.Rumor" Width="1.5" PointX="4.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HuXiuModel.sysdiagrams" Width="1.5" PointX="6.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HuXiuModel.Topic" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+      <Diagram DiagramId="5a2ff9352d30445f80b7c6ac5f3091a7" Name="Diagram1">
+        <EntityTypeShape EntityType="HuXiuModel.Activity" Width="1.5" PointX="5" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="HuXiuModel.Admin" Width="1.5" PointX="7.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="HuXiuModel.Column" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HuXiuModel.Interest" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HuXiuModel.News" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="HuXiuModel.News_class" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="HuXiuModel.Question" Width="1.5" PointX="10" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="HuXiuModel.Rumor" Width="1.5" PointX="7.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HuXiuModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HuXiuModel.Top" Width="1.5" PointX="5.25" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HuXiuModel.Topic" Width="1.5" PointX="2.75" PointY="6.625" IsExpanded="true" />
         <AssociationConnector Association="HuXiuModel.FK_Activity_System" ManuallyRouted="false" />
+        <AssociationConnector Association="HuXiuModel.FK_Question_Admin" ManuallyRouted="false" />
         <AssociationConnector Association="HuXiuModel.FK_News_Column" ManuallyRouted="false" />
+        <AssociationConnector Association="HuXiuModel.FK_News_News_class" ManuallyRouted="false" />
+        <AssociationConnector Association="HuXiuModel.FK_Top_News" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

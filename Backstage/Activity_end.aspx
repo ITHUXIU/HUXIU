@@ -73,16 +73,26 @@ form{
     <asp:Repeater ID="rptActivity_end" runat="server" OnItemCommand="rptActivity_end_ItemCommand" >
         <ItemTemplate>
            <tr> 
-               <td><asp:LinkButton ID="lbactivity_name" runat="server" Text='<%#Eval("activity_name") %>' CommandName="Activity_content" CommandArgument='<%#Eval("activity_id") %>'></asp:LinkButton> </td>
+               <td><asp:LinkButton ID="lbactivity_name" runat="server" Text='<%#Eval("activity_name") %>' PostBackUrl='<%#"Modify_activity.aspx?id="+Eval("activity_id") %>'></asp:LinkButton> </td>
             <td><%#Eval("activity_start") %></td>
             <td><%#Eval("activity_end") %></td>
-               <td><asp:LinkButton ID="lbmodify_activity" runat="server" Text="修改" CommandName="Modify" CommandArgument='<%#Eval("activity_id") %>'></asp:LinkButton></td>
+               <td><asp:LinkButton ID="lbmodify_activity" runat="server" Text="修改" PostBackUrl='<%#"Modify_activity.aspx?id="+Eval("activity_id") %>'></asp:LinkButton></td>
             <td><asp:LinkButton ID="lbdelete_activity" runat="server" Text="删除" CommandName="Delete" CommandArgument='<%#Eval("activity_id") %>'></asp:LinkButton></td>
                </tr>
             
         </ItemTemplate>
     </asp:Repeater>
             </table>
+        <asp:Button ID="btnUp" runat="server" Text="上一页" OnClick="btnUp_Click" />
+        <asp:Button ID="btnDown" runat="server" Text="下一页"  OnClick="btnDown_Click"/>
+        <asp:Button ID="btnFirst" runat="server" Text="首页" OnClick="btnFirst_Click" />
+        <asp:Button ID="btnLast" runat="server" Text="尾页"  OnClick="btnLast_Click"/>
+        页次：<asp:Label ID="lbNow" runat="server" Text="1"></asp:Label>
+        /<asp:Label ID="lbTotal" runat="server" Text="1"></asp:Label>
+        转<asp:TextBox ID="txtJump" Text="1" runat="server" Width="16px" onkeyup="this.value=this.value.replace(/\D/g,'')"></asp:TextBox>
+         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat ="server" ControlToValidate ="txtJump" ></asp:RequiredFieldValidator> 
+        <asp:Button ID="btnJump" runat="server" Text="Go"  OnClick="btnJump_Click"/>
+        
     </div>
     </form>
 </body>

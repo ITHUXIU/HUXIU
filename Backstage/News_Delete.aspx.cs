@@ -10,10 +10,15 @@ public partial class BackstageHTML_sccl_admin_page_News_Delete : System.Web.UI.P
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["username"] == null)
+        {
+            Response.Write("<script>alert('尚未登录!');location='../Login/Login.aspx'</script>");
+        }
         if (!IsPostBack) {
         using (var db = new HuXiuEntities())
         {
             var news = from it in db.News select it;
+
                 PagedDataSource pds = new PagedDataSource();
 
                 pds.AllowPaging = true;

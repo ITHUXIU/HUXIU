@@ -28,7 +28,10 @@ public partial class HuXiuEntities : DbContext
     public DbSet<Column> Column { get; set; }
     public DbSet<Interest> Interest { get; set; }
     public DbSet<News> News { get; set; }
+    public DbSet<News_class> News_class { get; set; }
+    public DbSet<Question> Question { get; set; }
     public DbSet<Rumor> Rumor { get; set; }
     public DbSet<sysdiagrams> sysdiagrams { get; set; }
+    public DbSet<Top> Top { get; set; }
     public DbSet<Topic> Topic { get; set; }
 }

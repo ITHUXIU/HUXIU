@@ -10,7 +10,8 @@
 <body>
     <form id="form1" runat="server">
     <div>
-    
+    <asp:LinkButton ID="lkbtnAddManager" runat="server" Text="添加管理员" OnClick="btnAddManager_Click" />
+        <br />
     </div>
     </form>
 </body>

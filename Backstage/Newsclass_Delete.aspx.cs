@@ -9,6 +9,10 @@ public partial class Backstage_Newsclass_Delete : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["username"] == null)
+        {
+            Response.Write("<script>alert('尚未登录!');location='../Login/Login.aspx'</script>");
+        }
         using (var db = new HuXiuEntities())
         {
             var newsclass = from it in db.News_class select it;

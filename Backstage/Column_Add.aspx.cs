@@ -9,7 +9,10 @@ public partial class Backstage_Column_Add : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (Session["username"] == null)
+        {
+            Response.Write("<script>alert('尚未登录!');location='../Login/Login.aspx'</script>");
+        }
     }
 
 

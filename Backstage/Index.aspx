@@ -24,13 +24,22 @@
 			<span class="header-logo">虎嗅网后台管理</span> 
 			<a class="header-menu-btn" href="javascript:;"><i class="icon-font">&#xe600;</i></a>
 			<ul class="header-bar">
-				<li class="header-bar-role"><a href="javascript:;">超级管理员</a></li>
+                <li class="header-bar-role"><asp:LinkButton ID="lkbtnNickname" runat="server" OnClick="lkbtnSuperManager_Click"></asp:LinkButton></li>
+                <li class="header-bar-role"><asp:Image ID="imgPhoto" runat="server" Height="30" Width="30" ImageUrl="../Images/t011f6933a23bb6faeb.png"/> </li>
+				<li class="header-bar-role">
+                    <asp:ScriptManager ID="ScriptManager1" runat="server" ></asp:ScriptManager>
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server" >
+            <ContentTemplate>   
+                 <asp:LinkButton ID="lkbtnSuperManager" runat="server" Text="超级管理员" OnClick="lkbtnSuperManager_Click"></asp:LinkButton>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+                   </li>
 				<li class="header-bar-nav">
 					<a href="javascript:;">admin<i class="icon-font" style="margin-left:5px;">&#xe60c;</i></a>
 					<ul class="header-dropdown-menu">
 						<li><a href="javascript:;">个人信息</a></li>
-						<li><a href="javascript:;">切换账户</a></li>
-						<li><a href="javascript:;">退出</a></li>
+						<li><asp:LinkButton ID="lkbtnChangeManager" runat="server" Text="切换账户" PostBackUrl="~/Login/Login.aspx"></asp:LinkButton></li>
+						<li><asp:LinkButton ID="lkbtnExit" runat="server" Text="退出" OnClick="lkbtnExit_Click"></asp:LinkButton></li>
 					</ul>
 				</li>
 				<li class="header-bar-nav"> 

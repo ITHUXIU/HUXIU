@@ -9,6 +9,10 @@ public partial class Backstage_Newsclass_Editor : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["username"] == null)
+        {
+            Response.Write("<script>alert('尚未登录!');location='../Login/Login.aspx'</script>");
+        }
         int id = Convert.ToInt32(Request.QueryString["news_classid"]);
         if (!IsPostBack)
         {

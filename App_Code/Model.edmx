@@ -17,16 +17,20 @@
           <Property Name="activity_cover" Type="varchar(max)" Nullable="false" />
           <Property Name="activity_coverlable" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="activity_topicid" Type="int" />
-          <Property Name="activity_hot" Type="int" Nullable="false" />
+          <Property Name="activity_hot" Type="int" />
           <Property Name="activity_topicname" Type="varchar" MaxLength="50" />
+          <Property Name="activity_class" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Admin">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="pwd" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="nickname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="photo" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Column">
           <Key>
@@ -65,6 +69,24 @@
           <Property Name="news_like" Type="int" Nullable="false" />
           <Property Name="news_hot" Type="int" Nullable="false" />
           <Property Name="new_column" Type="int" Nullable="false" />
+          <Property Name="new_author" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="News_class">
+          <Key>
+            <PropertyRef Name="news_classid" />
+          </Key>
+          <Property Name="news_classid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="news_classname" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="question" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="answer" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="question_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Rumor">
           <Key>
@@ -87,6 +109,15 @@
           <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Top">
+          <Key>
+            <PropertyRef Name="top_id" />
+          </Key>
+          <Property Name="top_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="top_path" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="top_news" Type="int" Nullable="false" />
+          <Property Name="top_cover" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Topic">
           <Key>
@@ -125,14 +156,59 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_News_News_class">
+          <End Role="News_class" Type="Self.News_class" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="News" Type="Self.News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="News_class">
+              <PropertyRef Name="news_classid" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="news_class" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Question_Admin">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Question" Type="Self.Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Top_News">
+          <End Role="News" Type="Self.News" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Top" Type="Self.Top" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="News">
+              <PropertyRef Name="news_id" />
+            </Principal>
+            <Dependent Role="Top">
+              <PropertyRef Name="top_news" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="HuXiuModelStoreContainer">
           <EntitySet Name="Activity" EntityType="Self.Activity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Column" EntityType="Self.Column" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Interest" EntityType="Self.Interest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="News_class" EntityType="Self.News_class" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Question" EntityType="Self.Question" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rumor" EntityType="Self.Rumor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Top" EntityType="Self.Top" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Topic" EntityType="Self.Topic" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Activity_System" Association="Self.FK_Activity_System">
             <End Role="Topic" EntitySet="Topic" />
@@ -141,6 +217,18 @@
           <AssociationSet Name="FK_News_Column" Association="Self.FK_News_Column">
             <End Role="Column" EntitySet="Column" />
             <End Role="News" EntitySet="News" />
+          </AssociationSet>
+          <AssociationSet Name="FK_News_News_class" Association="Self.FK_News_News_class">
+            <End Role="News_class" EntitySet="News_class" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Question_Admin" Association="Self.FK_Question_Admin">
+            <End Role="Admin" EntitySet="Admin" />
+            <End Role="Question" EntitySet="Question" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Top_News" Association="Self.FK_Top_News">
+            <End Role="News" EntitySet="News" />
+            <End Role="Top" EntitySet="Top" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -160,8 +248,9 @@
           <Property Name="activity_cover" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="activity_coverlable" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="activity_topicid" Type="Int32" />
-          <Property Name="activity_hot" Type="Int32" Nullable="false" />
+          <Property Name="activity_hot" Type="Int32" />
           <Property Name="activity_topicname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="activity_class" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Topic" Relationship="Self.FK_Activity_System" FromRole="Activity" ToRole="Topic" />
         </EntityType>
         <EntityType Name="Admin">
@@ -169,8 +258,12 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="pwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="nickname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="photo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Question" Relationship="Self.FK_Question_Admin" FromRole="Admin" ToRole="Question" />
         </EntityType>
         <EntityType Name="Column">
           <Key>
@@ -210,7 +303,29 @@
           <Property Name="news_like" Type="Int32" Nullable="false" />
           <Property Name="news_hot" Type="Int32" Nullable="false" />
           <Property Name="new_column" Type="Int32" Nullable="false" />
+          <Property Name="new_author" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Column" Relationship="Self.FK_News_Column" FromRole="News" ToRole="Column" />
+          <NavigationProperty Name="News_class1" Relationship="Self.FK_News_News_class" FromRole="News" ToRole="News_class" />
+          <NavigationProperty Name="Top" Relationship="Self.FK_Top_News" FromRole="News" ToRole="Top" />
+        </EntityType>
+        <EntityType Name="News_class">
+          <Key>
+            <PropertyRef Name="news_classid" />
+          </Key>
+          <Property Name="news_classid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="news_classname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="News" Relationship="Self.FK_News_News_class" FromRole="News_class" ToRole="News" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="question1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="answer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="question_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Admin" Relationship="Self.FK_Question_Admin" FromRole="Question" ToRole="Admin" />
         </EntityType>
         <EntityType Name="Rumor">
           <Key>
@@ -233,6 +348,16 @@
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Top">
+          <Key>
+            <PropertyRef Name="top_id" />
+          </Key>
+          <Property Name="top_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="top_path" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="top_news" Type="Int32" Nullable="false" />
+          <Property Name="top_cover" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="News" Relationship="Self.FK_Top_News" FromRole="Top" ToRole="News" />
         </EntityType>
         <EntityType Name="Topic">
           <Key>
@@ -258,6 +383,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Question_Admin">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Question" Type="Self.Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_News_Column">
           <End Role="Column" Type="Self.Column" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -272,22 +411,65 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_News_News_class">
+          <End Role="News_class" Type="Self.News_class" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="News" Type="Self.News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="News_class">
+              <PropertyRef Name="news_classid" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="news_class" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Top_News">
+          <End Role="News" Type="Self.News" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Top" Type="Self.Top" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="News">
+              <PropertyRef Name="news_id" />
+            </Principal>
+            <Dependent Role="Top">
+              <PropertyRef Name="top_news" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="HuXiuEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Activity" EntityType="Self.Activity" />
           <EntitySet Name="Admin" EntityType="Self.Admin" />
           <EntitySet Name="Column" EntityType="Self.Column" />
           <EntitySet Name="Interest" EntityType="Self.Interest" />
           <EntitySet Name="News" EntityType="Self.News" />
+          <EntitySet Name="News_class" EntityType="Self.News_class" />
+          <EntitySet Name="Question" EntityType="Self.Question" />
           <EntitySet Name="Rumor" EntityType="Self.Rumor" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Top" EntityType="Self.Top" />
           <EntitySet Name="Topic" EntityType="Self.Topic" />
           <AssociationSet Name="FK_Activity_System" Association="Self.FK_Activity_System">
             <End Role="Topic" EntitySet="Topic" />
             <End Role="Activity" EntitySet="Activity" />
           </AssociationSet>
+          <AssociationSet Name="FK_Question_Admin" Association="Self.FK_Question_Admin">
+            <End Role="Admin" EntitySet="Admin" />
+            <End Role="Question" EntitySet="Question" />
+          </AssociationSet>
           <AssociationSet Name="FK_News_Column" Association="Self.FK_News_Column">
             <End Role="Column" EntitySet="Column" />
             <End Role="News" EntitySet="News" />
+          </AssociationSet>
+          <AssociationSet Name="FK_News_News_class" Association="Self.FK_News_News_class">
+            <End Role="News_class" EntitySet="News_class" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Top_News" Association="Self.FK_Top_News">
+            <End Role="News" EntitySet="News" />
+            <End Role="Top" EntitySet="Top" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -309,6 +491,7 @@
                 <ScalarProperty Name="activity_topicid" ColumnName="activity_topicid" />
                 <ScalarProperty Name="activity_hot" ColumnName="activity_hot" />
                 <ScalarProperty Name="activity_topicname" ColumnName="activity_topicname" />
+                <ScalarProperty Name="activity_class" ColumnName="activity_class" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -316,8 +499,11 @@
             <EntityTypeMapping TypeName="HuXiuModel.Admin">
               <MappingFragment StoreEntitySet="Admin">
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="pwd" ColumnName="pwd" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="nickname" ColumnName="nickname" />
+                <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="photo" ColumnName="photo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -359,6 +545,26 @@
                 <ScalarProperty Name="news_like" ColumnName="news_like" />
                 <ScalarProperty Name="news_hot" ColumnName="news_hot" />
                 <ScalarProperty Name="new_column" ColumnName="new_column" />
+                <ScalarProperty Name="new_author" ColumnName="new_author" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="News_class">
+            <EntityTypeMapping TypeName="HuXiuModel.News_class">
+              <MappingFragment StoreEntitySet="News_class">
+                <ScalarProperty Name="news_classid" ColumnName="news_classid" />
+                <ScalarProperty Name="news_classname" ColumnName="news_classname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Question">
+            <EntityTypeMapping TypeName="HuXiuModel.Question">
+              <MappingFragment StoreEntitySet="Question">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="question1" ColumnName="question" />
+                <ScalarProperty Name="answer" ColumnName="answer" />
+                <ScalarProperty Name="question_id" ColumnName="question_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -383,6 +589,16 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Top">
+            <EntityTypeMapping TypeName="HuXiuModel.Top">
+              <MappingFragment StoreEntitySet="Top">
+                <ScalarProperty Name="top_id" ColumnName="top_id" />
+                <ScalarProperty Name="top_path" ColumnName="top_path" />
+                <ScalarProperty Name="top_news" ColumnName="top_news" />
+                <ScalarProperty Name="top_cover" ColumnName="top_cover" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

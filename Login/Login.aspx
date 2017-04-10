@@ -32,17 +32,17 @@ $(document).ready(function(){
   <body class="login-bg">
     <div class="login-box">
         <header>
-            <h1>框架后台管理系统</h1>
+            <h1>虎嗅网后台管理系统</h1>
         </header>
         <div class="login-main">
-			<form action="/manage/login" class="layui-form" method="post" id="form1" runat="server" >
+			<form class="layui-form" method="post" id="form1" runat="server" >
 				<input name="__RequestVerificationToken" type="hidden" value="">                
 				<div class="layui-form-item">
 					<label class="login-icon">
 						<i class="layui-icon"></i>
 					</label>
 					<%--<input type="text" name="userName" lay-verify="userName" autocomplete="off" placeholder="这里输入登录名" class="layui-input">--%>  
-                    <asp:TextBox ID="userName" runat="server" CssClass="layui-input" Text="这里输入登录名" ></asp:TextBox>
+                    <asp:TextBox ID="userName" runat="server" CssClass="layui-input" Text="邮箱/虎嗅账号" onfocus="if(this.value=='邮箱/虎嗅账号'){this.value='';}" ></asp:TextBox>
    
 				</div>
 				<div class="layui-form-item">
@@ -50,7 +50,7 @@ $(document).ready(function(){
 						<i class="layui-icon"></i>
 					</label>
 					<%--<input type="password" name="password" lay-verify="password" autocomplete="off" placeholder="这里输入密码" class="layui-input">--%>
-                    <asp:TextBox ID="password" runat="server" CssClass="layui-input" Text="这里输入密码"></asp:TextBox>
+                    <asp:TextBox ID="passWord" runat="server" CssClass="layui-input" Text="密码" onfocus="if(this.value=='密码'){this.value='';}"></asp:TextBox>
 				</div>
 				<div class="layui-form-item">
 					<div class="pull-left login-remember">
@@ -59,10 +59,11 @@ $(document).ready(function(){
 						<input type="checkbox" name="rememberMe" value="true" lay-skin="switch" title="记住帐号"><div class="layui-unselect layui-form-switch"><i></i></div>
 					</div>
 					<div class="pull-right">
-						<%--<button class="layui-btn layui-btn-primary" lay-submit="" lay-filter="login">
+					<%--	<button class="layui-btn layui-btn-primary" lay-submit="" lay-filter="login">
 							<i class="layui-icon"></i> 登录
 						</button>--%>
-                        <asp:Button ID="btnLogin" runat="server" CssClass="layui-btn layui-btn-primary" Text="登录" OnClick="btnLogin_Click"/>
+                        <asp:Button ID="btnLogin" runat="server" CssClass="layui-btn layui-btn-primary" Text="登录" OnClick="btnLogin_Click" />
+                        <asp:Button ID="btnBack" runat="server" CssClass="layui-btn layui-btn-primary" Text="返回" PostBackUrl="~/Front-end/homePage-master/Homepageaspx.aspx"/>
 					</div>
 					<div class="clear"></div>
 				</div>
@@ -98,8 +99,8 @@ $(document).ready(function(){
 
             var errorCount = 0;
 
-            form.on('submit(login)', function (data) {
-				window.location.href = "..common/page/index.html";
+           // form.on('submit(login)', function (data) {
+				//window.location.href = "..common/page/index.html";
                 /*if (errorCount > 5) {
                     layer.open({
                         title: '<img src="' + location.origin + '/Plugins/layui/images/face/7.gif" alt="[害羞]">输入验证码',
@@ -129,7 +130,7 @@ $(document).ready(function(){
                 }
 
                 return false;*/
-            });
+            //});
 
         });
 		
