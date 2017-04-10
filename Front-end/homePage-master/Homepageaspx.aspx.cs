@@ -22,6 +22,7 @@ public partial class Front_end_homePage_master_Homepageaspx : System.Web.UI.Page
                 //绑定头条
                 var top = from it in db.Top select it;
                 rptTop.DataSource = top.ToList();
+
                 rptTop.DataBind();
 
                 //绑定资讯头条
