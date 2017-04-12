@@ -1,5 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="News_List.aspx.cs" Inherits="Front_end_Period_huxiu_News_List" EnableEventValidation="false" %>
-
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="News_List.aspx.cs" EnableEventValidation="false" Inherits="Front_end_Period_huxiu_News_List" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,12 +14,13 @@
 	<link rel="stylesheet" href="css/ie8.css"><![endif]-->
 
 </head>
-<body><form runat="server">
+<body>
+    <form runat="server">
 	<div class="container">
 	<div class="header">
 		<div class="center">
 			<ul class="clearfix">
-				<li><a class="header-left-float" href=""></a></li>
+				<li class="header-left-float"><a  href=""></a></li>
 				<li class="people" style="height:0px;"><a href="#loginmodal" class="flatbtn  header-right-float-people" id="modaltrigger"></a></li>
 				<li><a href="#searchLo" class="flat header-right-float-search" id="modal"></a></li>
 							<div id="loginmodal" style="display:none;">
@@ -113,19 +113,20 @@
    
 
 				
-				<li><a class="header-right-float header-right-float-wide" href="">会员专享<br><span class="span-width ">	会员专享</span></a></li>
-				<li><a class="header-right-float header-right-float-wide" href="">创业白板<br><span class="span-width ">创业白板</span></a></li>
-				<li><a class="header-right-float" href="" >热议<br><span  >热议</span></a>
+				<li class="header-right-float header-right-float-wide"><a  href="">会员专享<br><span class="span-width ">	会员专享</span></a></li>
+				<li class="header-right-float header-right-float-wide"><a href="">创业白板<br><span class="span-width ">创业白板</span></a></li>
+				<li class="header-right-float"><a href="" >热议<br><span  >热议</span></a>
 				</li>
-				<%--<li><a class="header-right-float" href="">	活动<br><span  >活动	</span></a></li>--%>
-                <li class="clearfixHide"><asp:LinkButton CssClass="header-right-float" runat="server" PostBackUrl="~/Front-end/Period-huxiu/Activity_List.aspx"></asp:LinkButton></li>
+				<li class="header-right-float"><a  href="~/Front-end/Period-huxiu/Activity_List.aspx">	活动<br><span  >活动	</span></a></li>
 				<li class="unfold-li"><a class="header-right-float unfold-a" href="" >资讯	<br><span  >资讯</span></a>
 				<ul class=" unfold">
 					<div class="clearfix">
+
                         <asp:Repeater ID="rptClass" runat="server">
                             <ItemTemplate>
-                                <asp:LinkButton ID="lbtClass" runat="server" Text='<%# Eval("news_classname") %>'  PostBackUrl='<%#"News_List.aspx?news_classid="+ Eval("news_classid")%>'></asp:LinkButton>
-                            </ItemTemplate>
+                                <li><a href="<%#"~/Front-end/Period-huxiu/News_List.aspx?news_classid="+ Eval("news_classid")%>'"><%# Eval("news_classname") %></a></li>
+                                <%--<asp:LinkButton ID="lbtClass" runat="server" Text='<%# Eval("news_classname") %>' PostBackUrl='<%#"~/Front-end/Period-huxiu/News_List.aspx?news_classid="+ Eval("news_classid")%>'></asp:LinkButton>
+                           --%> </ItemTemplate>
                         </asp:Repeater>
 					</div>	
 				</ul>
@@ -137,34 +138,64 @@
 	<div id="main" class="main">
 		<div class="main-passage">
 			<div class="left-div">
-			<ul>
-				<li><a class="left-div-first flatbtn" href="#sendMes" id="modalt">投稿</a></li>
-				<li><a class="left-div-second" href="">客户端</a></li>
-				<li><div class="floatCtro"><a class="left-div-last" href="#1">
+			<ul class="clearfix">
+				<li class="left-div-first"><a class=" flatbtn" href="#sendMes" id="modalt">投稿</a></li>
+				<li class="left-div-second"><a  href="">客户端</a></li>
+				<li class="left-div-last"><div class="floatCtro"><a  href="#1">
             	返回顶部
           		</a></div></li>
 			</ul>
 			</div>
 			<div class="center">
 				<div class="main-passage-headline clearfix section">
-					<h1 class="headline"><asp:Label ID="lbClass" runat="server"></asp:Label> - 热文</h1>
-					<asp:LinkButton ID="lbtChange" runat="server" Text="换一换" OnClick="lbtChange_Click"></asp:LinkButton>
+					<h1 class="headline"><asp:Label ID="lbClass1" runat="server"></asp:Label>  - 热文</h1>
+					<%--<a class="main-passage-headline-right-a" href="">全部内容</a>--%>
+                            <asp:Label ID="lbTotal" runat="server" Text="1" Visible="false"></asp:Label>
+                            <asp:Label ID="lbNow" runat="server" Text="1" Visible="false"></asp:Label>
+                            <asp:LinkButton CssClass="main-passage-headline-right-a" runat="server" Text="换一换" ID="lbtChange" OnClick="lbtChange_Click"></asp:LinkButton>
 				</div>
 				<div class="main-passage-content">
 					<ul class="clearfix">
-                        <asp:Repeater ID="rptHotNews" runat="server" OnItemDataBound="rptHotNews_ItemDataBound">
-                            <ItemTemplate>
-						<li><div class="image-large-border"><asp:Image CssClass="image-large" ImageUrl='<%#"../../Backstage/" + Eval("news_cover") %>' runat="server" /></div></li>
-						<li><a class="passage-a"  href="	">
-								<h2><asp:LinkButton Text=<%# Eval("news_title")%> PostBackUrl='<%#"~/Front-end/zixunCont-master/News_Content.aspx?news_id="+Eval("news_id")%>' runat="server"></asp:LinkButton></h2>
-								<p><%--<span>Grace  03-24 16:00 收藏13 评论7	</span>--%>
-                                <span><%# Eval("new_author") %></span>
-                                <span><%# Eval("news_time") %></span>
-                                <span> 收藏13 评论7	 </span></p>
-								<p><asp:Label ID="lbHotNews" runat="server" Text=<%# Eval("news_content") %>></asp:Label></p>
-						</a></li>
-                            </ItemTemplate>
-                        </asp:Repeater>
+<%--						<li class="passage-image-border"><img class="image-large" src="./images/hszg.jpg" alt=""><div class="passage-div"  href="	">
+								<div><a>辉山乳业会是下一个汉能？
+								</a></div>
+								<span>Grace  03-24 16:00 收藏13 评论7	</span>
+								<p>港股辉山乳业股东挪30亿账上资金投资房地产  , 去年12月浑水沽空报告之后 , 各家银行前去审计调查。	</p>
+						</div>
+						</li>
+						<li class="passage-image-border"><div class="passage-div"  href="	">
+								<a>辉山乳业会是下一个汉能？
+								</a>
+								<span>Grace  03-24 16:00 收藏13 评论7	</span>
+								<p>港股辉山乳业股东挪30亿账上资金投资房地产  , 去年12月浑水沽空报告之后 , 各家银行前去审计调查。	</p>
+						</div><img class="image-large" src="./images/hszg.jpg" alt="">
+						</li>
+						<li class="passage-image-border"><img class="image-large" src="./images/hszg.jpg" alt=""><div class="passage-div"  href="	">
+								<div><a>辉山乳业会是下一个汉能？
+								</a></div>
+								<span>Grace  03-24 16:00 收藏13 评论7	</span>
+								<p>港股辉山乳业股东挪30亿账上资金投资房地产  , 去年12月浑水沽空报告之后 , 各家银行前去审计调查。	</p>
+
+						</div>
+						</li>--%>
+                                <asp:Repeater ID="rptHotNews" runat="server" OnItemDataBound="rptHotNews_ItemDataBound">
+                                    <ItemTemplate>
+                                        <li class="passage-image-border">
+                                            <div>
+                                                <asp:Image ID="imgUp" runat="server" CssClass="image-large" ImageUrl='<%#"../../Backstage/" + Eval("news_cover") %>' />
+                                                    <div class="passage-div" href="	">
+                                                        <div>
+                                                            <a href='<%#"~/Front-end/zixunCont-master/News_Content.aspx?news_id="+Eval("news_id")%>'><%# Eval("news_title") %></a>
+                                                        </div>
+                                                        <span class="passage-div-span"><%# Eval("new_author")+"  "+Eval("news_time")+"收藏13 评论7" %></span>
+                                                        <p><asp:Label ID="lbHotNews" runat="server" Text=<%# Eval("news_content") %>></asp:Label></p>
+                                                
+                                                    </div>
+                                                <asp:Image ID="imgDown" runat="server" CssClass="image-large" ImageUrl='<%#"../../Backstage/" + Eval("news_cover") %>' />
+                                            </div>
+                                        </li>
+                                    </ItemTemplate>
+                                </asp:Repeater>
 					</ul>
 				</div>
 			</div>
@@ -172,55 +203,50 @@
 		<div class="main-content">
 			<div class="center">
 				<div class="main-content-headline clearfix section">
-					<h1 class="headline"><asp:Label ID="lbClass1" runat="server"></asp:Label> - 内容</h1>
+					<h1 class="headline"><asp:Label ID="lbClass2" runat="server"></asp:Label> - 内容</h1>
 				</div>
 				<div class="main-content-content">
 					<ul class="clearfix">
-
-                            <asp:Repeater ID="rptNews" runat="server" OnItemDataBound="rptNews_ItemDataBound">
-                                <ItemTemplate>
-                                    <li>
-                                        <div class="container-div container-left-div clearfix">
-                                            <div class="image-large-border2">
-                                                <a class="reward "></a>
-                                                <asp:Image ImageUrl='<%#"../../Backstage/" + Eval("news_cover") %>' runat="server" CssClass="image-large" />
-                                            </div>
-                                            <asp:LinkButton Text=<%# Eval("news_title") %> PostBackUrl='<%#"~/Front-end/zixunCont-master/News_Content.aspx?news_id="+Eval("news_id")%>' runat="server"></asp:LinkButton>
-                                            <span><%# Eval("new_author") %>  评论7	</span>
-                                            <p><asp:Label ID="lbNews" runat="server" Text=<%# Eval("news_content") %>></asp:Label></p>
-                                        </div>
-                                    </li>
-                                </ItemTemplate>
-                            </asp:Repeater>
-
+<%--						<li class="main-content-content-border main-content-content-border-left clearfix"><div class="image-large-border2"><a class="reward " ></a><img class="image-large" src="./images/begz.jpg" alt=""></div><a href="	">比尔·盖茨说自己是中国的粉丝，猛夸中国.</a>
+									<span>比尔盖茨  评论7	</span>
+									<p>他说：“中国是一个不断追求卓越的国度。”	</p></li>
+						<li class="main-content-content-border clearfix"><div class="image-large-border2"><a class="reward " ></a><img class="image-large" src="./images/begz.jpg" alt=""></div><a href="	">比尔·盖茨说自己是中国的粉丝，猛夸中国.</a>
+									<span>比尔盖茨  评论7	</span>
+									<p>他说：“中国是一个不断追求卓越的国度。”	</p></li>
+						<li class="main-content-content-border  clearfix"><div class="image-large-border2"><a class="reward " ></a><img class="image-large" src="./images/begz.jpg" alt=""></div><a href="	">比尔·盖茨说自己是中国的粉丝，猛夸中国.</a>
+									<span>比尔盖茨  评论7	</span>
+									<p>他说：“中国是一个不断追求卓越的国度。”	</p></li>
+						<li class="main-content-content-border  clearfix"><div class="image-large-border2"><a class="reward " ></a><img class="image-large" src="./images/begz.jpg" alt=""></div><a href="	">比尔·盖茨说自己是中国的粉丝，猛夸中国.</a>
+									<span>比尔盖茨  评论7	</span>
+									<p>他说：“中国是一个不断追求卓越的国度。”	</p></li>--%>
+                                    <asp:Repeater ID="rptNews" runat="server" OnItemDataBound="rptNews_ItemDataBound">
+                                        <ItemTemplate>
+                                            <li class="main-content-content-border clearfix">
+                                                <div class="image-large-border2">
+                                                    <a class="reward "></a>
+                                                    <img class="image-large" src="<%#"../../Backstage/" + Eval("news_cover") %>"">
+                                                </div>
+                                                <a href="<%#"~/Front-end/zixunCont-master/News_Content.aspx?news_id="+Eval("news_id")%>"><%# Eval("news_title") %></a>
+                                                <span class="people-span"><%# Eval("new_author") %>  评论7	</span>
+                                                <p><asp:Label ID="lbNews" runat="server" Text=<%# Eval("news_content") %>></asp:Label></p>
+                                            </li>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
 					</ul>
 					<ul class="clearfix">
-				<%--		<li><a class="page-a page-a-red" href="	">转到</a></li>
-						<li><span class="page-span">转到<input type="	">页</span></li>
-						<li><a class="page-a page-a-width" href="	">下一页</a></li>
-						<li><a class="page-a page-a-width" href="	">300</a></li>
-						<li><span class="page-span page-span-narrow">...</span></li>
-						<li><a class="page-a" href="	">6</a></li>
-						<li><a class="page-a" href="	">5</a></li>
-						<li><a class="page-a" href="	">4</a></li>
-						<li><a class="page-a" href="	">3</a></li>
-						<li><a class="page-a" href="	">2</a></li>
-						<li><a class="page-a" href="	">1</a></li>
-						<li><a class="page-a page-a-width" href="	">上一页</a></li>--%>
-                                <asp:Button ID="btnUp" CssClass="page-a page-a-width" runat="server" Text="上一页" OnClick="btnUp_Click" />
-                                &nbsp;<asp:Button ID="btnDrow" CssClass="page-a page-a-width" runat="server" Text="下一页" OnClick="btnDrow_Click" />
-                                &nbsp;<asp:Button ID="btnFirst" CssClass="page-a page-a-width" runat="server" Text="首页" OnClick="btnFirst_Click" />
-                                &nbsp;<asp:Button ID="btnLast" CssClass="page-a page-a-width" runat="server" Text="尾页" OnClick="btnLast_Click" />
-                                &nbsp;页次：<asp:Label ID="lbNow" runat="server" Text="1"></asp:Label>
-                                /<asp:Label ID="lbTotal" CssClass="page-a" runat="server" Text="1"></asp:Label>
-
-                                &nbsp;
-
-                                转<asp:TextBox ID="txtJump" Text="1" runat="server" Width="23px" onkeyup="this.value=this.value.replace(/\D/g,'')"></asp:TextBox>
-                                &nbsp;<asp:Button ID="btnJump" runat="server" Text="Go" OnClick="btnJump_Click" />
-
-
-                            </ul>
+						<li class="page page-red"><a href="	"><asp:LinkButton ID="btnGo" runat="server" OnClick="btnGo_Click" Text="转到" /></a></li>
+						<li class="turn-page"><span >转到<asp:TextBox ID="txtPage" runat="server" CssClass="page-span" Width="25px"  onkeyup="this.value=this.value.replace(/\D/g,'')"></asp:TextBox>页</span></li>
+						<li class="page page-width"><a  href="	"><asp:LinkButton ID="btnNext" runat="server" OnClick="btnNext_Click" Text="下一页" /></a></li>
+						<%--<li class="page page-width"><a  href="	">300</a></li>
+						<li class="turn-page turn-page-narrow"><span >...</span></li>--%>
+<%--						<li class="page"><a  href="	">6</a></li>
+						<li class="page"><a  href="	">5</a></li>
+						<li class="page"><a  href="	">4</a></li>
+						<li class="page"><a  href="	">3</a></li>
+						<li class="page"><a  href="	">2</a></li>--%>
+						<li class="page"><asp:Label ID="lbNows" runat="server" Text="1" ></asp:Label>/<asp:Label ID="lbTotals" runat="server" Text="1" ></asp:Label></li>
+						<li class="page page-width"><a  href="	"><asp:LinkButton ID="btnLast" runat="server" OnClick="btnLast_Click" Text="上一页" /></a></li>	
+					</ul>
 				</div>
 			</div>
 		</div>
@@ -232,19 +258,13 @@
 						<a href="">全部内容</a>
 					</div>
 					<div class="main-subject-left-content clearfix">
-						<a class="subject-image-a " href="	"><div class="image-large-border3"><img class="image-large" src="./images/hszg.jpg" alt="">
-
-						</div></a>
+					<a class="image-large-border3" href="	"><img class="image-large" src="./images/hszg.jpg" alt=""></a>
 						<ul >
-							<li><a class="subject-top-a" href="	">快手的"钱"世今生<span>  今天</span></a></li>
-							<li><a href="	">快手的"钱"世今生<span>1天前	</span></a></li>
-							<li><a href="	">快手的"钱"世今生<span>1天前	</span></a></li>
-							<li><a href="	">快手的"钱"世今生<span>1天前	</span></a></li>
-							<li><a href="	">快手的"钱"世今生<span>1天前	</span></a></li>
-							<li><a href="	">快手的"钱"世今生<span>1天前	</span></a></li>
-							<li><a href="	">快手的"钱"世今生<span>1天前	</span></a></li>
-							<li><a href="	">快手的"钱"世今生<span>1天前	</span></a></li>
-							<li><a href="	">快手的"钱"世今生<span>1天前	</span></a></li>
+                            <asp:Repeater ID="rptColumn" runat="server" OnItemDataBound="rptColumn_ItemDataBound">
+                                <ItemTemplate>
+                                   <li><a href="	"><asp:Label ID="lbColumn" Text='<%# Eval("column_title") %>' runat="server"></asp:Label><span class="main-subject-left-content-span"></span></a></li>
+                                </ItemTemplate>
+                            </asp:Repeater>
 						</ul>
 					</div>
 				</div>
@@ -254,7 +274,7 @@
 					</div>
 					<div class="main-subject-right-content clearfix">
 					<div class="right-box clearfix">
-					 <div class="main-subject-right-content-first-div right-content-div"><a class="main-subject-right-content-first-a  clearfix" href=""><img src="./images/sun.png" alt=""></a><h2>#早报#</h2></div><div class="right-content-div main-subject-right-content-second-a clearfix"><a class="dip" href=""><img src="./images/circle.png" alt=""></a><h2>#深度#</h2></div></div>
+					 <div class="right-content-div"><a class="main-subject-right-content-first-a  clearfix" href=""><img src="./images/sun.png" alt=""></a><h2>#早报#</h2></div><div class="right-content-div main-subject-right-content-second-a clearfix"><a class="dip" href=""><img src="./images/circle.png" alt=""></a><h2>#深度#</h2></div></div>
 					 </div>
 				</div>
 			</div>
@@ -262,136 +282,137 @@
 	</div>
 	</div>
 	<div class="footer">
-		<div class="footer-narrow-center">
+		<div class="footer-narrow-center clearfix">
 			<div class="footer-left clearfix">
-				<ul>
-					<li><a class="footer-left-top" href="">关于我们</a></li>
-					<li><a class="footer-left-top" href="">合作伙伴</a></li>
-					<li><a class="footer-left-top" href="">常见问题解答</a></li>
+				<ul class="clearfix">
+					<li class="footer-left-top"><a  href="">关于我们</a></li>
+					<li class="footer-left-top"><a href="">合作伙伴</a></li>
+					<li class="footer-left-top"><a href="">常见问题解答</a></li>
 					<li><a href="">加入我们</a></li>
 					<li><a href="">广告及服务</a></li>
 					<li><a href="">防网络诈骗专题</a></li>
 				</ul>
 			</div>
 			<div class="footer-right">
-				<ul>
-					<li><a class="footer-right-width" href="">联系我们</a></li>
-					<li><a class="footer-right-wchat" href=""></a></li>
-					<li><a class="footer-right-qq" href=""></a></li>
-					<li><a class="footer-right-massage" href=""></a></li>
+				<ul class="clearfix">
+					<li class="footer-right-width"><a href="">联系我们</a></li>
+					<li class="footer-right-wchat"><a  href=""></a></li>
+					<li class="footer-right-qq"><a href=""></a></li>
+					<li class="footer-right-massage"><a href=""></a></li>
 				</ul>
 			</div>
 			<div class="footer-bottom">
 				<p>Copyright © 虎嗅网 京ICP备12013432号-1 <img src="./images/plice.png" alt=""> 京公网安备 11010102001402号 本站由 <img src="./images/al.png" alt=""> 提供计算与安全服务</p>
 			</div>
 		</div>
+		</div>
 	</div>
 	<script>
-	    $(function () {
-	        $('.header-right-float').hover(function () {
-	            $(this).css({ 'top': 0 + 'px' }).animate({ 'top': -50 }, 400);
-	        }, function () {
-	            $(this).stop(true).animate({ 'top': 0 }, 400);
-	        })
-	        $('.unfold-li').hover(function () {
-	            $('.unfold').css({ 'display': 'block', 'top': 50 }).animate({ 'top': -50, 'left': 0, 'opacity': 1 }, 400);
-	            50
-	        }, function () {
-	            $('.unfold').css({ 'display': 'none' }).animate({ 'top': 50, 'opacity': 0.3 }, 400);
-	        })
+	$(function(){
+	$('.header-right-float').hover(function(){
+		$(this).css({'top':0+'px'}).animate({'top':-50},400);
+	},function(){
+		$(this).stop(true).animate({'top': 0}, 400); 
+	})
+	$('.unfold-li').hover(function(){
+		$('.unfold').css({'display':'block','top':50}).animate({'top':-50,'left':0,'opacity':1}, 400);
+	50},function(){
+		$('.unfold').css({'display':'none'}).animate({'top':50,'opacity':0.3}, 400);
+	})
 
-	    })
+})
 		</script>
 	<script type="text/javascript">
-	    $(document).ready(function () {
-	        var navLabel = new Array('热文', '全球热点', '专题专栏');
-	        $('.main').pageScroller({ navigation: navLabel });
-	    });
+	$(document).ready(function(){
+		var navLabel = new Array('热文','全球热点','专题专栏');
+		$('.main').pageScroller({ navigation: navLabel });
+	});	
 
 	</script>
 	<script type="text/javascript">
-	    $('div.floatCtro a').click(function () {
-	        $('body,html').animate({ scrollTop: 0 }, 1000);
-	        $('li.scrollNav.active').removeClass('active');
-	    });
+		$('div.floatCtro a').click(function(){
+			$('body,html').animate({scrollTop:0},1000);
+			$('li.scrollNav.active').removeClass('active');
+			});	
 
 	</script>
 	<script>
-	    $(function () {
+		$(function(){
 
-	        $('#loginform').submit(function (e) {
+  $('#loginform').submit(function(e){
 
-	            return false;
+    return false;
 
-	        });
+  });
+  
+  $('#modaltrigger').leanModal({ top: 110, overlay: 0.45, closeButton: ".hidemodal" });
 
-	        $('#modaltrigger').leanModal({ top: 110, overlay: 0.45, closeButton: ".hidemodal" });
-
-	    });
+});
 </script>
 <script type="text/javascript">
-    $(function () {
+$(function(){
 
-        $('#sentform').submit(function (e) {
+  $('#sentform').submit(function(e){
 
-            return false;
+    return false;
 
-        });
+  });
+  
+  $('#modalt').leanModal({ top: 110, overlay: 0.45, closeButton: ".sentmodal" });
 
-        $('#modalt').leanModal({ top: 110, overlay: 0.45, closeButton: ".sentmodal" });
-
-    });
-    function disappear() {
-        var a = document.getElementById("cont");
-        if (a.value == "") {
-            a.value = "内容";
-        }
+});
+  function disappear(){
+    var a =document.getElementById("cont");
+    if(a.value == ""){
+      a.value ="内容";
     }
-    function disappearT() {
-        var a = document.getElementById("tit");
-        if (a.value == "") {
-            a.value = "标题";
-        }
+  }
+   function disappearT(){
+    var a =document.getElementById("tit");
+    if(a.value == ""){
+      a.value ="标题";
     }
-    function disappearC() {
-        var a = document.getElementById("contect");
-        if (a.value == "") {
-            a.value = "联系方式";
-        }
+  }
+   function disappearC(){
+    var a =document.getElementById("contect");
+    if(a.value == ""){
+      a.value ="联系方式";
     }
-    function disappearS() {
-        var a = document.getElementById("sentImg");
-        if (a.value == "") {
-            a.value = "上传图片";
-        }
+  }
+   function disappearS(){
+    var a =document.getElementById("sentImg");
+    if(a.value == ""){
+      a.value ="上传图片";
     }
+  }
 
 </script>
 <script type="text/javascript">
-    $(function () {
+$(function(){
 
-        $('#searchform').submit(function (e) {
+  $('#searchform').submit(function(e){
 
-            return false;
+    return false;
 
-        });
+  });
+  
+  $('#modal').leanModal({ top: 110, overlay: 0.45, closeButton: ".hide" });
 
-        $('#modal').leanModal({ top: 110, overlay: 0.45, closeButton: ".hide" });
-
-    });
+});
 
 </script>
 	<script type="text/javascript">
-	    $('.reward').click(function () {
-	        if (!$(this).hasClass('disreward')) {
-	            $(this).addClass('disreward');
-	        }
-	        else {
-	            $(this).removeClass('disreward');
-	        }
-	    });
+		$('.reward').click(function(){
+			if(!$(this).hasClass('disreward')){
+				$(this).addClass('disreward');
+			}
+			else
+			{
+				$(this).removeClass('disreward');
+			}
+			});	
 
 	</script>
-</div>	</form>
+    </form>
 </body>
 </html>

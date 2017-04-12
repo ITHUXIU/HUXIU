@@ -41,7 +41,6 @@
                                 <asp:LinkButton ID="lbtClass" runat="server" Text='<%# Eval("news_classname") %>'  PostBackUrl='<%#"~/Front-end/Period-huxiu/News_List.aspx?news_classid="+ Eval("news_classid")%>'></asp:LinkButton>
                             </ItemTemplate>
                         </asp:Repeater>
-                        <a class="clear"></a>
                     </div>
                     
                 </ul>

@@ -166,10 +166,10 @@
 				<span><asp:Label ID="lbNewsClass" runat="server"></asp:Label></span>
                 <%--<img src="images/people.jpg">--%>
 			</div>
-			
-			<div class="mainText">
-				<asp:Label ID="lbContent" runat="server"></asp:Label>
-			</div>
+			<asp:Label ID="lbContent" runat="server"></asp:Label>
+<%--			<div class="mainText">
+				
+			</div>--%>
 			<div class="hotLogo">
 				<div class="hotLogoTitle main-passage-headline clearfix section ">
 				

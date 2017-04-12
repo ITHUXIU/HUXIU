@@ -282,7 +282,7 @@ ul li{
     line-height: 30px;
     padding:25px 20px 15px 20px;
 }
-.passage-div span{
+.passage-div-span{
     display: block;
     color: #b5b5b5 ;
     font-size: 16px;
@@ -314,7 +314,7 @@ ul li{
     display: block;
     margin:50px 10px 20px 20px;
 }
-.main-content-content-border span{
+.people-span{
     background: url(../images/people.png);
     background-repeat: no-repeat;
     background-position: 18px 17px;
@@ -431,9 +431,10 @@ ul li{
     height: 80%;
 }
 .subject-top-li{
+    display:block;
     padding-top:  20px;
 }
-.main-subject-left-content ul span
+.main-subject-left-content-span
 {
     color: #b5b5b5;
     display: block;
