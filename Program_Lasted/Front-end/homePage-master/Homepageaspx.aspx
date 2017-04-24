@@ -54,7 +54,9 @@
 		<div id="loginmodal" style="display:none;">
    
     		<div class="mainLeft">
-      			<form id="loginform" name="loginform" method="post" action="index.html">
+                <img id="mainLeftI" src ="images/blackHu.png"/>
+      			
+
        			<asp:TextBox ID="txtusername" runat="server" CssClass="txtfield" TabIndex="1" Text="邮箱/虎嗅账号" onfocus="if(this.value=='邮箱/虎嗅账号'){this.value='';}"></asp:TextBox>
                       <asp:TextBox ID="txtpassword" runat="server" TextMode="Password" CssClass="txtfield" TabIndex="2" Text="密码" onfocus="if(this.value=='密码'){this.value='';}"></asp:TextBox>
 								      <div id="Lo">
@@ -65,7 +67,7 @@
                                           <asp:Button ID="btnLogin" runat="server" CssClass="flatbtn-blu hidemodal" Text="Log In" TabIndex="3" OnClick="btnLogin_Click" />
       				</div>
 
-    			</form>
+    		
     		</div>
    		 	<div class="mainRight">
      	 		<p class="white">第三方快速登录</p>
@@ -84,11 +86,12 @@
 		
 		<!-- 搜索 -->
 		<div id="searchLo" style="display:none;">
-       
-      		<form id="searchform" name="searchform" method="post" action="indexsearch.html">
+            <asp:TextBox ID="txtSearch" runat="server" CssClass="txt" TabIndex="1"  onfocus="if(this.value=='关键字'){this.value='';}"></asp:TextBox>
+    <asp:Button ID="btnSearch" runat="server" CssClass="search-blu hide" Text="搜索" TabIndex="3" OnClick="btnSearch_Click" />
+    
+
            
-       		<input type="text" name="sear" id="sear" class="txt" tabindex="1" value="关键字" onfocus="if(this.value=='关键字'){this.value='';}" >
-        	<button name="searc" id="searc" class="search-blu hide" tabindex="3">搜索</button>
+
         	<div class="kayWords">
          		<ul>
            	 	<li><a href="#">数码</a></li>
@@ -104,7 +107,7 @@
             	<li><a href="#">数码</a></li>
           		</ul>
         	</div>
-      		</form>
+      		
   		</div>
   		<!-- 投稿 -->
   		<div id="sendMes" style="display:none;">
@@ -133,7 +136,7 @@
       			</form>
     		</div>
     	</div>
-
+    
 
     	<!-- 时间轴 -->
     	<div  class="zhou">
@@ -166,6 +169,15 @@
             </ul>
 
         </div>
+
+
+
+       <script type="text/javascript">
+           var simg = $(".pictures ul li").find(".headBacImg").attr("src");
+		    var bimg=simg.replace(/-\d*/,'');
+            $(".pict").css("background","url("+bimg+")");//url("+bimg+"),添加 变量的方法
+            $(".pict").css("background-size","100% 475px");
+        </script>
 
         </div>
 
@@ -240,11 +252,6 @@
             <asp:Label ID="lbTotal" runat="server" Text="1" Visible="false"></asp:Label>
 			<asp:LinkButton  ID="lbtChange" runat="server" OnClick="lbtChange_Click" Text="换一换"></asp:LinkButton>
 
-
-
-
-
-
 		</div>
 		</div>
 
@@ -261,7 +268,7 @@
         <asp:UpdatePanel ID="UpdatePanel1" runat="server" >
             <ContentTemplate>   
               	<h1><asp:Label ID="lbInterestTitle" runat="server" ></asp:Label></h1>
-						<div class="storyNo"><%--<p id="time">--%><asp:Label ID="lbTime" runat="server" ></asp:Label><%--</p>--%><p id="detail">详情>></p></div>
+						<div class="storyNo"><%--<p id="time">--%><asp:Label ID="lbTime" runat="server" ></asp:Label><%--</p>--%><p id="detail"><asp:LinkButton ID="lkInterest" runat="server" Text="详情>>" OnClick="lkInterest_Click"></asp:LinkButton></p></div>
 						<div>
 							<p>
 								<asp:Label ID="lbInterestContent" runat="server" ></asp:Label>

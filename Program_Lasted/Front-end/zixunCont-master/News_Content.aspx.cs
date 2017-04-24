@@ -82,4 +82,11 @@ public partial class Front_end_zixunCont_master_News_Content : System.Web.UI.Pag
         }
     }
 
+
+    protected void btnSearch_Click(object sender, EventArgs e)
+    {
+        Session["search"] = txtSearch.Text;
+        Response.Write("<script>window.location='../Period-huxiu/Search.aspx'</script>");
+    }
+
 }

@@ -34,27 +34,33 @@
     </script><br />
     </div>
         短趣URL<br />
-        <asp:TextBox ID="txtUrl" runat="server" onbulr="check()"></asp:TextBox><br />
+        <asp:TextBox ID="txtUrl" runat="server" onblur="check()"></asp:TextBox><br />
          <script>
-                  function check() {                 
+             function check() {
+
+
+                
+
                       var temp = document.getElementById("txtUrl").value;
-                  
-                      //var match = /^((ht|f)tps?):\/\/[\w\-]+(\.[\w\-]+)+([\w\-\.,@?^=%&:\/~\+#]*[\w\-\@?^=%&\/~\+#])?$/;
-                      var strRegex = '^((https|http|ftp|rtsp|mms)?://)'
-+ '?(([0-9a-z_!~*\'().&=+$%-]+: )?[0-9a-z_!~*\'().&=+$%-]+@)?' //ftp的user@ 
-+ '(([0-9]{1,3}.){3}[0-9]{1,3}' // IP形式的URL- 199.194.52.184 
-+ '|' // 允许IP和DOMAIN（域名） 
-+ '([0-9a-z_!~*\'()-]+.)*' // 域名- www. 
-+ '([0-9a-z][0-9a-z-]{0,61})?[0-9a-z].' // 二级域名 
-+ '[a-z]{2,6})' // first level domain- .com or .museum 
-+ '(:[0-9]{1,4})?' // 端口- :80 
-+ '((/?)|' // a slash isn't required if there is no file name 
-+ '(/[0-9a-z_!~*\'().;?:@&=+$,%#-]+)+/?)$';
-                      var re = new RegExp(strRegex);
+                      var aaa = document.getElementById("txtUrl");
+                      // var match = /^((ht|f)tps?):\/\/[\w\-]+(\.[\w\-]+)+([\w\-\.,@?^=%&:\/~\+#]*[\w\-\@?^=%&\/~\+#])?$/;
+                     var myre = /(([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)-(0[1-9]|[12][0-9]|30))|(02-(0[1-9]|[1][0-9]|2[0-8]))))|((([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00))-02-29)/;
+//                      var strRegex = '^((https|http|ftp|rtsp|mms)?://)'
+//+ '?(([0-9a-z_!~*\'().&=+$%-]+: )?[0-9a-z_!~*\'().&=+$%-]+@)?' //ftp的user@ 
+//+ '(([0-9]{1,3}.){3}[0-9]{1,3}' // IP形式的URL- 199.194.52.184 
+//+ '|' // 允许IP和DOMAIN（域名） 
+//+ '([0-9a-z_!~*\'()-]+.)*' // 域名- www. 
+//+ '([0-9a-z][0-9a-z-]{0,61})?[0-9a-z].' // 二级域名 
+//+ '[a-z]{2,6})' // first level domain- .com or .museum 
+//+ '(:[0-9]{1,4})?' // 端口- :80 
+//+ '((/?)|' // a slash isn't required if there is no file name 
+//+ '(/[0-9a-z_!~*\'().;?:@&=+$,%#-]+)+/?)$';
+//                      var re = new RegExp(strRegex);
                       //re.test() 
-                      if (!re.test(temp)) {
-                          alert('提示\n\n请输入有效URL');
-                          //    myreg.focus();
+                      if (!myre.test(temp)) {
+                          alert("提示\n\n请输入有效URL");
+                          aaa.value = "";
+                           myre.focus();
                       } 
 
                       //if (!match.test(temp)) {

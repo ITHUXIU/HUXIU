@@ -13,10 +13,9 @@ public partial class Backstage_Activity_select : System.Web.UI.Page
         {
             Response.Write("<script>alert('尚未登录!');location='../Login/Login.aspx'</script>");
         }
-       if(!IsPostBack)
-        {
-            RptDataBind(1);
-        }
+
+        RptDataBind(1);
+
     }
 
     protected void rptActivity_ItemDataBound(object sender, RepeaterItemEventArgs e)
@@ -54,7 +53,7 @@ public partial class Backstage_Activity_select : System.Web.UI.Page
 
                 db.SaveChanges();
             }
-            Response.Write("<script>alert('删除成功！');location='Activity_begin.aspx'</script>");
+            Response.Write("<script>alert('删除成功！');location='Activity_select.aspx'</script>");
         }
     }
     protected void RptDataBind(int currentPage)

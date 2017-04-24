@@ -14,7 +14,7 @@
     <form id="form1" runat="server">
         <div>
             专题名称
-        <asp:TextBox ID="txtName" runat="server"></asp:TextBox>
+        <asp:TextBox ID="txtName" runat="server" MaxLength="12"></asp:TextBox>
             <br />
             <asp:Button ID="btnName" runat="server" OnClick="btnName_Click" Text="修改" />
             <br />

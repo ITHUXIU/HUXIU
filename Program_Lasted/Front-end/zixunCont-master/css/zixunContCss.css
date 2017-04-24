@@ -151,7 +151,7 @@ ul li{
 }
 .content{width: 100%;}
 .main{
-	width: 60%;
+	width: 62%;
 
 	margin: 0 auto;
 	padding-top: 50px;
@@ -409,13 +409,9 @@ ul li{
 		width: 100%;
 	}
 }
-
-
-/*@media (max-width: 1264px)and(min-width:980px ) {
-	.from img{
-		height: 567px;
-	}
-	.from{
-		height: 646px;
-	}
-}*/
+@media (max-width : 980px) {
+    .centera {
+        width: 90%;
+        text-align: center;
+    }
+}

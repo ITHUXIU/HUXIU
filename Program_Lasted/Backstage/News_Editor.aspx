@@ -49,7 +49,7 @@
                         <br />
                         <br />
                         资讯作者：
-                        <asp:TextBox ID="txtAuthor" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txtAuthor" runat="server" MaxLength="12"></asp:TextBox>
                         <asp:Button ID="btnAuthor" runat="server" Text="修改" OnClick="btnAuthor_Click" />
                         <br />
                         上传资讯封面:

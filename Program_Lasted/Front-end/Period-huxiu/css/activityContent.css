@@ -260,27 +260,13 @@ transition: all 1s ease-in-out;
      color: white;
      background: red;
 }
-.buy p{
-     padding-left: 32px;
-}
-.buy p span{
-    color: red;
-}
+
 .active{
     overflow: hidden;
-    height: 400px;
+    /*height: 400px;*/
 }
-.active span{
-   color:red;
-   padding-left: 22px;
-   font-size: 20px;
-}
-.active p{
-    text-align:justify;
-    text-justify:inter-ideograph;
-    padding-left: 32px;
-   padding-top: 30px;
-}
+
+
 .narrowcenter{
     width: 90%;
     margin:0 auto;

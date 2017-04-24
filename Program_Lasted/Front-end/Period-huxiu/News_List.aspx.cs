@@ -7,9 +7,9 @@ using System.Web.UI.WebControls;
 
 public partial class Front_end_Period_huxiu_News_List : System.Web.UI.Page
 {
+
     protected void Page_PreLoad(object sender, EventArgs e)
     {
-
         try
         {
             int id = Convert.ToInt32(Request.QueryString["news_classid"].ToString());
@@ -20,9 +20,9 @@ public partial class Front_end_Period_huxiu_News_List : System.Web.UI.Page
         }
 
     }
+
     protected void Page_Load(object sender, EventArgs e)
     {
-        //string aa = Request.QueryString["news_classid"];
         int newsclassid = Convert.ToInt32(Request.QueryString["news_classid"]);
         if (!IsPostBack)
         {
@@ -50,7 +50,7 @@ public partial class Front_end_Period_huxiu_News_List : System.Web.UI.Page
                 rptHotNews.DataBind();
 
                 //绑定资讯12条
-                var news = from it in db.News where it.news_class == newsclassid  orderby it.news_time descending select it;
+                var news = from it in db.News where it.news_class == newsclassid orderby it.news_time descending select it;
                 pds.AllowPaging = true;
                 pds.PageSize = 12;
                 pds.DataSource = news.ToList();
@@ -70,7 +70,6 @@ public partial class Front_end_Period_huxiu_News_List : System.Web.UI.Page
 
                 //var query = biaoming.Where(c => c.名称 == 条件).Max(c => c.ManualID);
                 //绑定专题前面的图片
-                //var imgColumn = from it in db.Column where it.column_hot
                 List<Column> dt = column.ToList();
                 imgCover.ImageUrl = "../../Backstage/" + dt[0].column_cover;
                 
@@ -90,8 +89,8 @@ public partial class Front_end_Period_huxiu_News_List : System.Web.UI.Page
 
             string simplify = System.Text.RegularExpressions.Regex.Replace(newscontent, @"<[///!]*?[^<>]*?>", "").Replace("\n", "").Replace(" ", "").Replace("\t", "").Replace("\r", "").Replace("&nbsp;", "");
 
-            if (simplify.Length > 20)
-                simplify = simplify.Substring(0, 20) + "....";
+            if (simplify.Length > 50)
+                simplify = simplify.Substring(0, 50) + "....";
 
             label.Text = simplify;
 
@@ -172,13 +171,19 @@ public partial class Front_end_Period_huxiu_News_List : System.Web.UI.Page
 
             string simplify = System.Text.RegularExpressions.Regex.Replace(newscontent, @"<[///!]*?[^<>]*?>", "").Replace("\n", "").Replace(" ", "").Replace("\t", "").Replace("\r", "").Replace("&nbsp;", "");
 
-            if (simplify.Length > 20)
-                simplify = simplify.Substring(0, 20) + "....";
+            if (simplify.Length > 50)
+                simplify = simplify.Substring(0, 50) + "....";
 
             label.Text = simplify;
 
             //设置资讯css样式
             counter++;
+
+            Panel panel = (Panel)e.Item.FindControl("pnlClass");
+            if (counter % 4 == 0)
+                panel.CssClass = "main-content-content-border main-content-content-border-right clearfix";
+            else
+                panel.CssClass = "main-content-content-border clearfix";
 
         }
     }
@@ -230,7 +235,7 @@ public partial class Front_end_Period_huxiu_News_List : System.Web.UI.Page
 
         using (var db = new HuXiuEntities())
         {
-            var news = from it in db.News where it.news_class == newsclassid orderby it.news_time descending select it;
+            var news = from it in db.News where it.news_class==newsclassid orderby it.news_time descending select it;
 
             PagedDataSource pds = new PagedDataSource();
 
@@ -258,14 +263,44 @@ public partial class Front_end_Period_huxiu_News_List : System.Web.UI.Page
         if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
         {
             //设置标题Css
+            //Panel panel = (Panel)e.Item.FindControl("plColumn");
+
+            //if (Csser == 0)
+            //    panel.CssClass = "subject-top-li";
+            //Csser++;
+
+            //设置时间
             Label label = (Label)e.Item.FindControl("lbColumn");
 
-            if (Csser == 0)
-                label.CssClass = "subject-top-li";
-            Csser++;
+            DateTime time = Convert.ToDateTime(label.Text);
+
+            TimeSpan ts1 = new TimeSpan(time.Ticks);
+            TimeSpan ts2 = new TimeSpan(DateTime.Now.Ticks);
+            TimeSpan ts = ts1.Subtract(ts2).Duration();
+            //显示时间  
+            if (ts.Days >= 365)
+                label.Text = "1年前";
+            else if (ts.Days > 90)
+                label.Text = "3个月前";
+            else if (ts.Days >= 30)
+                label.Text = "1个月前";
+            else if (ts.Days >= 7)
+                label.Text = "1周前";
+            else if (ts.Days >= 3)
+                label.Text = "3天前";
+            else if (ts.Days != 0)
+                label.Text = ts.Days.ToString() + "天前";
+            else if (ts.Hours != 0)
+                label.Text = ts.Hours.ToString() + "小时前";
+            else if (ts.Minutes != 0)
+                label.Text = ts.Minutes.ToString() + "分钟前";
+            else if (ts.Seconds != 0)
+                label.Text = ts.Seconds.ToString() + "秒前";
+            else
+                label.Text = "刚刚";
+
         }
     }
-
     protected void btnLogin_Click(object sender, EventArgs e)
     {
         Class1 login = new Class1();
@@ -292,6 +327,18 @@ public partial class Front_end_Period_huxiu_News_List : System.Web.UI.Page
             }
         }
     }
+    protected void rptNews_ItemCommand(object source, RepeaterCommandEventArgs e)
+    {
+        int id = Convert.ToInt32(e.CommandArgument.ToString());
+
+        if (e.CommandName == "Like")
+            Class1.calculateLike(id);
+    }
 
 
+    protected void btnSearch_Click(object sender, EventArgs e)
+    {
+        Session["search"] = txtSearch.Text;
+        Response.Write("<script>window.location='../Period-huxiu/Search.aspx'</script>");
+    }
 }

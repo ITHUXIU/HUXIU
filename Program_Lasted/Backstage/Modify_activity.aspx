@@ -49,32 +49,37 @@
             myEditor.value = editor.getContent();//把得到的值给textarea
         }
     </script><br />
-   <asp:TextBox ID="txtActivityBeginTime" TextMode="DateTime" runat="server" onblur="check()" ></asp:TextBox><br />
+        开始时间：
+   <asp:TextBox ID="txtActivityBeginTime" TextMode="DateTime" runat="server" onblur="checkBegin()" ></asp:TextBox><br />
                  <script>
-                  function check() {                 
-                      var temp = document.getElementById("txtActivityBeginTime").value;
-                  
-                      var myreg = /(([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)-(0[1-9]|[12][0-9]|30))|(02-(0[1-9]|[1][0-9]|2[0-8]))))|((([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00))-02-29)/;
-                      if (!myreg.test(temp)) {
-                          alert('提示\n\n请输入有效时间');
-                          myreg.focus();
+                     function checkBegin() {
+                         var temp = document.getElementById("txtActivityBeginTime").value;
+                         var aaa = document.getElementById("txtActivityBeginTime");
 
-                      }
+                         var myreg = /(([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)-(0[1-9]|[12][0-9]|30))|(02-(0[1-9]|[1][0-9]|2[0-8]))))|((([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00))-02-29)/;
+                         if (!myreg.test(temp)) {
+                             aaa.value = "";
+                             alert('提示\n\n请输入有效时间,格式为xxxx-xx-xx');
+                             myreg.focus();
+
+                         }
                  
                   }
               </script>
         结束时间：
         <asp:TextBox ID="txtActivityEndTime" TextMode="DateTime" runat="server" onblur="checkEnd()"></asp:TextBox><br />
                 <script>
-                  function checkEnd() {                 
-                      var temp = document.getElementById("txtActivityEndTime").value;
-                  
-                      var myreg = /(([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)-(0[1-9]|[12][0-9]|30))|(02-(0[1-9]|[1][0-9]|2[0-8]))))|((([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00))-02-29)/;
-                      if (!myreg.test(temp)) {
-                          alert('提示\n\n请输入有效时间');
-                          myreg.focus();
+                    function checkEnd() {
+                        var temp = document.getElementById("txtActivityEndTime").value;
+                        var aaa = document.getElementById("txtActivityEndTime");
 
-                      }
+                        var myreg = /(([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)-(0[1-9]|[12][0-9]|30))|(02-(0[1-9]|[1][0-9]|2[0-8]))))|((([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00))-02-29)/;
+                        if (!myreg.test(temp)) {
+                            aaa.value = "";
+                            alert('提示\n\n请输入有效时间,格式为xxxx-xx-xx');
+                            myreg.focus();
+
+                        }
                  
                   }
               </script>

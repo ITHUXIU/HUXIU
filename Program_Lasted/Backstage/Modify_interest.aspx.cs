@@ -73,6 +73,8 @@ public partial class Backstage_Modify_interest : System.Web.UI.Page
                 interest.interest_content = Server.HtmlDecode(myEditor.InnerHtml);
 
                 db.SaveChanges();
+
+                Response.Write("<script>alert('编辑成功！');location='Interesting.aspx'</script>");
             }
         }
         else

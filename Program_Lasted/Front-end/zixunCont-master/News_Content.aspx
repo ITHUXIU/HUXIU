@@ -43,28 +43,29 @@
 
 			</ul>
 
-		</div>
+		    </div>
+         </div>
 		<!-- 登录 -->
 		<div id="loginmodal" style="display:none;">
        
     		<div class="mainLeft">
                 <img src ="images/blackHu.png"/>
-      			<form id="loginform" name="loginform" method="post" action="index.html">
+      			
        			<asp:TextBox ID="txtusername" runat="server" CssClass="txtfield" TabIndex="1" Text="邮箱/虎嗅账号" onfocus="if(this.value=='邮箱/虎嗅账号'){this.value='';}"></asp:TextBox>
-                      <asp:TextBox ID="txtpassword" runat="server" TextMode="Password" CssClass="txtfield" TabIndex="2" Text="密码" onfocus="if(this.value=='密码'){this.value='';}"></asp:TextBox>
-								      <div id="Lo">
+                    <asp:TextBox ID="txtpassword" runat="server" TextMode="Password" CssClass="txtfield" TabIndex="2" Text="密码" onfocus="if(this.value=='密码'){this.value='';}"></asp:TextBox>
+					<div id="Lo">
 								         <asp:LinkButton ID="lkbtnForget" runat="server" Text="忘记密码？" PostBackUrl="~/Backstage/Find_password.aspx"></asp:LinkButton>
 								      </div>
-								      <div class="center1">
+				    <div class="center1">
 								         
                                           <asp:Button ID="btnLogin" runat="server" CssClass="flatbtn-blu hidemodal" Text="Log In" TabIndex="3" OnClick="btnLogin_Click" />
-      				</div>
+      				                </div>
 
-    			</form>
+    		
     		</div>
-   		 	<div class="mainRight">
-     	 		<p class="white">第三方快速登录</p>
-      			<div>
+   		 	    <div class="mainRight">
+     	 		    <p class="white">第三方快速登录</p>
+      			    <div>
         			<ul>
           				<li><img src="images/QQ2.png"></li>
           				<li><img src="images/wechart2.png"></li>
@@ -72,18 +73,20 @@
           				<li><img src="images/buy.png"></li>
         			</ul>
       			</div>
-      			<p class="red">短信快捷登录</p>
-      			<p class="red">扫一扫下载客户端</p>
+      			    <p class="red">短信快捷登录</p>
+      			    <p class="red">扫一扫下载客户端</p>
     			</div>
-  			</div>
-		</div>
+  	</div>
+		
 		<!-- 搜索 -->
 		<div id="searchLo" style="display:none;">
        
-      		<form id="searchform" name="searchform" method="post" action="indexsearch.html">
+     
            
-       		<input type="text" name="sear" id="sear" class="txt" tabindex="1" value="关键字" onfocus="if(this.value=='关键字'){this.value='';}" >
-        	<button name="searc" id="searc" class="search-blu hide" tabindex="3">搜索</button>
+       	      <asp:TextBox ID="txtSearch" runat="server" CssClass="txt" TabIndex="1"  onfocus="if(this.value=='关键字'){this.value='';}"></asp:TextBox>
+    <asp:Button ID="btnSearch" runat="server" CssClass="search-blu hide" Text="搜索" TabIndex="3" OnClick="btnSearch_Click" />
+    
+
         	<div class="kayWords">
          		<ul>
            	 	<li><a href="#">数码</a></li>
@@ -99,7 +102,7 @@
             	<li><a href="#">数码</a></li>
           		</ul>
         	</div>
-      		</form>
+      	
   		</div>
   		<!-- 投稿 -->
   		<div id="sendMes" style="display:none;">
@@ -108,24 +111,24 @@
         		<img src="images/blackHu.png">
       		</div>
       		<div class="sendText">
-       	 		<form id="sentform" name="sentform" method="post" action="index.html">
+       	 		
            			<input type="text" name="tit" id="tit" class="titl" tabindex="1" value="标题" onblur="disappearT()" onfocus="if(this.value=='标题'){this.value='';}">
            			<textarea name="cont" id="cont" class="contText" tabindex="2" value="内容" onblur="disappear()" onfocus="if(this.value=='内容'){this.value='';}"  rows="10" cols="30">内容</textarea>
           			<input type="text" name="contect" id="contect" class="contectL" tabindex="3" value="联系方式" onblur="disappearC()" onfocus="if(this.value=='联系方式'){this.value='';}">
            			<textarea name="sentImg" id="sentImg" 	class="	sentImgL" tabindex="3" onblur="disappearS()" onfocus="if(this.value=='上传图片'){this.value='';}"  rows="10" cols="30">上传图片</textarea>
           			<div class="sentNote">
-            		<div class="hide"><span></span><p>匿名投稿</p></div>
-            		<div class="addition"><span></span><p>允许虎嗅将您的原创稿件授权于虎嗅有关合作关系的第三方平台</p></div>
+            		    <div class="hide"><span></span><p>匿名投稿</p></div>
+            		    <div class="addition"><span></span><p>允许虎嗅将您的原创稿件授权于虎嗅有关合作关系的第三方平台</p></div>
             
-            		<p class="care">请您放心，授权会严格满足转载规范，标明您的姓名及来源等信息</p>
+            		    <p class="care">请您放心，授权会严格满足转载规范，标明您的姓名及来源等信息</p>
           			</div>
 					<div class="sendBut">
-          			<input type="submit" name="sentAct" id="sentAct" class="sentActicle sentmodal" value="我要投稿" tabindex="4">
-          			<input type="submit" name="save" id="save" class="save-blu sentmodal" value="存草稿" tabindex="5">
+          			    <input type="submit" name="sentAct" id="sentAct" class="sentActicle sentmodal" value="我要投稿" tabindex="4">
+          			    <input type="submit" name="save" id="save" class="save-blu sentmodal" value="存草稿" tabindex="5">
 
         			</div>
 
-      			</form>
+      			
     		</div>
     	</div>
 
@@ -137,8 +140,7 @@
 			<ul>
 				<li><a class="left-div-first flatbtn" id="modalt" href="#sendMes"><span></span>投稿</a></li>
 				<li><a class="left-div-second" href=""><span></span>客户端</a></li>
-				<!-- <li><a class="left-div-third" href="#pageScroll0">热文</a></li>
-				<li><a class="left-div-forth" href="#pageScroll1">热门标签</a></li> -->
+				
 				<li><div class="floatCtro"><a class="left-div-last" href="#1">
             	返回顶部
           		</a></div></li>
@@ -169,16 +171,16 @@
 			<div class="from">
 				<p>转载自界面</p>
 				<span><asp:Label ID="lbNewsClass" runat="server"></asp:Label></span>
-                <%--<img src="images/people.jpg">--%>
+              
 			</div>
 			<asp:Label ID="lbContent" runat="server"></asp:Label>
-<%--			<div class="mainText">
-				
-			</div>--%>
+
 			<div class="hotLogo">
-				<div class="hotLogoTitle main-passage-headline clearfix section ">
+				<div  class="hotActTitle">
 				
-					<img src="images/sanjiao.png"><h2>热门标签</h2>
+					<img src="images/sanjiao.png">
+                    <h2 class="main-passage-headline clearfix section">热门标签</h2>
+                   
 					<a href="#bookmark">全部</a>
 				</div>
 				<div class="hotLogoCont">
@@ -194,8 +196,8 @@
 				</div>
 			</div>
 			<div class="hotAct">
-				<div class="hotActTitle main-passage-headline clearfix section">
-					<img src="images/sanjiao.png "><h2>热文</h2>
+				<div class="hotActTitle">
+					<img src="images/sanjiao.png "><h2 class="main-passage-headline clearfix section">热文</h2>
 				</div>
 				<div class="hotActCont">
 					<ul>
@@ -232,7 +234,8 @@
 				<p>Copyright © 虎嗅网 京IPC备12013432号-1<img src="images/police.png">京公网安备11010102001402 本站由<a href="#"><img src="images/ali.png"></a>提供计算与安全服务</p>
 			</div>	
 		</div>
-	</div>
+	
+</div>
 	<!-- 导航栏 -->
 	<script>
 		$(function(){
@@ -277,7 +280,8 @@
 		$(document).ready(function(){
 			var navLabel = new Array('热门标签','热文');
 			$('.content').pageScroller({ navigation: navLabel });
-		});	
+		});
+
 
 	</script>
 	<script type="text/javascript">

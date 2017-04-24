@@ -14,6 +14,9 @@ public partial class Front_end_Period_huxiu1_Activity_content : System.Web.UI.Pa
 
     Class1 login = new Class1();
 
+    static public string activityUrl;
+    static protected string activityTime, activityContent;
+
     protected void Page_PreLoad(object sender, EventArgs e)
     {
         try
@@ -27,7 +30,7 @@ public partial class Front_end_Period_huxiu1_Activity_content : System.Web.UI.Pa
 
     }
 
-    protected string activityTime, activityContent;
+ 
     protected void Page_Load(object sender, EventArgs e)
     {
      
@@ -39,7 +42,7 @@ public partial class Front_end_Period_huxiu1_Activity_content : System.Web.UI.Pa
 
             using (var db = new HuXiuEntities())
             {
-              
+                
 
                 var topic = (from it in db.Topic where it.topic_id != 8 orderby it.topic_id select it).Take(4);
 
@@ -48,6 +51,8 @@ public partial class Front_end_Period_huxiu1_Activity_content : System.Web.UI.Pa
                 lbActivityName.Text = activity.activity_name;
 
                 activityContent = activity.activity_content;
+
+                activityUrl = "../" + activity.activity_cover;
 
                 activityTime = activity.activity_start.ToString();
 
@@ -129,4 +134,49 @@ public partial class Front_end_Period_huxiu1_Activity_content : System.Web.UI.Pa
         }
     }
 
+
+    protected void lkbtnBlog_Click(object sender, EventArgs e)
+    {
+        string content;
+        content = activityContent;
+        string simplify = System.Text.RegularExpressions.Regex.Replace(content, @"<[///!]*?[^<>]*?>", "").Replace("\n", "").Replace(" ", "").Replace("\t", "").Replace("\r", "").Replace("&nbsp;", "");
+
+        // if (simplify.Length > 15)
+        //  simplify = simplify.Substring(0, 15) + "....";
+        string url = "http://service.weibo.com/share/share.php?appkey=1934882415&url=https%3A%2F%2Fwww.huxiu.com%2Farticle%2F190487.html%3Ff%3Dpc-weibo-article&title=" + simplify + "%40虎嗅网&content=utf-8&pic=https://imgs.bipush.com/article/cover/201702/02/210424231162.jpg#_loginLayer_1492261857422";
+
+        Response.Redirect(url);
+    }
+
+    protected void lkbtnQq_Click(object sender, EventArgs e)
+    {
+        string content;
+        content = activityContent;
+        string simplify = System.Text.RegularExpressions.Regex.Replace(content, @"<[///!]*?[^<>]*?>", "").Replace("\n", "").Replace(" ", "").Replace("\t", "").Replace("\r", "").Replace("&nbsp;", "");
+
+        // if (simplify.Length > 15)
+        //  simplify = simplify.Substring(0, 15) + "....";
+        string url = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https%3A%2F%2Fwww.huxiu.com%2Farticle%2F187874.html%3Ff%3Dpc-qzone-article&showcount=0&desc=" + simplify + "&summary=&title=去年的十大刷屏营销案例，你看过几个？&site=虎嗅网&pics=&style=203&width=22&height=22&otype=share";
+
+        Response.Redirect(url);
+
+        
+    }
+
+    protected void lkbtnPay_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void lkbtnWc_Click(object sender, EventArgs e)
+    {
+
+    }
+
+
+    protected void btnSearch_Click(object sender, EventArgs e)
+    {
+        Session["search"] = txtSearch.Text;
+        Response.Write("<script>window.location='../Period-huxiu/Search.aspx'</script>");
+    }
 }

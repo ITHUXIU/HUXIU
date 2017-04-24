@@ -11,9 +11,9 @@
     <form id="form1" runat="server">
     <div>
     <asp:LinkButton ID="lkbtnAddManager" runat="server" Text="添加管理员" OnClick="btnAddManager_Click" /><br />
-        <asp:LinkButton ID="lkbBackHomepage" runat="server" Text="返回首页" PostBackUrl="~/Front-end/homePage-master/Homepageaspx.aspx"></asp:LinkButton><br />
-        <asp:LinkButton ID="lkbBackNews" runat="server" Text="返回资讯页" PostBackUrl="~/Front-end/Period-huxiu/News_List.aspx"></asp:LinkButton><br />
-        <asp:LinkButton ID="lkbBackActivity" runat="server" Text="返回活动页" PostBackUrl="~/Front-end/Period-huxiu/Activity.aspx"></asp:LinkButton>
+        <asp:LinkButton ID="lkbBackHomepage" runat="server" Text="返回首页" OnClick="lkbBackHomepage_Click"></asp:LinkButton><br />
+        
+        <asp:LinkButton ID="lkbBackActivity" runat="server" Text="返回活动页" OnClick="lkbBackActivity_Click"></asp:LinkButton>
         <br />
     </div>
     </form>

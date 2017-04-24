@@ -32,4 +32,21 @@ public partial class Backstage_Home : System.Web.UI.Page
             }
         }
     }
+
+    protected void lkbBackHomepage_Click(object sender, EventArgs e)
+    {
+        Response.Write("<script language='javascript'>window.open('../Front-end/homePage-master/Homepageaspx.aspx','_blank')</script>");
+    }
+
+    protected void lkbBackNews_Click(object sender, EventArgs e)
+    {
+        Response.Write("<script language='javascript'>window.open('../Front-end/Period-huxiu/Activity.aspx',''_blank)</script>");
+        //Server.Transfer("4.4.aspx");
+    }
+    
+    protected void lkbBackActivity_Click(object sender, EventArgs e)
+    {
+     
+        Response.Write("<script language='javascript'>window.open('../Front-end/Period-huxiu/Activity.aspx');</script>");
+    }
 }

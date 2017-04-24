@@ -1,0 +1,45 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Text;
+using ThoughtWorks;
+using ThoughtWorks.QRCode;
+using ThoughtWorks.QRCode.Codec;
+using ThoughtWorks.QRCode.Codec.Data;
+using System.Drawing;
+using System.Drawing.Imaging;
+
+public partial class Default2 : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+
+    }
+    private void create_two(string nr)
+    {
+        Bitmap bt;
+        Bitmap bmp2 = new Bitmap(1024, 768, PixelFormat.Format16bppRgb555);
+        string enCodeString = nr;
+        QRCodeEncoder qrCodeEncoder = new QRCodeEncoder();
+        bt = qrCodeEncoder.Encode(enCodeString, Encoding.UTF8);
+        string filename = string.Format(DateTime.Now.ToString(), "yyyymmddhhmmss")
+         + ".jpg";
+        filename = filename.Replace(" ", "");
+        filename = filename.Replace(":", "");
+        filename = filename.Replace("-", "");
+        filename = filename.Replace(".", "");
+        Graphics draw = Graphics.FromImage(bmp2);
+        draw.DrawImage(bt, 0, 0);
+        bmp2.Save(Server.MapPath("../Images/") + filename + ".jpg");
+        this.Image1.ImageUrl = "../Images/" + filename + ".jpg";
+        draw.Dispose();
+        bt.Dispose();//释放bmp文件资源
+    }
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        create_two(TextBox1.Text);
+    }
+}

@@ -31,6 +31,7 @@ public partial class Backstage_Activity_system : System.Web.UI.Page
 
                 db.SaveChanges();
             }
+            Response.Write("<script>window.location='Activity_system.aspx'</script>");
         }
     }
     protected void RptDataBind2(int currentPage)

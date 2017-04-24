@@ -52,10 +52,15 @@
 }
 .channel-right-large
 {
-    height:440px;
+    height:446px;
 }
 .channel-right-small{
         height: 165px;
+        margin-bottom:20px;
+    }
+.channel-right-small last{
+        height: 165px;
+        margin-bottom:20px;
     }
 .main-passage-content a{
     height: 225px;

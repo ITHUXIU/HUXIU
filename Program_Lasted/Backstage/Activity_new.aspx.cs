@@ -27,8 +27,7 @@ public partial class Backstage_Activity_new : System.Web.UI.Page
 
                 if (topicname == null)
                 {
-                    //没执行location？？？
-                    //Response.Write("<script>alert('该系列不存在，请确认无误再填写');location='Activity_new.aspx'</script>");
+              
                     topic_id = "8";
                 }
                 else
@@ -44,48 +43,64 @@ public partial class Backstage_Activity_new : System.Web.UI.Page
         }
         if (txtTitle.Text != "" && txtCoverLabel.Text != "" && myEditor.InnerHtml != "" && ibtnChangeiamge.ImageUrl != "" && txtActivityBeginTime.Text != "" && txtActivityEndTime.Text != "")
         {
-            int class1;
-            if (activityKind.SelectedValue == "虎嗅活动")
-                class1 = 1;
-            else if (activityKind.SelectedValue == "活动频道")
-                class1 = 2;
-            else
-                class1 = 3;
-            using (var db = new HuXiuEntities())
+            if (txtTitle.Text.Length <= 20)
             {
-                Activity newActivity = new Activity();
+                if (txtCoverLabel.Text.Length <= 3)
+                {
+                    int class1;
+                    if (activityKind.SelectedValue == "虎嗅活动")
+                        class1 = 1;
+                    else if (activityKind.SelectedValue == "活动频道")
+                        class1 = 2;
+                    else
+                        class1 = 3;
+                    using (var db = new HuXiuEntities())
+                    {
+                        Activity newActivity = new Activity();
 
-                newActivity.activity_name = txtTitle.Text;
+                        newActivity.activity_name = txtTitle.Text;
 
-                newActivity.activity_topicid = Convert.ToInt32(topic_id);
+                        newActivity.activity_topicid = Convert.ToInt32(topic_id);
 
-                newActivity.activity_topicname = txtTopicName.Text;
+                        newActivity.activity_topicname = txtTopicName.Text;
 
-                newActivity.activity_coverlable = txtCoverLabel.Text;
+                        newActivity.activity_coverlable = txtCoverLabel.Text;
 
-                newActivity.activity_content = Server.HtmlDecode(myEditor.InnerHtml);
+                        newActivity.activity_content = Server.HtmlDecode(myEditor.InnerHtml);
 
-                newActivity.activity_cover = ibtnChangeiamge.ImageUrl;
+                        newActivity.activity_cover = ibtnChangeiamge.ImageUrl;
 
-                newActivity.activity_class = class1;
+                        newActivity.activity_class = class1;
 
-                newActivity.activity_hot = 0;
+                        newActivity.activity_hot = 0;
 
-                newActivity.activity_start = Convert.ToDateTime(txtActivityBeginTime.Text);
+                        newActivity.activity_start = Convert.ToDateTime(txtActivityBeginTime.Text);
 
-                newActivity.activity_end = Convert.ToDateTime(txtActivityEndTime.Text);
+                        newActivity.activity_end = Convert.ToDateTime(txtActivityEndTime.Text);
 
-                db.Activity.Add(newActivity);
+                        db.Activity.Add(newActivity);
 
-                db.SaveChanges();
+                        db.SaveChanges();
 
-                Response.Write("<script>alert('添加成功！');location='Activity_new.aspx'</script>");
+                        Response.Write("<script>alert('添加成功！');location='Activity_new.aspx'</script>");
+                    }
+                }
+                else
+                {
+                    Response.Write("<script>alert('小标签只能三个字以内！')</script>");
+                }
+
+            }
+            else
+            {
+                Response.Write("<script>alert('标题过长！')</script>");
             }
         }
         else
         {
             Response.Write("<script>alert('请填写完全！')</script>");
         }
+        
     }
     protected void btnupload_Click(object sender, EventArgs e)
     {

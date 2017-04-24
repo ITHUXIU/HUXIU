@@ -87,7 +87,7 @@ public class Class1
         int_Blue = (int_Blue > 255) ? 255 : int_Blue;
 
         return Color.FromArgb(int_Red, int_Green, int_Blue).Name;
-    }    
+    }
     //显示多久之前时间
     public string PassTime(DateTime time)
     {
@@ -101,35 +101,53 @@ public class Class1
                     {
                         if (Convert.ToInt32(DateTime.Now.Minute - time.Minute) == 0)
                         {
-                            return (DateTime.Now.Second - time.Second).ToString() + "秒前";
+                            if(DateTime.Now.Second - time.Second>0)
+                                return (DateTime.Now.Second - time.Second).ToString() + "秒前";
+                            else
+                                return (time.Second - DateTime.Now.Second).ToString() + "秒后";
                         }
                         else
                         {
-                            return (DateTime.Now.Minute - time.Minute).ToString() + "分钟前";
+                            if(DateTime.Now.Minute - time.Minute>0)
+                                return (DateTime.Now.Minute - time.Minute).ToString() + "分钟前";
+                            else
+                                return (time.Minute - DateTime.Now.Minute).ToString() + "分钟后";
                         }
                     }
                     else
                     {
-                        return (DateTime.Now.Hour - time.Hour).ToString() + "小时前";
+                        if(DateTime.Now.Hour - time.Hour>0)
+                            return (DateTime.Now.Hour - time.Hour).ToString() + "小时前";
+                        else
+                            return (time.Hour - DateTime.Now.Hour).ToString() + "小时后";
                     }
                 }
                 else
                 {
-                    return (DateTime.Now.Day - time.Day).ToString() + "天前";
+                    if(DateTime.Now.Day - time.Day>0)
+                        return (DateTime.Now.Day - time.Day).ToString() + "天前";
+                    else
+                        return (time.Day - DateTime.Now.Day).ToString() + "天后";
                 }
             }
             else
             {
-                return (DateTime.Now.Month - time.Month).ToString() + "月前";
+                if(DateTime.Now.Month - time.Month>0)
+                    return (DateTime.Now.Month - time.Month).ToString() + "月前";
+                else
+                    return (time.Month - DateTime.Now.Month).ToString() + "月后";
             }
         }
         else
         {
-            return (DateTime.Now.Year - time.Year).ToString() + "年前";
+            if(DateTime.Now.Year - time.Year>0)
+                return (DateTime.Now.Year - time.Year).ToString() + "年前";
+            else
+                return (time.Year - DateTime.Now.Year).ToString() + "年后";
         }
     }
     //计算热度
-    static public void calculateHot(string type ,int id)
+    static public void calculateHot(string type, int id)
     {
         using (var db = new HuXiuEntities())
         {
@@ -143,7 +161,7 @@ public class Class1
             }
             if (type == "news")
             {
-                News news = db.News.SingleOrDefault(a => a.news_id== id);
+                News news = db.News.SingleOrDefault(a => a.news_id == id);
 
                 news.news_hot += 1;
 
@@ -151,4 +169,24 @@ public class Class1
             }
         }
     }
+    static public void calculateLike(int id)
+    {
+        using (var db = new HuXiuEntities())
+        {
+            News news = db.News.SingleOrDefault(a => a.news_id == id);
+
+            news.news_like += 1;
+
+            db.SaveChanges();
+        }
+    }
+
+    static public int Test(string str)
+    {
+        if (str.Contains("<script>"))
+            return 0;
+        else
+            return 1;
+    }
+
 }

@@ -18,7 +18,7 @@
                     添加资讯
                 <br />
                     <br />
-                    资讯标题:<asp:TextBox ID="txtTitle" runat="server" Width="593px"></asp:TextBox>
+                    资讯标题:<asp:TextBox ID="txtTitle" runat="server" Width="593px" MaxLength="12"></asp:TextBox>
                     <asp:Label ID="lbTitle" runat="server"></asp:Label>
                     <br />
                     <br />
@@ -43,7 +43,7 @@
                     <br />
                     <br />
                     作者/编辑:
-                    <asp:TextBox ID="txtAuthor" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtAuthor" runat="server" MaxLength="12"></asp:TextBox>
                     <br />
                     <br />
                     上传资讯封面:

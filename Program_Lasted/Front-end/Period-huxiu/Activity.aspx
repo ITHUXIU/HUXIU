@@ -12,6 +12,8 @@
 	<script type="text/javascript"  src="js/jquery-3.1.1.min.js"></script>
 	<script type="text/javascript" src="js/pagescroller.min.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/jquery.leanModal.min.js"></script>
+    <!--[if lte IE 9]>
+	<link rel="stylesheet" href="css/ie9.css"><![endif]-->
 	<!--[if lte IE 8]>
 	<link rel="stylesheet" href="css/ie8.css"><![endif]-->
 </head>
@@ -24,6 +26,26 @@
 				<li class="header-left-float"><a  href="../homePage-master/Homepageaspx.aspx"></a></li>
 				<li class="people" style="height:0px;"><a href="#loginmodal" class="flatbtn  header-right-float-people" id="modaltrigger"></a></li>
 				<li><a href="#searchLo" class="flat header-right-float-search" id="modal"></a></li>
+                <li class="header-right-float header-right-float-wide"><a  href="">会员专享<br><span class="span-width ">	会员专享</span></a></li>
+				<li class="header-right-float header-right-float-wide"><a href="">创业白板<br><span class="span-width ">创业白板</span></a></li>
+				<li class="header-right-float"><a href="" >热议<br><span  >热议</span></a>
+				</li>
+				<li class="header-right-float"><a  href="~/Front-end/Period-huxiu/Activity_List.aspx">	活动<br><span  >活动	</span></a></li>
+				<li class="unfold-li"><a class="header-right-float unfold-a" href="" >资讯	<br><span  >资讯</span></a>
+				<ul class=" unfold">
+					<div class="clearfix">
+
+                        <asp:Repeater ID="rptClass" runat="server">
+                            <ItemTemplate>
+                                <li><a href="<%#"News_List.aspx?news_classid="+ Eval("news_classid")%>"><%# Eval("news_classname") %></a></li>
+                                <%--<asp:LinkButton ID="lbtClass" runat="server" Text='<%# Eval("news_classname") %>' PostBackUrl='<%#"~/Front-end/Period-huxiu/News_List.aspx?news_classid="+ Eval("news_classid")%>'></asp:LinkButton>
+                           --%> </ItemTemplate>
+                        </asp:Repeater>
+						
+					</div>	
+				</ul>
+				</li>
+			</ul>
 										<div id="loginmodal" style="display:none;">
 								    <div class="mainLeft">
 								      <div class="mainLeftImg">
@@ -89,10 +111,10 @@
 			  </div>
 			  <div id="searchLo" style="display:none;">
        
-      <form id="searchform" name="searchform" method="post" action="indexsearch.html">
-           
-        <input type="text" name="sear" id="sear" class="txt" tabindex="1" value="关键字" onfocus="if(this.value=='关键字'){this.value='';}" >
-        <button id="searc" class="search-blu hide">搜索</button>
+
+            <asp:TextBox ID="txtSearch" runat="server" CssClass="txt" TabIndex="1"  onfocus="if(this.value=='关键字'){this.value='';}"></asp:TextBox>
+    <asp:Button ID="btnSearch" runat="server" CssClass="search-blu hide" Text="搜索" TabIndex="3" OnClick="btnSearch_Click" />
+    
         <div class="kayWords">
           <ul>
             <li><a href="#">数码</a></li>
@@ -109,31 +131,12 @@
           </ul>
         </div>
 
-      </form>
+
   </div>
    
 
 				
-				<li class="header-right-float header-right-float-wide"><a  href="">会员专享<br><span class="span-width ">	会员专享</span></a></li>
-				<li class="header-right-float header-right-float-wide"><a href="">创业白板<br><span class="span-width ">创业白板</span></a></li>
-				<li class="header-right-float"><a href="" >热议<br><span  >热议</span></a>
-				</li>
-				<li class="header-right-float"><a  href="~/Front-end/Period-huxiu/Activity_List.aspx">	活动<br><span  >活动	</span></a></li>
-				<li class="unfold-li"><a class="header-right-float unfold-a" href="" >资讯	<br><span  >资讯</span></a>
-				<ul class=" unfold">
-					<div class="clearfix">
-
-                        <asp:Repeater ID="rptClass" runat="server">
-                            <ItemTemplate>
-                                <li><a href="<%#"News_List.aspx?news_classid="+ Eval("news_classid")%>"><%# Eval("news_classname") %></a></li>
-                                <%--<asp:LinkButton ID="lbtClass" runat="server" Text='<%# Eval("news_classname") %>' PostBackUrl='<%#"~/Front-end/Period-huxiu/News_List.aspx?news_classid="+ Eval("news_classid")%>'></asp:LinkButton>
-                           --%> </ItemTemplate>
-                        </asp:Repeater>
-						
-					</div>	
-				</ul>
-				</li>
-			</ul>
+				
 		</div>
 	</div>
 	<div id="wrapper">
@@ -214,14 +217,16 @@
 								<h2><asp:LinkButton ID="lkbtnActivityTitle" runat="server" Text='<%#Eval("activity_name")%>' CommandArgument='<%#Eval("activity_id") %>' CommandName="ActivityContent"></asp:LinkButton></h2>
 								
 								<div class="clearfix">
-                                    <asp:Label ID="lbState" runat="server" CssClass="main-channel-right-content-span"></asp:Label>
+                                    <asp:Label ID="lbState" runat="server" CssClass="red-span"></asp:Label>
 
                                     <asp:Label ID="beginTime" runat="server" Visible="false" Text='<%#Eval("activity_start") %>' ></asp:Label>
 						<asp:Label ID="endTime" runat="server" Visible="false" Text='<%#Eval("activity_end") %>' ></asp:Label>
 							<%--<span class="red-span">进行中</span>--%>
 								</div>
                          
-								<a class="gray" href="">默默直播<span class="clock-span" ><%#Eval("activity_start").ToString().Substring(0,10) %></span></a>
+								<a class="gray" href="">默默直播<%--<span class="clock-span" ><%#Eval("activity_start").ToString().Substring(0,10) %></span>--%>
+                                    <asp:Label ID="lbTime" runat="server" CssClass="clock-span"></asp:Label> 
+								</a>
 						</div><%--<img class="image-large" src="./images/10.jpg" alt="">--%>
                                 <asp:Image ID="img2" CssClass="image-large" runat="server" ImageUrl='<%#"../"+Eval("activity_cover") %>' />
 						</li>

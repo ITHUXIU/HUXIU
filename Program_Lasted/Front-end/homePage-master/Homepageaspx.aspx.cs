@@ -8,6 +8,7 @@ using System.Web.UI.WebControls;
 
 public partial class Front_end_homePage_master_Homepageaspx : System.Web.UI.Page
 {
+    static string url;
     Class1 login = new Class1();
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -57,6 +58,7 @@ public partial class Front_end_homePage_master_Homepageaspx : System.Web.UI.Page
                 //转化成DataTable类型
                 DataTable dt = login.LINQToDataTable(interest);
                 lbInterestTitle.Text = dt.Rows[0][1].ToString();
+                url = dt.Rows[0][5].ToString();
 
                 string interestContent = dt.Rows[0][2].ToString();
 
@@ -242,6 +244,7 @@ public partial class Front_end_homePage_master_Homepageaspx : System.Web.UI.Page
                 Interest interest = db.Interest.SingleOrDefault(a => a.interest_id == id);
 
                 lbInterestTitle.Text = interest.interest_title;
+                url = interest.interest_url;
                 lbInterestContent.Text = interest.interest_content;
 
                 //显示多久之前时间
@@ -254,4 +257,18 @@ public partial class Front_end_homePage_master_Homepageaspx : System.Web.UI.Page
     {
 
     }
+
+    protected void lkInterest_Click(object sender, EventArgs e)
+    {
+        Response.Write("<script language='javascript'>window.open('" + url + "');</script>");
+    }
+
+
+    protected void btnSearch_Click(object sender, EventArgs e)
+    {
+        Session["search"] = txtSearch.Text;
+        Response.Write("<script>window.location='../Period-huxiu/Search.aspx'</script>");
+    }
+
+
 }

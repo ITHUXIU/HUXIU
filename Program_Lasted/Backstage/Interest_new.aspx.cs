@@ -17,7 +17,7 @@ public partial class Backstage_Interest_new : System.Web.UI.Page
 
     protected void btnInterestNew_Click(object sender, EventArgs e)
     {
-        if (txtInterstTitle != null && txtUrl != null && myEditor.InnerHtml != null)
+        if (txtInterstTitle.Text != "" && txtUrl.Text != "" && myEditor.InnerHtml != "")
         {
             using (var db = new HuXiuEntities())
             {

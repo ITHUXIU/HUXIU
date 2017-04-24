@@ -12,7 +12,7 @@
     <form id="form1" runat="server">
     <div>
         添加分类
-        <asp:TextBox ID="txtClass" runat="server"></asp:TextBox>
+        <asp:TextBox ID="txtClass" runat="server" MaxLength="12"></asp:TextBox>
         <asp:Button ID="btnSub" runat="server" Text="提交" OnClick="btnSub_Click" />
     </div>
     </form>

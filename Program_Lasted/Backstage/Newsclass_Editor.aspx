@@ -11,7 +11,7 @@
 <body>
     <form id="form1" runat="server">
     <div>
-            <asp:TextBox ID="txtName" runat="server"></asp:TextBox>
+            <asp:TextBox ID="txtName" runat="server" MaxLength="12"></asp:TextBox>
             <br />
             <asp:Button ID="btnSub" runat="server" Text="修改" OnClick="btnSub_Click" />
     </div>

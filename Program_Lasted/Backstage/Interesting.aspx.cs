@@ -38,7 +38,8 @@ public partial class Backstage_Interesting : System.Web.UI.Page
         {
             string url = e.CommandArgument.ToString();
             //有待改正
-            Response.Redirect(url);
+            //Response.Redirect(url);
+            Response.Write("<script language='javascript'>window.open('"+url+"');</script>");
         }
     }
     protected void RptDataBind(int currentPage)

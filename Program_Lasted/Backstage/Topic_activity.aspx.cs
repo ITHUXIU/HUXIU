@@ -17,10 +17,11 @@ public partial class Backstage_picture_Topic_activity : System.Web.UI.Page
     }
     protected void RptDataBind(int currentPage)
     {
+        int id = Convert.ToInt32(Request.QueryString["id"].ToString());
 
         using (var db = new HuXiuEntities())
         {
-            var datascore = from it in db.Activity where it.activity_start > DateTime.Now select it;
+            var datascore = from it in db.Activity where it.activity_topicid==id select it;
 
             PagedDataSource pds = new PagedDataSource();
 

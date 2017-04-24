@@ -28,10 +28,10 @@
 </head>
 <body>
     <form runat="server">
-        <img style="width: 100%; height: 475px;" src="./images/tiger.png" alt="">
+        <img style="width: 100%; height: 475px;" src="images/tiger.png" alt="">
         <div style="position: absolute; width: 47%; height: 475px; top: 0; right: 0;">
-            <a style="position: relative; float: left; color: red; top: 340px; padding-right: 25px;" href="../homePage-master/Homepageaspx.aspx">返回首页</a>
-            <a style="position: relative; float: left; color: red; top: 340px;" href="">刷新本页</a>
+            <a style="position: relative; float: left; color: red; top: 340px; padding-right: 25px;"">
+                3秒后返回首页</a>
         </div>
 
     </form>

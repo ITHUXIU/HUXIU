@@ -189,6 +189,9 @@ public partial class Front_end_Period_huxiu1_js_Activity : System.Web.UI.Page
             Label begin = (Label)e.Item.FindControl("beginTime");
             Label end = (Label)e.Item.FindControl("endTime");
             Label state = (Label)e.Item.FindControl("lbState");
+            Label time = (Label)e.Item.FindControl("lbTime");
+
+            time.Text = login.PassTime(Convert.ToDateTime(begin.Text));
             if (Convert.ToDateTime(begin.Text) > DateTime.Now)
             {
                 state.Text = "未进行";
@@ -227,5 +230,10 @@ public partial class Front_end_Period_huxiu1_js_Activity : System.Web.UI.Page
 
         Response.Write("<script>window.location='Activity_content.aspx'</script>");
 
+    }
+    protected void btnSearch_Click(object sender, EventArgs e)
+    {
+        Session["search"] = txtSearch.Text;
+        Response.Write("<script>window.location='../Period-huxiu/Search.aspx'</script>");
     }
 }

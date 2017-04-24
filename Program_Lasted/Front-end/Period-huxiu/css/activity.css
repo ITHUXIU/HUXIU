@@ -228,7 +228,6 @@ ul li{
      overflow: hidden;
     float: left;
     width: 60%;
-    height:100%;
 }
 .image-large-border4{
      overflow: hidden;
@@ -236,7 +235,7 @@ ul li{
 }
 .image-large
 {
-height: 100%;
+height: 187px;
 width: 100%;
 transition: all 1s ease-in-out;
 -moz-transition:all 1s ease-in-out; /* Firefox 4 */
@@ -281,7 +280,7 @@ transition: all 1s ease-in-out;
 }
 
 .main-channel-left-content div img{
-   height: auto;
+   height: 239px;
     width: 100%;
 }
 .main-channel-left-content  li a{
@@ -290,7 +289,11 @@ transition: all 1s ease-in-out;
     font-size: 18px;
     height: 60px;
     line-height: 60px;
-    width: 100%;
+    width: 95%;
+    margin: 0 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .main-channel-left-content  li a:hover{
     color: red;
@@ -318,12 +321,18 @@ transition: all 1s ease-in-out;
     width:100%!important;
 }
 .channel-right-large img{
+    height: 366px;
     width:100%!important;
 
 }
 .channel-right-large h1{
+
     float: left;
     display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 70%;
     padding-left: 20px;
     line-height: 50px!important;
     height: 50px!important;
@@ -332,7 +341,6 @@ transition: all 1s ease-in-out;
 .channel-right-large span{
     margin:5px 10px 0px 0px!important;
     padding: 5px 15px!important;
-    line-height: 31px;
     width: 60px!important;
     font-size: 18px;
 }
@@ -348,15 +356,21 @@ transition: all 1s ease-in-out;
     z-index: 10;
     text-align: center;
 }
+.label p{
+   overflow: visible!important;
+    text-overflow:ellipsis!important;
+    white-space: normal!important;
+}
 .right-content{
-    background-color:#f0f0f0;
     width: 40%;
-    height: 210px;
+    height: 187px;
     float: right;
     overflow: hidden;
+    background: #f0f0f0;
+
 }
 .channel-right-small{
-    height: 210px;
+    height: 187px;
     position: relative;
 }
 .channel-right-small .label
@@ -376,6 +390,11 @@ transition: all 1s ease-in-out;
 
     padding: 5px 20px 5px 20px ;
     float: left;
+    display: block;
+    width: 95%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .channel-right-large  p:hover{
     color: red;
@@ -390,11 +409,11 @@ transition: all 1s ease-in-out;
     color: white;
     display: block;
     line-height: 16px;
-    padding: 65px 35px 0px 20px;
+    width: 20px;
+    padding: 65px 35px 0px 22px;
 }
-.main-channel-right-content div img{
+.channel-right-small img{
     float: left;
-     height: 100%;
     width: 60%;
 }
 .channel-right-small{
@@ -406,14 +425,22 @@ transition: all 1s ease-in-out;
 
 }
 .channel-right-small  h1{
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
    text-align: center;
    padding-top: 10px;
    font-size: 18px;
 }
 .channel-right-small  p{
-
+    height:100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
     float:right;
-   padding: 10px 10px 10px 10px ;
+   padding: 10px 10px 0px 10px ;
 }
 .channel-right-small  p:hover{
     color: red;
@@ -422,7 +449,7 @@ transition: all 1s ease-in-out;
     color: red;
 }
 .channel-right-small span{
-    margin-right: 10px;
+    margin-right: 15px;
 }
 .channel-right-small img{
     width: 100%!important;
@@ -438,8 +465,7 @@ transition: all 1s ease-in-out;
    height: 20px;
    line-height: 20px;
     padding: 2px 2px;
-    margin-right:10px;
-    margin-top: 5px;
+    margin-top: 10px;
    float: right;
    color: white;
    background-color: red;
@@ -483,7 +509,7 @@ transition: all 1s ease-in-out;
     margin-bottom: 50px;
 }
 .passage-a{
-    height:184.7px;
+    height:187px;
     width: 100%;
     overflow: hidden;
     float: left;
@@ -495,6 +521,9 @@ transition: all 1s ease-in-out;
     line-height: 30px;
     padding:25px 0px 15px 15px;
     padding:25px 0px 15px 15px;
+        overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .gray{
@@ -509,7 +538,7 @@ transition: all 1s ease-in-out;
     width: 80%;
     font-size: 16px;
     color: #b5b5b5;
-    margin: 70PX 20px 0px 20px;
+    margin: 20PX 20px 0px 20px;
 }
 
 .red-span{
@@ -530,7 +559,7 @@ transition: all 1s ease-in-out;
     font-size: 18px;
     color: #b5b5b5;
     display: block;
-    margin-top: 10px;
+    margin-top: 14px;
     padding: 2px 10px 0px 30px;
     background: url(../images/4.png);
     background-repeat: no-repeat;
@@ -652,7 +681,7 @@ transition: all 1s ease-in-out;
         width: 1000px;
     }
     .gray{
-        margin-top: 20px;
+        margin-top: 40px;
         margin-left: 20px;
     }
     .channel-right-large p{
@@ -661,6 +690,7 @@ transition: all 1s ease-in-out;
     .clock-span{
         top: -12px;
     }
+  
     .channel-right-large{
         height: 465px;
         overflow: hidden;
@@ -693,6 +723,9 @@ transition: all 1s ease-in-out;
     .main-channel-left{
         width: 275px;
     }
+      .channel-right-small  p{
+    height:80px;
+        }
     .channel-right-small{
         width: 90%;
         height: 154px;
@@ -706,12 +739,22 @@ transition: all 1s ease-in-out;
         .image-large-border2{
     height: 154px;
 }
+.image-large
+{
+height: 153px;
+}
+.channel-right-large img{
+    height: 285px;
+    width:100%!important;
+
+}
+.main-channel-left-content div img{
+   height: 205px;
+    width: 100%;
+}
     .main-channel-left-content li a{
         height: 50px;
         line-height: 50px;
-    }
-    .gray{
-       display: none;
     }
     .passage-a h2{
 
@@ -726,7 +769,7 @@ transition: all 1s ease-in-out;
         width: 62%;
     }
     .main-channel-left-content div img {
-        height: auto;
+        height:205px;
         width: 100%;
     }
     .main-channel-left-content-content
@@ -737,12 +780,20 @@ transition: all 1s ease-in-out;
     .main-channel-left-content-content-last{
     margin-bottom: 25px;
     }
+    .channel-right-large h1
+    {
+         margin-top: 12px!important;
+    }
+    .channel-right-large span
+    {
+        margin-top: 20px!important;
+    }
     .channel-right-large p{
-       padding-bottom: 5px;
+       padding-top: 10px;
     }
     .channel-right-small 
     {
-        margin-top: 29px;
+        margin-top: 30px;
     }
     .passage-a{
         height: 153px;
@@ -767,6 +818,9 @@ transition: all 1s ease-in-out;
 {   .center{
         width: 816px;
     }
+    .channel-right-small  p{
+    height:80px;
+        }
     .main-channel-left{
         position: absolute;
         float: left;
@@ -774,6 +828,15 @@ transition: all 1s ease-in-out;
     .main-channel-left{
         width: 275px;
     }
+    .channel-right-large img{
+    height: 256px;
+    width:100%!important;
+
+}
+.main-channel-left-content div img{
+   height: 205px;
+    width: 100%;
+}
     .channel-right-small{
         width: 90%;
         height: 154px;
@@ -791,12 +854,18 @@ transition: all 1s ease-in-out;
         height: 50px;
         line-height: 50px;
     }
-    .gray{
-       display: none;
-    }
+
     .passage-a h2{
 
         padding-top: 15px;
+    }
+    .channel-right-large h1
+    {
+         margin-top: 12px!important;
+    }
+    .channel-right-large span
+    {
+        margin-top: 20px!important;
     }
     .center-dif{
         width: 816px;
@@ -808,10 +877,7 @@ transition: all 1s ease-in-out;
     .main-channel-right{
         width: 62%;
     }
-    .main-channel-left-content div img {
-        height: auto;
-        width: 100%;
-    }
+
     .main-channel-left-content-content
     {
         margin-bottom: 35px;
@@ -821,6 +887,7 @@ transition: all 1s ease-in-out;
         margin-bottom: 22px!important;
     }
     .channel-right-large p{
+
        padding-bottom: 5px;
     }
     .channel-right-small 
@@ -834,13 +901,17 @@ transition: all 1s ease-in-out;
     .footer-narrow-center{
         width: 816px;
     }
-
+    .image-large
+    {
+    height: 153px;
+    }
     .left-div{
         left: 5px;
     }
     .pageScroll.left{
         margin-left: 5px;
     }
+
 }
 @media  (min-width:980px) and (max-width:1075px) 
 {
@@ -858,9 +929,21 @@ transition: all 1s ease-in-out;
     .channel-right-large{
         height: 400px;
     }
+    .main-channel-left-content div img{
+   height: 179px;
+    width: 100%;
+}
     .right-content{
         height: 154px;
     }
+         .channel-right-small  p{
+    height:80px;
+        }
+            .channel-right-large img{
+    height: 256px;
+    width:100%!important;
+
+}
     .image-large-border2{
     height: 154px;
     }
@@ -868,19 +951,17 @@ transition: all 1s ease-in-out;
         height: 50px;
         line-height: 50px;
     }
-    .gray{
-       display: none;
-    }
     .passage-a h2{
 
         padding-top: 15px;
     }
-    .main-channel-right-content span{
-        margin-top: 1px;
+    .image-large
+    {
+    height: 154px;
     }
     .passage-a {
 
-       height: 135px;
+       height: 154px;
     }
     .center-dif{
         width: 720px;
@@ -899,12 +980,8 @@ transition: all 1s ease-in-out;
     .channel-right-small{
         width: 95%;
     }
-    .main-channel-left-content div img {
-        height: auto;
-        width: 100%;
-    }
     .channel-right-large{
-        height: 360px;
+        height: 350px;
     }
     .main-channel-left{
         width: 240px;
@@ -918,19 +995,20 @@ transition: all 1s ease-in-out;
         margin-bottom: 25px!important;
     }
     .channel-right-large p{
-       padding-bottom: 5px;
+       padding-top: 20px;
     }
     .channel-right-small 
     {
         margin-top: 29px;
     }
     .channel-right-small{
-        height: 154px;
+        height: 146px;
     }
     .channel-right-large h1
     {
         height: 30px!important;
         line-height: 30px!important;
+        padding-top: 10px;
     }
     .channel-right-small h1{
         padding-top: 5px;
@@ -949,13 +1027,34 @@ transition: all 1s ease-in-out;
     .pageScroll.left{
         margin-left: 5px;
     }
+    .gray{
+        margin-top: 5PX!important;
+        width: 80%;
+        margin-left: 2%;
+    }
+    .clock-span
+    {
+        margin-top: 15PX!important;
+    }
 }
 @media  (min-width:0px) and (max-width:980px) 
 {
-    
+    .right-content
+    {
+        height: 164px;
+    }
     .header{
         width: 980px;
     }
+        .main-channel-left-content div img{
+   height: 202px;
+    width: 100%;
+}
+        .channel-right-large img{
+    height: 330px;
+    width:100%!important;
+
+}
     .main{
         width: 980px;
     }
@@ -982,17 +1081,23 @@ transition: all 1s ease-in-out;
     }
     .clock-span{
         top: -10px;
+        margin-top: 8px;
     }
     .gray{
-            margin-top: 5px;
+        width:80%;
+            margin-top: 30px;
             margin-left: 10px;
     }
     .channel-right-small{
         height: 164px;
-        margin-top: 22px;
+        margin-top: 32px;
     }
-    .right-content{
-         height: 164px;
+        .image-large
+    {
+    height: 164px;
+    }
+    .channel-right-small-last{
+        margin-bottom: 24px;
     }
     .main-channel-left-content-content{
         margin-bottom: 46px;
@@ -1001,9 +1106,18 @@ transition: all 1s ease-in-out;
     {
         margin-bottom: 25px!important;
     }
+         .channel-right-small  p{
+    height:80px;
+        }
     .channel-right-large p{
        padding-bottom: 5px;
     }
+     .channel-right-large{
+       height:420px;
+    }
+     .image-large-border2{
+         height:164px;
+     }
     .passage-a{
     height:169px;
     }

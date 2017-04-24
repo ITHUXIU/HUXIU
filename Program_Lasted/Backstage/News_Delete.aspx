@@ -93,7 +93,7 @@
                     <th><asp:Label ID="lb" runat="server" Text='<%# Eval("News_content") %>' Width="60%" ></asp:Label></th>
                     <th><%# Eval("news_top") %></th>
                     <th><asp:LinkButton ID="lbt" runat="server" Text="删除" CommandName="Delete" CommandArgument='<%#Eval("News_id") %>'></asp:LinkButton></th>
-                    <th><asp:LinkButton PostBackUrl='<%#"../Front-end/zixunCont-master/News_Content.aspx?news_id="+ Eval("news_id") %>' runat="server" Text="编辑"></asp:LinkButton></th>
+                    <th><asp:LinkButton PostBackUrl='<%#"News_Editor.aspx?news_id="+ Eval("news_id") %>' runat="server" Text="编辑"></asp:LinkButton></th>
                     </tr>  
 
                 </ItemTemplate>

@@ -15,7 +15,7 @@
     <form id="form1" runat="server">
         <div>
             专题名称
-        <asp:TextBox ID="txtName" runat="server"></asp:TextBox>
+        <asp:TextBox ID="txtName" runat="server" MaxLength="12"></asp:TextBox>
             <br />
             <br />
             专题内容<br />

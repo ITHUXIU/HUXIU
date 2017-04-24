@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Activity_content.aspx.cs" Inherits="Front_end_Period_huxiu1_Activity_content" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Activity_content.aspx.cs" Inherits="Front_end_Period_huxiu1_Activity_content" EnableEventValidation="false" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,6 +9,8 @@
 	<link rel="stylesheet" href="css/activityContent.css">
 	<script type="text/javascript"  src="js/jquery-3.1.1.min.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/jquery.leanModal.min.js"></script>
+    <!--[if lte IE 9]>
+	<link rel="stylesheet" href="css/ie9.css"><![endif]-->
 	<!--[if lte IE 8]>
 	<link rel="stylesheet" href="css/ie8.css"><![endif]-->
 </head>
@@ -21,6 +23,23 @@
 				<li><a class="header-left-float" href="../homePage-master/Homepageaspx.aspx"></a></li>
 				<li class="people" style="height:0px;"><a href="#loginmodal" class="flatbtn  header-right-float-people" id="modaltrigger"></a></li>
 				<li><a href="#searchLo" class="flat header-right-float-search" id="modal"></a></li>
+                <li><a class="header-right-float header-right-float-wide" href="">会员专享<br><span class="span-width ">	会员专享</span></a></li>
+				<li><a class="header-right-float header-right-float-wide" href="">创业白板<br><span class="span-width ">创业白板</span></a></li>
+				<li><a class="header-right-float" href="" >热议<br><span  >热议</span></a>
+				</li>
+				<li><a class="header-right-float"  href="Activity.aspx">	活动<br><span  >活动	</span></a></li>
+				<li class="unfold-li"><a class="header-right-float unfold-a" href="" >资讯	<br><span  >资讯</span></a>
+				<ul class=" unfold">
+					<div class="clearfix">
+                        <asp:Repeater ID="rptClass" runat="server">
+                            <ItemTemplate>
+                                <li><a href="<%#"News_List.aspx?news_classid="+ Eval("news_classid")%>"><%# Eval("news_classname") %></a></li>
+                            </ItemTemplate>
+                        </asp:Repeater>
+					</div>	
+				</ul>
+				</li>
+			</ul>
                 <div id="loginmodal" style="display: none;">
                     <div class="mainLeft">
                         <div class="mainLeftImg">
@@ -54,10 +73,12 @@
 				  </div>
 			  <div id="searchLo" style="display:none;">
        
-      <form id="searchform" name="searchform" method="post" action="indexsearch.html">
+
            
-        <input type="text" name="sear" id="sear" class="txt" tabindex="1" value="关键字" onfocus="if(this.value=='关键字'){this.value='';}" >
-        <button id="searc" class="search-blu hide">搜索</button>
+              <asp:TextBox ID="txtSearch" runat="server" CssClass="txt" TabIndex="1"  onfocus="if(this.value=='关键字'){this.value='';}"></asp:TextBox>
+    <asp:Button ID="btnSearch" runat="server" CssClass="search-blu hide" Text="搜索" TabIndex="3" OnClick="btnSearch_Click" />
+    
+
         <div class="kayWords">
           <ul>
             <li><a href="#">数码</a></li>
@@ -74,34 +95,18 @@
           </ul>
         </div>
 
-      </form>
+  
   </div>
    
 
 				
-				<li><a class="header-right-float header-right-float-wide" href="">会员专享<br><span class="span-width ">	会员专享</span></a></li>
-				<li><a class="header-right-float header-right-float-wide" href="">创业白板<br><span class="span-width ">创业白板</span></a></li>
-				<li><a class="header-right-float" href="" >热议<br><span  >热议</span></a>
-				</li>
-				<li><a class="header-right-float"  href="Activity.aspx">	活动<br><span  >活动	</span></a></li>
-				<li class="unfold-li"><a class="header-right-float unfold-a" href="" >资讯	<br><span  >资讯</span></a>
-				<ul class=" unfold">
-					<div class="clearfix">
-                        <asp:Repeater ID="rptClass" runat="server">
-                            <ItemTemplate>
-                                <li><a href="<%#"News_List.aspx?news_classid="+ Eval("news_classid")%>"><%# Eval("news_classname") %></a></li>
-                            </ItemTemplate>
-                        </asp:Repeater>
-					</div>	
-				</ul>
-				</li>
-			</ul>
+				
 		</div>
 	</div>
 	<div class="main">
 		<div class="center">
 			<div class="img-div">
-				<img  class="image-large" src="./images/big.png" alt="">
+				<img  class="image-large" src='<%=activityUrl %>' alt="">
 			</div>
 			<div class="buy">
 				<h1 class="headline"><asp:Label ID="lbActivityName" runat="server"></asp:Label></h1>
@@ -136,10 +141,10 @@
 					</ul>
 					<span>分享到：</span>
 					<ul class="clearfix">	
-					<div class="circle cirle-qq"><a href="	"></a></div>
-					<div class="circle cirle-blog"><a href="	"></a></div>
-					<div class="circle cirle-pay"><a href="	"></a></div>
-					<div class="circle cirle-wc"><a href="	"></a></div>
+					<div class="circle cirle-qq"><asp:LinkButton ID="lkbtnQq" runat="server" OnClick="lkbtnQq_Click"></asp:LinkButton></div>
+					<div class="circle cirle-blog"><asp:LinkButton ID="lkbtnBlog" runat="server" OnClick="lkbtnBlog_Click"></asp:LinkButton></div>
+					<div class="circle cirle-pay"><asp:LinkButton ID="lkbtnPay" runat="server" OnClick="lkbtnPay_Click"></asp:LinkButton></div>
+					<div class="circle cirle-wc"><asp:LinkButton ID="lkbtnWc" runat="server" OnClick="lkbtnWc_Click"></asp:LinkButton></div>
 					</ul>
 				</div>
 			</div>
@@ -159,10 +164,10 @@
 			</div>
 			<div class="footer-right">
 				<ul>
-					<li><a class="footer-right-width" href="">联系我们</a></li>
-					<li><a class="footer-right-wchat" href=""></a></li>
-					<li><a class="footer-right-qq" href=""></a></li>
-					<li><a class="footer-right-massage" href=""></a></li>
+				<li class="footer-right-width"><a href="">联系我们</a></li>
+					<li class="footer-right-wchat"><a  href=""></a></li>
+					<li class="footer-right-qq"><a href=""></a></li>
+					<li class="footer-right-massage"><a href=""></a></li>
 				</ul>
 			</div>
 			<div class="footer-bottom">

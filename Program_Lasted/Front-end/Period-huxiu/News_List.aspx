@@ -10,6 +10,8 @@
 	<script type="text/javascript"  src="js/jquery-3.1.1.min.js"></script>
 	<script type="text/javascript" src="js/pagescroller.min.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/jquery.leanModal.min.js"></script>
+    <!--[if lte IE 9]>
+	<link rel="stylesheet" href="css/ie9.css"><![endif]-->
 	<!--[if lte IE 8]>
 	<link rel="stylesheet" href="css/ie8.css"><![endif]-->
 
@@ -23,22 +25,41 @@
 				<li class="header-left-float"><a  href="../homePage-master/Homepageaspx.aspx"></a></li>
 				<li class="people" style="height:0px;"><a href="#loginmodal" class="flatbtn  header-right-float-people" id="modaltrigger"></a></li>
 				<li><a href="#searchLo" class="flat header-right-float-search" id="modal"></a></li>
+                <li class="header-right-float header-right-float-wide"><a  href="">会员专享<br><span class="span-width ">	会员专享</span></a></li>
+				<li class="header-right-float header-right-float-wide"><a href="">创业白板<br><span class="span-width ">创业白板</span></a></li>
+				<li class="header-right-float"><a href="" >热议<br><span  >热议</span></a>
+				</li>
+				<li class="header-right-float"><a  href="Activity.aspx">	活动<br><span  >活动	</span></a></li>
+				<li class="unfold-li"><a class="header-right-float unfold-a" href="" >资讯	<br><span  >资讯</span></a>
+				<ul class=" unfold">
+					<div class="clearfix">
+
+                        <asp:Repeater ID="rptClass" runat="server">
+                            <ItemTemplate>
+                                <li><a href="<%#"News_List.aspx?news_classid="+ Eval("news_classid")%>"><%# Eval("news_classname") %></a></li>
+                            </ItemTemplate>
+                        </asp:Repeater>
+					</div>	
+				</ul>
+				</li>
+			</ul>
 							<div id="loginmodal" style="display:none;">
 								    <div class="mainLeft">
 								      <div class="mainLeftImg">
 								            <img src="./images/blackHu.png" alt="">
 								      </div>
 								      <form id="loginform" name="loginform" method="post" action="index.html">
-								           
-								         <asp:TextBox ID="txtusername" runat="server" CssClass="txtfield" TabIndex="1" Text="邮箱/虎嗅账号" onfocus="if(this.value=='邮箱/虎嗅账号'){this.value='';}"></asp:TextBox>
-                                         <asp:TextBox ID="txtpassword" runat="server" TextMode="Password" CssClass="txtfield" TabIndex="2" Text="密码" onfocus="if(this.value=='密码'){this.value='';}"></asp:TextBox>
+								      <asp:TextBox ID="txtusername" runat="server" CssClass="txtfield" TabIndex="1" Text="邮箱/虎嗅账号" onfocus="if(this.value=='邮箱/虎嗅账号'){this.value='';}"></asp:TextBox>
+                                      <asp:TextBox ID="txtpassword" runat="server" TextMode="Password" CssClass="txtfield" TabIndex="2" Text="密码" onfocus="if(this.value=='密码'){this.value='';}"></asp:TextBox>    
+<%--								       <input type="text" name="username" id="username" class="txtfield" tabindex="1" value="手机号/邮箱/虎嗅账号" onfocus="if(this.value=='手机号/邮箱/虎嗅账号'){this.value='';}">
+								           <input type="password" name="password" id="password" class="txtfield" tabindex="2"  >--%>
 								      <div id="Lo">
 								        <span></span><p id="remember">记住密码</p>
-								          <asp:LinkButton ID="lkbtnForget" runat="server" Text="忘记密码？" PostBackUrl="~/Backstage/Find_password.aspx"></asp:LinkButton>
+								        <p id="forget"><asp:LinkButton ID="lkbtnForget" runat="server" Text="忘记密码？" PostBackUrl="~/Backstage/Find_password.aspx"></asp:LinkButton></p>
 								      </div>
 								      <div class="center1">
-								          
-								          <asp:Button ID="btnLogin" runat="server" CssClass="flatbtn-blu hidemodal" Text="Log In" TabIndex="3" OnClick="btnLogin_Click" />
+								             <asp:Button ID="btnLogin" runat="server" CssClass="flatbtn-blu hidemodal" Text="Log In" TabIndex="3" OnClick="btnLogin_Click" />
+								          <input type="submit" name="zhubtn" id="zhubtn" class="flatbtn-blu hidemodal" value="注册" tabindex="3">
 								      </div>
 				   	 				</form>
 				    			</div>
@@ -88,10 +109,12 @@
 			  </div>
 			  <div id="searchLo" style="display:none;">
        
-      <form id="searchform" name="searchform" method="post" action="indexsearch.html">
+     
            
-        <input type="text" name="sear" id="sear" class="txt" tabindex="1" value="关键字" onfocus="if(this.value=='关键字'){this.value='';}" >
-        <button id="searc" class="search-blu hide">搜索</button>
+              <asp:TextBox ID="txtSearch" runat="server" CssClass="txt" TabIndex="1"  onfocus="if(this.value=='关键字'){this.value='';}"></asp:TextBox>
+    <asp:Button ID="btnSearch" runat="server" CssClass="search-blu hide" Text="搜索" TabIndex="3" OnClick="btnSearch_Click" />
+    
+
         <div class="kayWords">
           <ul>
             <li><a href="#">数码</a></li>
@@ -108,30 +131,11 @@
           </ul>
         </div>
 
-      </form>
   </div>
    
 
 				
-				<li class="header-right-float header-right-float-wide"><a  href="">会员专享<br><span class="span-width ">	会员专享</span></a></li>
-				<li class="header-right-float header-right-float-wide"><a href="">创业白板<br><span class="span-width ">创业白板</span></a></li>
-				<li class="header-right-float"><a href="" >热议<br><span  >热议</span></a>
-				</li>
-				<li class="header-right-float"><a  href="Activity.aspx">	活动<br><span  >活动	</span></a></li>
-				<li class="unfold-li"><a class="header-right-float unfold-a" href="" >资讯	<br><span  >资讯</span></a>
-				<ul class=" unfold">
-					<div class="clearfix">
-
-                        <asp:Repeater ID="rptClass" runat="server">
-                            <ItemTemplate>
-                                <li><a href="<%#"News_List.aspx?news_classid="+ Eval("news_classid")%>"><%# Eval("news_classname") %></a></li>
-                                <%--<asp:LinkButton ID="lbtClass" runat="server" Text='<%# Eval("news_classname") %>' PostBackUrl='<%#"~/Front-end/Period-huxiu/News_List.aspx?news_classid="+ Eval("news_classid")%>'></asp:LinkButton>
-                           --%> </ItemTemplate>
-                        </asp:Repeater>
-					</div>	
-				</ul>
-				</li>
-			</ul>
+				
 		</div>
 	</div>
 	<div id="wrapper">
@@ -149,6 +153,7 @@
 			<div class="center">
 				<div class="main-passage-headline clearfix section">
 					<h1 class="headline"><asp:Label ID="lbClass1" runat="server"></asp:Label>  - 热文</h1>
+					<%--<a class="main-passage-headline-right-a" href="">全部内容</a>--%>
                             <asp:Label ID="lbTotal" runat="server" Text="1" Visible="false"></asp:Label>
                             <asp:Label ID="lbNow" runat="server" Text="1" Visible="false"></asp:Label>
                             <asp:LinkButton CssClass="main-passage-headline-right-a" runat="server" Text="换一换" ID="lbtChange" OnClick="lbtChange_Click"></asp:LinkButton>
@@ -159,16 +164,16 @@
                                     <ItemTemplate>
                                         <li class="passage-image-border">
                                             <div>
-                                                <a href='<%#"../zixunCont-master/News_Content.aspx?news_id="+Eval("news_id")%>'><asp:Image ID="imgUp" runat="server" CssClass="image-large" ImageUrl='<%#"../../Backstage/" + Eval("news_cover") %>' /></a>
+                                                 <a href='<%#"../zixunCont-master/News_Content.aspx?news_id="+Eval("news_id")%>'><asp:Image ID="imgUp" runat="server" CssClass="image-large" ImageUrl='<%#"../../Backstage/" + Eval("news_cover") %>' /></a>
                                                     <div class="passage-div" href="	">
                                                         <div>
-                                                            <a href='<%#"../zixunCont-master/News_Content.aspx?news_id="+ Eval("news_id")%>'><%# Eval("news_title") %></a>
+                                                            <a href='<%#"../zixunCont-master/News_Content.aspx?news_id="+Eval("news_id")%>'><%# Eval("news_title") %></a>
                                                         </div>
                                                         <span class="passage-div-span"><%# Eval("new_author")+"  "+Eval("news_time") %></span>
                                                         <p><asp:Label ID="lbHotNews" runat="server" Text=<%# Eval("news_content") %>></asp:Label></p>
                                                 
                                                     </div>
-                                                <a href='<%#"../zixunCont-master/News_Content.aspx?news_id="+Eval("news_id")%>'><asp:Image ID="imgDown" runat="server" CssClass="image-large" ImageUrl='<%#"../../Backstage/" + Eval("news_cover") %>' /></a>
+                                                 <a href='<%#"../zixunCont-master/News_Content.aspx?news_id="+Eval("news_id")%>'><asp:Image ID="imgDown" runat="server" CssClass="image-large" ImageUrl='<%#"../../Backstage/" + Eval("news_cover") %>' /></a>
                                             </div>
                                         </li>
                                     </ItemTemplate>
@@ -184,19 +189,18 @@
 				</div>
 				<div class="main-content-content">
 					<ul class="clearfix">
-                                    <asp:Repeater ID="rptNews" runat="server" OnItemDataBound="rptNews_ItemDataBound">
+                                    <asp:Repeater ID="rptNews" runat="server" OnItemDataBound="rptNews_ItemDataBound" OnItemCommand="rptNews_ItemCommand">
                                         <ItemTemplate>
-                                            <li class="main-content-content-border clearfix">
+                                            <asp:Panel ID="pnlClass" runat="server" CssClass="main-content-content-border clearfix">
+                                            
                                                 <div class="image-large-border2">
-                                                    <a class="reward "></a>
-                                                   <%-- <a href='<%#"../zixunCont-master/News_Content.aspx?news_id="+Eval("news_id")%>'><img class="image-large" src="<%#"../../Backstage/" + Eval("news_cover") %>""></a>
-                                                --%>
-                                                    <img class="image-large" src="<%#"../../Backstage/" + Eval("news_cover") %>"">
+                                                   <asp:LinkButton CssClass="reward" runat="server" CommandName="Like" CommandArgument='<%#Eval("news_id") %>'></asp:LinkButton><%--</a>--%>
+                                                     <a  href='<%#"../zixunCont-master/News_Content.aspx?news_id="+Eval("news_id")%>'><img class="image-large" src="<%#"../../Backstage/" + Eval("news_cover") %>""></a>
                                                 </div>
-                                                <a href="<%#"../zixunCont-master/News_Content.aspx?news_id="+Eval("news_id")%>"><%# Eval("news_title") %></a>
+                                                <a class="titlele" href="<%#"../zixunCont-master/News_Content.aspx?news_id="+Eval("news_id")%>"><%# Eval("news_title") %></a>
                                                 <span class="people-span"><%# Eval("new_author") %> </span>
                                                 <p><asp:Label ID="lbNews" runat="server" Text=<%# Eval("news_content") %>></asp:Label></p>
-                                            </li>
+                                            </asp:Panel>
                                         </ItemTemplate>
                                     </asp:Repeater>
 					</ul>
@@ -204,13 +208,6 @@
 						<li class="page page-red"><a href="	"><asp:LinkButton ID="btnGo" runat="server" OnClick="btnGo_Click" Text="转到" /></a></li>
 						<li class="turn-page"><span >转到<asp:TextBox ID="txtPage" runat="server" CssClass="page-span" Width="25px"  onkeyup="this.value=this.value.replace(/\D/g,'')"></asp:TextBox>页</span></li>
 						<li class="page page-width"><a  href="	"><asp:LinkButton ID="btnNext" runat="server" OnClick="btnNext_Click" Text="下一页" /></a></li>
-						<%--<li class="page page-width"><a  href="	">300</a></li>
-						<li class="turn-page turn-page-narrow"><span >...</span></li>--%>
-<%--						<li class="page"><a  href="	">6</a></li>
-						<li class="page"><a  href="	">5</a></li>
-						<li class="page"><a  href="	">4</a></li>
-						<li class="page"><a  href="	">3</a></li>
-						<li class="page"><a  href="	">2</a></li>--%>
 						<li class="page"><asp:Label ID="lbNows" runat="server" Text="1" ></asp:Label>/<asp:Label ID="lbTotals" runat="server" Text="1" ></asp:Label></li>
 						<li class="page page-width"><a  href="	"><asp:LinkButton ID="btnLast" runat="server" OnClick="btnLast_Click" Text="上一页" /></a></li>	
 					</ul>
@@ -225,11 +222,13 @@
 						<a href="">全部内容</a>
 					</div>
 					<div class="main-subject-left-content clearfix">
-					<a class="image-large-border3" href="	"><%--<img id="imgCover" class="image-large" alt="" runat="server">--%><asp:Image ID="imgCover" runat="server" /></a>
-						<ul >
+					<a class="image-large-border3" href="	"><%--<img class="image-large" src="./images/hszg.jpg" alt="">--%><asp:Image ID="imgCover" runat="server" /></a>
+						<ul class="clearfix mid">
                             <asp:Repeater ID="rptColumn" runat="server" OnItemDataBound="rptColumn_ItemDataBound">
                                 <ItemTemplate>
-                                   <li><a href="	"><asp:Label ID="lbColumn" Text='<%# Eval("column_title") %>' runat="server"></asp:Label><span class="main-subject-left-content-span"></span></a></li>
+                                   <li>
+                                       <a href="	"><%# Eval("column_title") %><span><asp:Label ID="lbColumn" runat="server" Text=<%# Eval("column_time") %>></asp:Label></span></a>
+                                   </li>
                                 </ItemTemplate>
                             </asp:Repeater>
 						</ul>
